@@ -1,0 +1,18 @@
+@media screen and (max-width: 768px) {
+	#SideMenu
+	{
+		display: none;
+	}
+}
+
+#SideMenu {
+  padding: 0;
+}
+
+#SideMenu li {
+  list-style-type: none;
+}
+
+#SideMenu > div {
+  height: 100vh;
+}
