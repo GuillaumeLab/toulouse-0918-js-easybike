@@ -10,8 +10,7 @@ const mapConfig = {
   
 
 class MapLeaflet extends Component {
-    // create an array with marker components
-
+    
     render() {
         return (
             <div className="map ">
