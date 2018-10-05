@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
-import MarkersLayer from './MarkersLayer'
+
+import Navbar from './components/Navbar';
+import SideMenu from './components/SideMenu';
+import MapContainer from './components/Map.js'
+
+
 import './App.css';
-
-const mapConfig = {
-  center: [43.6036786, 1.4328012],
-  zoom: 14
-};
-
+import './Navbar.css';
+import './Map.css';
+import './SideMenu.css';
 
 // const data = {
 //   type: "FeatureCollection",
@@ -42,14 +43,12 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
-        <Map center={mapConfig.center} zoom={mapConfig.zoom} className="map__reactleaflet">
-          <TileLayer
-            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
-          />
-          <MarkersLayer />
-        </Map>
+      <div className='App container-fluid'>
+        <Navbar/>   
+        <div className="row">
+          <SideMenu/> 
+          <MapContainer/>
+        </div>           
       </div>
     );
   }
