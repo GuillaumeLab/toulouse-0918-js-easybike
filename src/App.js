@@ -10,25 +10,6 @@ import './Navbar.css';
 import './Map.css';
 import './SideMenu.css';
 
-// const data = {
-//   type: "FeatureCollection",
-//   features: [
-//     {
-//       type: "Feature",
-//       id: "01",
-//       properties: { name: "Alabama", density: 94.65 },
-//       geometry: {
-//         type: "Polygon",
-//         coordinates: [
-//           [
-//             [43.6044292, 1.4416234]
-//           ]
-//         ]
-//       }
-//     }
-//   ]
-// }
-
 class App extends Component {
   getStyle(feature) {
     return {
