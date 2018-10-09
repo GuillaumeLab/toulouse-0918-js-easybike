@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 import { apiKey } from './settings';
+import PopupContent from './PopupContent';
 
 // const stations = require('./../static-data-JCDBikes');
 
@@ -39,10 +40,10 @@ class MarkersLayer extends Component {
   render() {
     const { stationsList, error } = this.state;
 
-    const LeafletMarkers = stationsList.map(marker => (
-      <Marker position={[marker.position.lat, marker.position.lng]} key={`marker_${marker.name}`}>
+    const leafletMarkers = stationsList.map(stationData => (
+      <Marker position={[stationData.position.lat, stationData.position.lng]} key={`marker_${stationData.name}`}>
         <Popup>
-          <span>{marker.name}</span>
+          <PopupContent marker={stationData} />
         </Popup>
       </Marker>
     ));
@@ -50,7 +51,7 @@ class MarkersLayer extends Component {
     return (
 
       <div>
-        {LeafletMarkers}
+        {leafletMarkers}
       </div>
     );
   }
