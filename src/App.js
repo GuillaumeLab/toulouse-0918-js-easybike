@@ -11,8 +11,6 @@ import './Map.css';
 import './SideMenu.css';
 
 class App extends Component {
-
-
   getStyle(feature) {
     return {
       fillColor: '#ece7f2',
