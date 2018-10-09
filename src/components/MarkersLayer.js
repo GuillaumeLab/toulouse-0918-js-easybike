@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
-import {apiKey} from './settings';
+import { apiKey } from './settings';
 
 // const stations = require('./../static-data-JCDBikes');
 
@@ -38,7 +38,7 @@ class MarkersLayer extends Component {
 
   render() {
     const { stationsList, error } = this.state;
-    
+
     const LeafletMarkers = stationsList.map(marker => (
       <Marker position={[marker.position.lat, marker.position.lng]} key={`marker_${marker.name}`}>
         <Popup>
@@ -48,6 +48,7 @@ class MarkersLayer extends Component {
     ));
 
     return (
+
       <div>
         {LeafletMarkers}
       </div>
