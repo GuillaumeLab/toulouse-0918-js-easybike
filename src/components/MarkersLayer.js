@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 import { apiKey } from './settings';
-
-// const stations = require('./../static-data-JCDBikes');
-
-// const stationsStaticList = stations.map((station) => ({
-//   name: station.name,
-//   latlng: [station.latitude, station.longitude]
-// }));
-
+import RequestWarning from './RequestWarning';
 
 class MarkersLayer extends Component {
   constructor(props) {
@@ -39,7 +32,7 @@ class MarkersLayer extends Component {
   render() {
     const { stationsList, error } = this.state;
 
-    const LeafletMarkers = stationsList.map(marker => (
+    const leafletMarkers = stationsList.map(marker => (
       <Marker position={[marker.position.lat, marker.position.lng]} key={`marker_${marker.name}`}>
         <Popup>
           <span>{marker.name}</span>
@@ -47,10 +40,11 @@ class MarkersLayer extends Component {
       </Marker>
     ));
 
-    return (
+    const displayMarkers = error ? <RequestWarning error={error} /> : leafletMarkers;
 
+    return (
       <div>
-        {LeafletMarkers}
+        {displayMarkers}
       </div>
     );
   }
