@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-class RequestWarning extends Component {
+class ModalWarning extends Component {
   render() {
-    const { error } = this.props;
+    const { error, clearError, refresh } = this.props;
     if (!error) {
       return null;
     }
@@ -12,10 +12,11 @@ class RequestWarning extends Component {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-body">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
               <p>Nous avons rencontré une erreur lors de la récupération des données</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.clearError}>Close</button>
+              <button type="button" className="btn btn-primary" onClick={this.props.refresh} >Recharger les stations</button>
             </div>
           </div>
         </div>
@@ -24,4 +25,4 @@ class RequestWarning extends Component {
   }
 }
 
-export default RequestWarning;
+export default ModalWarning;
