@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  svg(width="50" height="120" viewBox="0 0 50 120" class="icon-station")
+    polygon(points="2 2 48 2 48 80 25 118 2 80" style="stroke-width:8")
+    clippath(id="fill-icon")
+      polygon(points="6 6 44 6 44 80 25 110 6 80 " style="stroke-width:1")
+    g(clip-path="url(#fill-icon)")
+      rect(width="100%" height="110px")
+/>
+
+ 

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
+
 import { apiKey } from './settings';
 import ModalWarning from './ModalWarning';
+
+import { iconStation } from './icon';
 
 class MarkersLayer extends Component {
   constructor(props) {
@@ -55,7 +58,11 @@ class MarkersLayer extends Component {
     const { stationsList, error } = this.state;
 
     const leafletMarkers = stationsList.map(marker => (
-      <Marker position={[marker.position.lat, marker.position.lng]} key={`marker_${marker.name}`}>
+      <Marker
+        icon={iconStation}
+        position={[marker.position.lat, marker.position.lng]}
+        key={`marker_${marker.name}`}
+      >
         <Popup>
           <span>{marker.name}</span>
         </Popup>
