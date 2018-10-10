@@ -1,0 +1,22 @@
+.container {
+  padding: 0;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.infoRow {
+  margin: 0;
+}
+
+.stationStatus {
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.popupImg {
+  max-width: 50%;
+
+}
