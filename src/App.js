@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
-import MapContainer from './components/Map.js'
+import MapContainer from './components/Map'
 
 
 import './App.css';
@@ -21,15 +21,15 @@ class App extends Component {
       fillOpacity: 0.7
     }
   }
-  
+
   render() {
     return (
-      <div className='App container-fluid'>
-        <Navbar/>   
+      <div className="App container-fluid">
+        <Navbar />
         <div className="row">
-          <SideMenu/> 
-          <MapContainer/>
-        </div>           
+          <SideMenu />
+          <MapContainer />
+        </div>
       </div>
     );
   }
