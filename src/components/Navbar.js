@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Navbar = () => (
-  <nav className="navbar navbar-expand-lg navbar-light">
+  <nav className="navbar navbar-expand-lg navbar-light mx-0">
     <div className="col-2">
-      <a className="navbar-brand" href="index.html"><h1>EasyBike</h1></a>
+      <a className="navbar-brand color" href="index.html"><h1>EasyBike</h1></a>
     </div>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

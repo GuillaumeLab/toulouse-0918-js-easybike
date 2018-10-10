@@ -13,12 +13,12 @@ import './SideMenu.css';
 class App extends Component {
   getStyle(feature) {
     return {
-        fillColor: '#ece7f2',
-        weight: 2,
-        opacity: 1,
-        color: 'blue',
-        dashArray: '3',
-        fillOpacity: 0.7
+      fillColor: '#ece7f2',
+      weight: 2,
+      opacity: 1,
+      color: 'blue',
+      dashArray: '3',
+      fillOpacity: 0.7
     }
   }
   
