@@ -8,10 +8,13 @@ class RequestWarning extends Component {
     }
 
     return (
-      <div className="modal" tabindex="-1" role="dialog">
+      <div className="modal show modal-warning" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-body">
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
               <p>Nous avons rencontré une erreur lors de la récupération des données</p>
             </div>
           </div>
