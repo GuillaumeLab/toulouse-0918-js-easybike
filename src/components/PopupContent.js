@@ -15,15 +15,19 @@ const PopupContent = props => {
           <br />
           <div className="infoRow row">
             <div className="stationStatus col-6">
-              <img className="popupImg img-fluid" src={bicycle} alt="Bicycles" /> = {marker.available_bikes}
+              <div>
+                <img className="popupImg img-fluid" src={bicycle} alt="Bicycles" /><span className="counterSize"> = {marker.available_bikes}</span>
+              </div>
             </div>
             <div className="stationStatus col-6">
-              <img className="popupImg img-fluid" src={parking} alt="Parking" /> = {marker.available_bike_stands}
+              <div>
+                <img className="popupImg img-fluid" src={parking} alt="Parking" /><span className="counterSize"> = {marker.available_bike_stands}</span>
+              </div>
             </div>
           </div>
           <br />
           <div className="row">
-            <div className="col-3">
+            <div className="refreshText col-3">
               <p>Il y a 5 min.</p>
             </div>
             <div className="col-3">
