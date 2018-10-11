@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
-<<<<<<< Updated upstream
 
 import { apiKey } from './settings';
 import ModalWarning from './ModalWarning';
-
 import { iconStation } from './icon';
+
+
 
 class MarkersLayer extends Component {
   constructor(props) {

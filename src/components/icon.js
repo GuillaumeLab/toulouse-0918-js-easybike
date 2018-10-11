@@ -2,8 +2,8 @@ import L from 'leaflet';
 
 const iconStation = L.Icon.extend({
   options: {
-    iconUrl: require('../img/marker-pin-person.svg'),
-    iconRetinaUrl: require('../img/marker-pin-person.svg'),
+    iconUrl: require('../images/iconStation.svg'),
+    iconRetinaUrl: require('../images/iconStation.svg'),
     iconAnchor: null,
     popupAnchor: null,
     shadowUrl: null,
@@ -14,4 +14,4 @@ const iconStation = L.Icon.extend({
   }
 });
 
-export default { iconStation };
+export default iconStation;
