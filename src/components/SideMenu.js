@@ -1,10 +1,12 @@
 import React from 'react';
+import Favorites from "./Favorites";
 
 const SideMenu = () => (
-  <div id="SideMenu" className="col-md-4 align-self-center">    
+  <div id="SideMenu" className="col-md-3 align-self-center">    
     <ul>
       <li>Desktop menu placeholder</li>
-    </ul>    
+    </ul>
+    <Favorites/>    
   </div>
 );
 
