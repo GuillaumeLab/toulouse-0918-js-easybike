@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Favorites = () => {
+const NavigationModule = () => {
 
   // constructor (props) {
   //   super(props);
@@ -32,15 +32,16 @@ const Favorites = () => {
   return (
     <div className="card m-2">
       <div className="card-header font-weight-bold">
-        FAVORIS
+        NAVIGATION
       </div>
       <div className="card-body">
-        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
+        <div className="btn-group-toggle" data-toggle="buttons">
+        <input type="checkbox"></input><span> Rechercher un itinéraire</span>
+        </div>
       </div>
     </div>
   );
 };
 
 
-export default Favorites;
+export default NavigationModule;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Navbar from './components/Navbar';
+import AltNavbar from './components/AltNavbar';
 import SideMenu from './components/SideMenu';
 import MapContainer from './components/Map'
 
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
-        <Navbar />
+        <AltNavbar />
         <div className="row">
           <SideMenu />
           <MapContainer />
