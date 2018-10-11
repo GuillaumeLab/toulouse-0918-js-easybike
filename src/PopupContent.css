@@ -6,14 +6,8 @@
   padding: 0;
 }
 
-.infoRow {
-  margin: 1rem 0rem;
-}
-
-.stationStatus {
-  padding: 0;
-  margin-left: 0;
-  margin-right: 0;
+.PopupFooter {
+  margin: 0;
 }
 
 .infoCol {
@@ -29,6 +23,14 @@
   margin: 0;
 }
 
-.counterSize {
-  font-size: 1.6rem;
+.btn .badge{
+  font-size: 1.4rem;
+  margin: 0.8rem;
+  min-height: 30px;
+  min-width: 40px;
+  top: 0;
+}
+
+.Go > a {
+  color: #ffffff;
 }

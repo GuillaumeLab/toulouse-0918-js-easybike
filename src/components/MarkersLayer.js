@@ -40,8 +40,8 @@ class MarkersLayer extends Component {
   render() {
     const { stationsList, error } = this.state;
 
-    const maxWidth = 350;
-    const minWidth = 300;
+    const maxWidth = 400;
+    const minWidth = 340;
 
     const leafletMarkers = stationsList.map(stationData => (
       <Marker position={[stationData.position.lat, stationData.position.lng]} key={`marker_${stationData.name}`}>
