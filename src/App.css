@@ -3,6 +3,12 @@
   width: 100%;
 }
 
+.modal-warning {
+  display: block;
+  font-size: 1.5rem;
+  top: 150px;
+}
+
 .App {
   text-align: center;
 }
