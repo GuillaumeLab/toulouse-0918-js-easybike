@@ -1,6 +1,6 @@
 import React from 'react';
-import bicycle from '../images/bicycle-white.png';
-import parking from '../images/parking-sign-white.png';
+import bicycle from '../images/bicycle.png';
+import parking from '../images/parking-sign.png';
 
 const PopupContent = props => {
   const { marker } = props;
@@ -16,20 +16,20 @@ const PopupContent = props => {
           <div className="infoRow row">
             <div className="col-6">
               <div className="infoCol d-flex justify-content-center">
-                <button type="button" className="btn btn-primary">
-                  <img className="popupImg img-fluid" src={bicycle} alt="Bicycles" /><span className="badge badge-light">{marker.available_bikes}</span>
+                <button type="button" className="infoColBtn btn btn-outline-dark">
+                  <img className="popupImg img-fluid" src={bicycle} alt="Bicycles" /><span className="badge badge-dark">{marker.available_bikes}</span>
                 </button>
               </div>
             </div>
             <div className="col-6">
               <div className="infoCol d-flex justify-content-center">
-                <button type="button" className="btn btn-primary">
-                  <img className="popupImg img-fluid" src={parking} alt="Parking" /><span className="badge badge-light">{marker.available_bike_stands}</span>
+                <button type="button" className="infoColBtn btn btn-outline-dark">
+                  <img className="popupImg img-fluid" src={parking} alt="Parking" /><span className="badge badge-dark">{marker.available_bike_stands}</span>
                 </button>
               </div>
             </div>
           </div>
-          <br />
+          <br/>
           <div className="PopupFooter row">
             <div className="refreshText col-3 d-flex align-items-center">
               <p>Il y a 5 min.</p>
