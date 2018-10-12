@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
+import L from 'leaflet';
+import SvgStationIconGauge from './SvgStationIconGauge';
+
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 
 import { apiKey } from './settings';
 import ModalWarning from './ModalWarning';
-import { iconStation } from './icon';
-
-
 
 class MarkersLayer extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class MarkersLayer extends Component {
   }
 
   refreshStationsList() {
-    this.setState({error: null});
+    this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
 
@@ -60,7 +61,11 @@ class MarkersLayer extends Component {
 
     const leafletMarkers = stationsList.map(marker => (
       <Marker
-        icon={iconStation}
+        icon={L.divIcon({
+          className: 'custom-icon',
+          html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(marker.available_bike_stands / marker.bike_stands) * 100} />),
+          iconSize: [16, 45]
+        })}
         position={[marker.position.lat, marker.position.lng]}
         key={`marker_${marker.name}`}
       >
