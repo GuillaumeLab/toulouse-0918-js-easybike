@@ -1,13 +1,19 @@
+/* carte full page  */
+
 .leaflet-container {
   height: 100vh;
   width: 100%;
 }
+
+/* Alerte erreur de requête API */
 
 .modal-warning {
   display: block;
   font-size: 1.5rem;
   top: 150px;
 }
+
+/* Styles par defaut */
 
 .App {
   text-align: center;
