@@ -1,46 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const NavigationModule = () => {
+class NavigationModule extends Component {
 
-  // constructor (props) {
-  //   super(props);
-  //   this.state = {
-  //     itinary : false
-  //   };
-  // }
-
-  // displayItinary = (event) => {
-  //   this.setState ({
-  //     itinary : true
-  //   });
-  // };
-
-  function check () {
-    let check = document.getElementsByTagName('input');
-    if (check.type === 'checkbox') {
-      check.checked = true;
-    }
+  constructor (props) {
+    super(props);
+    this.state = {
+      isChecked : false
+    };
   }
 
-  function uncheck () {
-    let uncheck = document.getElementsByTagName('input');
-    if (uncheck.type === 'checkbox') {
-      uncheck.checked = false;
-    }
-  }
-
-  return (
-    <div className="card m-2">
-      <div className="card-header font-weight-bold">
-        NAVIGATION
-      </div>
-      <div className="card-body">
-        <div className="btn-group-toggle" data-toggle="buttons">
-        <input type="checkbox"></input><span> Rechercher un itinéraire</span>
+  updateCheck = () => {
+    this.setState ({
+      isChecked : !this.state.isChecked
+    });
+  };
+ 
+  render () {
+    return (
+      <div className="card m-2">
+        <div className="card-header font-weight-bold">
+          NAVIGATION
+        </div>
+        <div className="card-body">
+          <div className="form-check">      
+            <input type = "checkbox" className = "form-check-input" id = "itinary"
+            onChange={this.updateCheck} checked={this.state.isChecked}/>
+            <span> Rechercher un trajet</span>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 
