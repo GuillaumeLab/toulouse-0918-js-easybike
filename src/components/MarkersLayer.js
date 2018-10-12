@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 import { apiKey } from './settings';
+import PopupContent from './PopupContent';
 import ModalWarning from './ModalWarning';
 
 class MarkersLayer extends Component {
@@ -54,10 +55,13 @@ class MarkersLayer extends Component {
   render() {
     const { stationsList, error } = this.state;
 
-    const leafletMarkers = stationsList.map(marker => (
-      <Marker position={[marker.position.lat, marker.position.lng]} key={`marker_${marker.name}`}>
-        <Popup>
-          <span>{marker.name}</span>
+    const maxWidth = 400;
+    const minWidth = 340;
+
+    const leafletMarkers = stationsList.map(stationData => (
+      <Marker position={[stationData.position.lat, stationData.position.lng]} key={`marker_${stationData.name}`}>
+        <Popup maxWidth={maxWidth} minWidth={minWidth}>
+          <PopupContent marker={stationData} />
         </Popup>
       </Marker>
     ));
