@@ -9,6 +9,7 @@ import './App.css';
 import './Navbar.css';
 import './Map.css';
 import './SideMenu.css';
+import './PopupContent.css';
 
 class App extends Component {
   getStyle(feature) {

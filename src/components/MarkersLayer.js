@@ -7,6 +7,7 @@ import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 
 import { apiKey } from './settings';
+import PopupContent from './PopupContent';
 import ModalWarning from './ModalWarning';
 
 class MarkersLayer extends Component {
@@ -59,18 +60,20 @@ class MarkersLayer extends Component {
   render() {
     const { stationsList, error } = this.state;
 
-    const leafletMarkers = stationsList.map(marker => (
+    const maxWidth = 400;
+    const minWidth = 340;
+    const leafletMarkers = stationsList.map(stationData => (
       <Marker
         icon={L.divIcon({
           className: 'custom-icon',
-          html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(marker.available_bike_stands / marker.bike_stands) * 100} />),
+          html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(stationData.available_bike_stands / stationData.bike_stands) * 100} />),
           iconSize: [16, 45]
         })}
-        position={[marker.position.lat, marker.position.lng]}
-        key={`marker_${marker.name}`}
+        position={[stationData.position.lat, stationData.position.lng]}
+        key={`marker_${stationData.name}`}
       >
-        <Popup>
-          <span>{marker.name}</span>
+        <Popup maxWidth={maxWidth} minWidth={minWidth}>
+          <PopupContent marker={stationData} />
         </Popup>
       </Marker>
     ));
