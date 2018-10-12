@@ -3,14 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
 import { apiKey } from './settings';
 import PopupContent from './PopupContent';
-
-// const stations = require('./../static-data-JCDBikes');
-
-// const stationsStaticList = stations.map((station) => ({
-//   name: station.name,
-//   latlng: [station.latitude, station.longitude]
-// }));
-
+import ModalWarning from './ModalWarning';
 
 class MarkersLayer extends Component {
   constructor(props) {
@@ -20,9 +13,31 @@ class MarkersLayer extends Component {
       isLoading: false,
       error: null
     };
+    this.clearError = this.clearError.bind(this);
+    this.refreshStationsList = this.refreshStationsList.bind(this);
   }
 
   componentDidMount() {
+    const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
+    this.setState({ isLoading: true });
+
+    axios.get(request)
+      .then(result => this.setState({
+        stationsList: result.data,
+        isLoading: false
+      }))
+      .catch(error => this.setState({
+        error,
+        isLoading: false
+      }));
+  }
+
+  clearError() {
+    this.setState({ error: null });
+  }
+
+  refreshStationsList() {
+    this.setState({error: null});
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
 
@@ -51,10 +66,17 @@ class MarkersLayer extends Component {
       </Marker>
     ));
 
-    return (
+    const displayMarkers = error ? (
+      <ModalWarning
+        error={error}
+        clearError={this.clearError}
+        refresh={this.refreshStationsList}
+      />)
+      : leafletMarkers;
 
+    return (
       <div>
-        {leafletMarkers}
+        {displayMarkers}
       </div>
     );
   }
