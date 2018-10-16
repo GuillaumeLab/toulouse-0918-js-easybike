@@ -3,13 +3,4 @@
 	{
 		display: none;
 	}
-}
-
-#SideMenu {
-  padding: 0;
-}
-
-#SideMenu li {
-  list-style-type: none;
-}
-
+};
