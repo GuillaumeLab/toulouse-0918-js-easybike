@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
+import L from 'leaflet';
+import SvgStationIconGauge from './SvgStationIconGauge';
+
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
+
 import { apiKey } from './settings';
-
-// const stations = require('./../static-data-JCDBikes');
-
-// const stationsStaticList = stations.map((station) => ({
-//   name: station.name,
-//   latlng: [station.latitude, station.longitude]
-// }));
-
+import PopupContent from './PopupContent';
+import ModalWarning from './ModalWarning';
 
 class MarkersLayer extends Component {
   constructor(props) {
@@ -19,6 +18,8 @@ class MarkersLayer extends Component {
       isLoading: false,
       error: null
     };
+    this.clearError = this.clearError.bind(this);
+    this.refreshStationsList = this.refreshStationsList.bind(this);
   }
 
   componentDidMount() {
@@ -36,21 +37,58 @@ class MarkersLayer extends Component {
       }));
   }
 
+  clearError() {
+    this.setState({ error: null });
+  }
+
+  refreshStationsList() {
+    this.setState({ error: null });
+    const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
+    this.setState({ isLoading: true });
+
+    axios.get(request)
+      .then(result => this.setState({
+        stationsList: result.data,
+        isLoading: false
+      }))
+      .catch(error => this.setState({
+        error,
+        isLoading: false
+      }));
+  }
+
   render() {
     const { stationsList, error } = this.state;
 
-    const LeafletMarkers = stationsList.map(marker => (
-      <Marker position={[marker.position.lat, marker.position.lng]} key={`marker_${marker.name}`}>
-        <Popup>
-          <span>{marker.name}</span>
+    const maxWidth = 400;
+    const minWidth = 340;
+    const leafletMarkers = stationsList.map(stationData => (
+      <Marker
+        icon={L.divIcon({
+          className: 'custom-icon',
+          html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(stationData.available_bike_stands / stationData.bike_stands) * 100} />),
+          iconSize: [16, 45]
+        })}
+        position={[stationData.position.lat, stationData.position.lng]}
+        key={`marker_${stationData.name}`}
+      >
+        <Popup maxWidth={maxWidth} minWidth={minWidth}>
+          <PopupContent marker={stationData} />
         </Popup>
       </Marker>
     ));
 
-    return (
+    const displayMarkers = error ? (
+      <ModalWarning
+        error={error}
+        clearError={this.clearError}
+        refresh={this.refreshStationsList}
+      />)
+      : leafletMarkers;
 
+    return (
       <div>
-        {LeafletMarkers}
+        {displayMarkers}
       </div>
     );
   }
