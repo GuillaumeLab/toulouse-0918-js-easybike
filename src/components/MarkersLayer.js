@@ -62,7 +62,7 @@ class MarkersLayer extends Component {
 
     const maxWidth = 400;
     const minWidth = 340;
-    const leafletMarkers = stationsList.map(stationData => (
+    const allStationsMarkers = stationsList.map(stationData => (
       <Marker
         icon={L.divIcon({
           className: 'custom-icon',
@@ -88,7 +88,7 @@ class MarkersLayer extends Component {
         clearError={this.clearError}
         refresh={this.refreshStationsList}
       />)
-      : leafletMarkers;
+      : allStationsMarkers;
 
     return (
       <div>
