@@ -10,27 +10,28 @@ class NavigationModule extends Component {
     };
   }
 
-  selectNavigation = () => {
+  selectNavigation() {
     this.setState ({
       isChecked : !this.state.isChecked
     });
   };
  
-  render () {
-
+  render() {
     return (
-      
       <div className="container">
-
         <div className="card my-2">
-          
           <div className="card-header font-weight-bold">NAVIGATION</div>       
-          
           <div className="card-body p-2">
             <div className="card-text">
               <div className="form-check mb-2">      
-                <input type ="checkbox" className= "form-check-input" id = "itinary"
-                onChange={this.selectNavigation} checked={this.state.isChecked}/><span> Rechercher un trajet</span>
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="itinary"
+                  onChange={this.selectNavigation}
+                  checked={this.state.isChecked}
+                />
+                <span> Rechercher un trajet</span>
               </div>
               <form>
                 <div class="form-group">   

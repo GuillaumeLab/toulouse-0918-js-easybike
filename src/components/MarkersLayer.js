@@ -66,7 +66,11 @@ class MarkersLayer extends Component {
       <Marker
         icon={L.divIcon({
           className: 'custom-icon',
-          html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(stationData.available_bike_stands / stationData.bike_stands) * 100} />),
+          html: ReactDOMServer.renderToString(
+            <SvgStationIconGauge
+              perc={(stationData.available_bike_stands / stationData.bike_stands) * 100}
+            />
+          ),
           iconSize: [16, 45]
         })}
         position={[stationData.position.lat, stationData.position.lng]}
