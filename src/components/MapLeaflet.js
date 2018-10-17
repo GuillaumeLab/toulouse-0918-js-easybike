@@ -25,10 +25,6 @@ class MapLeaflet extends Component {
     };
   }
 
-  componentWillMount() {
-    this.forceUpdate();
-  }
-
   render() {
     let [defaultLatUser, defaultLongUser] = defaultCenter.center;
     let center = this.state.centerMap;
