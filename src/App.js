@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
-import MapContainer from './components/MapContainer';
+import MapContainer from './components/Map'
 
 
 import './App.css';
@@ -12,14 +12,6 @@ import './SideMenu.css';
 import './PopupContent.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stationsToDisplay: 'all'
-    };
-    this.displayWhat = this.displayWhat.bind(this);
-  }
-
   getStyle(feature) {
     return {
       fillColor: '#ece7f2',
@@ -31,21 +23,13 @@ class App extends Component {
     }
   }
 
-  displayWhat(stations) {
-    this.setState({
-      stationsToDisplay: stations
-    });
-  }
-
   render() {
     return (
       <div className="App container-fluid">
-        <Navbar
-          displayWhat={this.displayWhat}
-        />
+        <Navbar />
         <div className="row">
           <SideMenu />
-          <MapContainer stationsToDisplay={this.state.stationsToDisplay}/>
+          <MapContainer />
         </div>
       </div>
     );

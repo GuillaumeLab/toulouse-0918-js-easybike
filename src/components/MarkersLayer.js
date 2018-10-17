@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
+import SvgStationIconGauge from './SvgStationIconGauge';
 
 import { Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
-import SvgStationIconGauge from './SvgStationIconGauge';
 
 import { apiKey } from './settings';
 import PopupContent from './PopupContent';

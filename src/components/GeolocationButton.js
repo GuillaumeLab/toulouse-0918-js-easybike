@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
+import Control from 'react-leaflet-control';
 import { geolocIcon } from '../images/geoloc-icon.svg';
 
 
 const GeolocationButton = () => (
   <div>
     <button type="button">
-      <img src={geolocIcon} alt="target icon" />
+      Reset View
     </button>
   </div>
 );
-
 export default GeolocationButton;
