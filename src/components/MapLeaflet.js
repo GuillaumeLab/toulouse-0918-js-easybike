@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Geolocation from 'react-geolocation';
-import Control from 'react-leaflet-control';
-import ControlsLayer from './ControlsLayer';
+
 
 import MarkersLayer from './MarkersLayer';
 
@@ -15,7 +14,7 @@ const defaultCenter = {
 
 // const mapConfig = {
 //   center: [43.6036786, 1.4328012],
-//   zoom: 15
+//   zoom: 
 // };
 
 class MapLeaflet extends Component {
@@ -50,26 +49,18 @@ class MapLeaflet extends Component {
               longitude = defaultLongUser;
             }
             return (
-              <Fragment>
-                <button type="button" onClick={e => this.forceUpdate()}>Force Update</button>
-                <Map center={ center } zoom={this.state.zoom} className="map__reactleaflet">
-                  <TileLayer
-                    url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
-                  />
-                  <MarkersLayer stationsToDisplay={this.props.stationsToDisplay} />
-                  <Control position="topright">
-                    <button type="button" onClick={getCurrentPosition}>
-                      Reset View
-                    </button>
-                  </Control>
-                  <Marker position={[latitude, longitude]}>
-                    <Popup>
-                      <span>USER</span>
-                    </Popup>
-                  </Marker>
-                </Map>
-              </Fragment>
+              <Map center={center} zoom={this.state.zoom} className="map__reactleaflet">
+                <TileLayer
+                  url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+                />
+                <MarkersLayer stationsToDisplay={this.props.stationsToDisplay} />
+                <Marker position={[latitude, longitude]}>
+                  <Popup>
+                    <span>USER</span>
+                  </Popup>
+                </Marker>
+              </Map>
             );
           }
           }

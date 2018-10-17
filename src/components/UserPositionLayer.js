@@ -25,28 +25,30 @@ class UserPositionLayer extends Component {
             position: { coords: { latitude, longitude } = {} } = {},
             error,
             getCurrentPosition
-          }) => (
-              <div>
-                <button onClick={getCurrentPosition}>Get Position</button>
-                {error &&
-                  <div>
-                    {error.message}
-                  </div>}
-                <pre>
-                  latitude: {latitude}
-                  longitude: {longitude}
-                </pre>
-              </div>
-            )}
+          }) => {
+            if (!latitude || !longitude) {
+              latitude = defaultLatUser;
+              latitude = defaultLatUser; longitude = defaultLongUser;
+              longitude = defaultLongUser;
+            }
+            return (
+              <Map center={[latitude, longitude]} zoom={usersMarkerDefault.zoom} className="map__reactleaflet">
+                <TileLayer
+                  url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+                />
+                <MarkersLayer />
+                <Marker position={[latitude, longitude]} >
+                  <Popup>
+                    <span>USER</span>
+                  </Popup>
+                </Marker>
+              </Map>
+            )
+          }
+          }
         />
-        <Marker position={[latitude, longitude]}>
-          <Popup>
-            <span>USER</span>
-          </Popup>
-        </Marker>
-
       </div>
-    );
   }
 }
 
