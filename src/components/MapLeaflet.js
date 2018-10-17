@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Geolocation from 'react-geolocation';
-
 
 import MarkersLayer from './MarkersLayer';
 
@@ -43,7 +42,6 @@ class MapLeaflet extends Component {
             error,
             getCurrentPosition
           }) => {
-            //     <div>{error.message}</div>
             if (!latitude || !longitude) {
               latitude = defaultLatUser;
               longitude = defaultLongUser;
