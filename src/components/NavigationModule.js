@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-
+import ItineraryInputModule from './ItineraryInputModule';
+import AdressInputModule from './AdressInputModule';
 
 class NavigationModule extends Component {
 
   constructor (props) {
     super(props);
     this.state = {
-      isChecked : false
+      itinerary : false
     };
+    this.selectNavigation = this.selectNavigation.bind(this);
   }
 
   selectNavigation() {
     this.setState ({
-      isChecked : !this.state.isChecked
+      itinerary : !this.state.itinerary
     });
   };
  
@@ -27,15 +29,16 @@ class NavigationModule extends Component {
                 <input
                   type="checkbox"
                   className="form-check-input"
-                  id="itinary"
+                  id="itinerary"
                   onChange={this.selectNavigation}
-                  checked={this.state.isChecked}
+                  checked={this.state.itinerary}
                 />
                 <span> Rechercher un trajet</span>
               </div>
               <form>
-                <div class="form-group">   
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresse"/>
+                <div class="form-group">
+                  <AdressInputModule itinerary={this.state.itinerary} />
+                  <ItineraryInputModule itinerary={this.state.itinerary} />
                 </div>
               </form>
             </div>
