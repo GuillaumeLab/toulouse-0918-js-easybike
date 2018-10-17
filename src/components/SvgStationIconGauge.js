@@ -4,7 +4,7 @@ class SvgStationIconGauge extends Component {
   render() {
     const perc = this.props.perc || 0;
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 50 120" class="icon-station">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 50 120" className="icon-station">
         <title>Station marker</title>
         <desc>Marker with gauge to display availability in bike stations</desc>
         
