@@ -57,7 +57,7 @@ class MapLeaflet extends Component {
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
                   />
-                  <MarkersLayer />
+                  <MarkersLayer stationsToDisplay={this.props.stationsToDisplay} />
                   <Control position="topright">
                     <button type="button" onClick={getCurrentPosition}>
                       Reset View
