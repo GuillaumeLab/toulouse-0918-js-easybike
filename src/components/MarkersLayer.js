@@ -59,10 +59,14 @@ class MarkersLayer extends Component {
 
   render() {
     const { stationsList, error } = this.state;
-
+    // const stationsToDisplay = 'all';
     const maxWidth = 400;
     const minWidth = 340;
-    const leafletMarkers = stationsList.map(stationData => (
+    // const leafletMarkers = stationsList.map(stationData => (
+    const leafletMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") || 
+                                                              (stationData.available_bike_stands !== 0 && stationsToDisplay === "freeSpaces") ||
+                                                               stationsToDisplay === "all")
+        .map(stationData => (
       <Marker
         icon={L.divIcon({
           className: 'custom-icon',
