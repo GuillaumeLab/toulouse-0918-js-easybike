@@ -11,11 +11,6 @@ const defaultCenter = {
   zoom: 15
 };
 
-// const mapConfig = {
-//   center: [43.6036786, 1.4328012],
-//   zoom: 
-// };
-
 class MapLeaflet extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +26,6 @@ class MapLeaflet extends Component {
     return (
       <div className="map">
         <Geolocation
-          lazy
           render={({
             fetchingPosition,
             position: { coords: { latitude, longitude } = {} } = {},
