@@ -14,8 +14,8 @@ class Navbar extends Component {
         </button>
         <div id="navbarNavAltMarkup" className="col-md-8 collapse navbar-collapse">
           <div className="navbar-nav text-right text-md-center mx-auto">
-            <button type="button" className="nav-item nav-link" onClick={() => this.props.displayWhat('bikes')}>Prendre un vélo</button>
-            <button type="button" className="nav-item nav-link" onClick={() => this.props.displayWhat('freeSpaces')}>Déposer un vélo</button>
+            <a className="nav-item nav-link" href="#">Prendre un vélo</a>
+            <a className="nav-item nav-link" href="#">Déposer un vélo</a>
             <a className="nav-item nav-link" href="#">Calcul d&apos;itinéraire</a>
             <a className="nav-item nav-link" href="#">Filtrer</a>
             <a className="nav-item nav-link" href="#">Favoris</a>
