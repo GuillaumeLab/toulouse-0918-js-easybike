@@ -73,7 +73,7 @@ class MarkersLayer extends Component {
           className: 'custom-icon',
           html: ReactDOMServer.renderToString(
             <SvgStationIconGauge
-              perc={(stationData.available_bike_stands / stationData.bike_stands) * 100}
+              perc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
             />
           ),
           iconSize: [16, 45]
