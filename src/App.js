@@ -38,6 +38,7 @@ class App extends Component {
   }
 
   render() {
+    const { stationsToDisplay } = this.state;
     return (
       <div className="App container-fluid">
         <Navbar
@@ -45,7 +46,7 @@ class App extends Component {
         />
         <div className="row">
           <SideMenu displayWhat={this.displayWhat} />
-          <MapContainer stationsToDisplay={this.state.stationsToDisplay}/>
+          <MapContainer stationsToDisplay={stationsToDisplay} />
         </div>
       </div>
     );

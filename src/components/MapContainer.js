@@ -4,7 +4,7 @@ import MapLeaflet from './MapLeaflet';
 class MapContainer extends Component {
   render() {
     return (
-      <div id="mapContainer" className="container-fluid col-12 col-md-9">
+      <div id="mapContainer" className="col-12 col-md-9 px-2">
         <MapLeaflet stationsToDisplay={this.props.stationsToDisplay} />
       </div>
     );
