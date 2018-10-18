@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 class Navbar extends Component {
   render() {
-    const displayWhat = this.props.displayWhat;
     return (
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-dark container-fluid">
         <div className="col-2">
           <a className="navbar-brand" href="index.html"><h1>EasyBike</h1></a>
         </div>

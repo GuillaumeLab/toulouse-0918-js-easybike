@@ -2,6 +2,7 @@
   height: auto;
   background-color: #1F57EC;
 }
-.navbar .color {
-  color : #FF830D;
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,1);
 }
