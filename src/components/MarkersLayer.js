@@ -59,33 +59,31 @@ class MarkersLayer extends Component {
 
   render() {
     const { stationsList, error } = this.state;
-    const stationsToDisplay = this.props.stationsToDisplay;
-    // const stationsToDisplay = 'all';
+    const { stationsToDisplay } = this.props;
     const maxWidth = 400;
     const minWidth = 340;
-    // const leafletMarkers = stationsList.map(stationData => (
-    const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") || 
-                                                              (stationData.available_bike_stands !== 0 && stationsToDisplay === "freeSpaces") ||
-                                                               stationsToDisplay === "all")
-        .map(stationData => (
-      <Marker
-        icon={L.divIcon({
-          className: 'custom-icon',
-          html: ReactDOMServer.renderToString(
-            <SvgStationIconGauge
-              perc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
-            />
-          ),
-          iconSize: [16, 45]
-        })}
-        position={[stationData.position.lat, stationData.position.lng]}
-        key={`marker_${stationData.name}`}
-      >
-        <Popup maxWidth={maxWidth} minWidth={minWidth}>
-          <PopupContent marker={stationData} />
-        </Popup>
-      </Marker>
-    ));
+    const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
+      (stationData.available_bike_stands !== 0 && stationsToDisplay === "freeSpaces") ||
+      stationsToDisplay === "all")
+      .map(stationData => (
+        <Marker
+          icon={L.divIcon({
+            className: 'custom-icon',
+            html: ReactDOMServer.renderToString(
+              <SvgStationIconGauge
+                perc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
+              />
+            ),
+            iconSize: [16, 45]
+          })}
+          position={[stationData.position.lat, stationData.position.lng]}
+          key={`marker_${stationData.name}`}
+        >
+          <Popup maxWidth={maxWidth} minWidth={minWidth}>
+            <PopupContent marker={stationData} />
+          </Popup>
+        </Marker>
+      ));
 
     const displayMarkers = error ? (
       <ModalWarning

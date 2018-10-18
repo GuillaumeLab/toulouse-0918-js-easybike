@@ -21,6 +21,7 @@ class MapLeaflet extends Component {
   }
 
   render() {
+    const { stationsToDisplay } = this.props;
     let [defaultLatUser, defaultLongUser] = defaultCenter.center;
     let center = this.state.centerMap;
     return (
@@ -42,7 +43,7 @@ class MapLeaflet extends Component {
                   url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                   attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
                 />
-                <MarkersLayer stationsToDisplay={this.props.stationsToDisplay} />
+                <MarkersLayer stationsToDisplay={stationsToDisplay} />
                 <Marker position={[latitude, longitude]}>
                   <Popup>
                     <span>USER</span>
