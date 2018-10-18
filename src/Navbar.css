@@ -1,7 +1,16 @@
+
 .navbar {
   height: auto;
-  background-color: #1F57EC;
+  background-color: rgb(82, 125, 243);
+  color: white;
 }
-.navbar .color {
-  color : #FF830D;
+
+.navbar h1 {
+  font-size: 2rem;
 }
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,1);
+}
+
+

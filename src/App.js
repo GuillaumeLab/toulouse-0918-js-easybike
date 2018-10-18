@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container-fluid">
+      <div className="App container-fluid p-0">
         <Navbar
           displayWhat={this.displayWhat}
         />
