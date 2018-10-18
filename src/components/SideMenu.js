@@ -3,6 +3,8 @@ import Favorites from './Favorites';
 import NavigationModule from './NavigationModule';
 import StationsToDisplayMenu from './StationsToDisplayMenu';
 
+import '../SideMenu.css';
+
 class SideMenu extends Component {
   render() {
     return (

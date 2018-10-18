@@ -1,24 +1,48 @@
 import React, { Component } from 'react';
 
 class StationToDisplayMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOption: 'all'
+    };
+
+    this.handleRadioChange = this.handleRadioChange.bind(this);
+  }
+
+  handleRadioChange(event) {
+    this.setState({
+      selectedOption: event.target.value
+    });
+    this.props.displayWhat(event.target.value);
+  }
+
   render() {
+    const { selectedOption } = this.state;
     return (
       <div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a className="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" onClick={() => this.props.displayWhat('all')}>Toutes les stations</a>
-          <a className="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" onClick={() => this.props.displayWhat('bikes')}>Uniquement les stations avec des vélos disponibles</a>
-          <a className="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" onClick={() => this.props.displayWhat('freeSpaces')}>Uniquement les stations avec des emplacements disponibles</a>
+        <div className="card">
+          <div className="card-header font-weight-bold">Affichage des stations</div>
+          <div className="card-body">
+            <div className="card-text">
+              <form>
+                <div className="form-check ">
+                  <div className="form-group stations-to-display">
+                    <input name="stations" id="all-bikes" type="radio" value="all" checked={selectedOption === 'all'} onChange={this.handleRadioChange} aria-label="Display all stations" />
+                    <label htmlFor="all-bikes">Toutes les stations</label>
+                  </div>
+                  <div className="form-group stations-to-display">
+                    <input name="stations" id="only-bikes" type="radio" value="bikes" checked={selectedOption === 'bikes'} onChange={this.handleRadioChange} aria-label="Display stations with bikes" />
+                    <label htmlFor="only-bikes">Seulement les stations avec vélos</label>
+                  </div>
+                  <div className="form-group stations-to-display">
+                    <input name="stations" id="only-free-spaces" type="radio" value="freeSpaces" checked={selectedOption === 'freeSpaces'} onChange={this.handleRadioChange} aria-label="Display stations with free bikes stands" />
+                    <label htmlFor="only-free-spaces">Seulement les stations avec emplacements disponibles</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );

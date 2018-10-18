@@ -4,3 +4,18 @@
 		display: none;
 	}
 };
+
+.stations-to-display {
+  word-break: break-word;
+  padding: 1rem;
+}
+
+.stations-to-display input {
+  margin-top: 0.3rem;
+  margin-right: 1rem;
+}
+
+.stations-to-display label {
+  display: inline;
+  
+}

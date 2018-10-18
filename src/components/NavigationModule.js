@@ -20,7 +20,6 @@ class NavigationModule extends Component {
  
   render() {
     return (
-      <div className="container">
         <div className="card my-2">
           <div className="card-header font-weight-bold">NAVIGATION</div>       
           <div className="card-body p-2">
@@ -36,7 +35,7 @@ class NavigationModule extends Component {
                 <span> Rechercher un trajet</span>
               </div>
               <form>
-                <div class="form-group">
+                <div className="form-group">
                   <AdressInputModule itinerary={this.state.itinerary} />
                   <ItineraryInputModule itinerary={this.state.itinerary} />
                 </div>
@@ -44,7 +43,6 @@ class NavigationModule extends Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 };
