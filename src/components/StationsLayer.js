@@ -10,7 +10,7 @@ import { apiKey } from './settings';
 import PopupContent from './PopupContent';
 import ModalWarning from './ModalWarning';
 
-class MarkersLayer extends Component {
+class StationsLayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,31 +59,24 @@ class MarkersLayer extends Component {
 
   render() {
     const { stationsList, error } = this.state;
-    const { stationsToDisplay } = this.props;
+
     const maxWidth = 400;
     const minWidth = 340;
-    const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
-      (stationData.available_bike_stands !== 0 && stationsToDisplay === "freeSpaces") ||
-      stationsToDisplay === "all")
-      .map(stationData => (
-        <Marker
-          icon={L.divIcon({
-            className: 'custom-icon',
-            html: ReactDOMServer.renderToString(
-              <SvgStationIconGauge
-                perc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
-              />
-            ),
-            iconSize: [16, 45]
-          })}
-          position={[stationData.position.lat, stationData.position.lng]}
-          key={`marker_${stationData.name}`}
-        >
-          <Popup maxWidth={maxWidth} minWidth={minWidth}>
-            <PopupContent marker={stationData} />
-          </Popup>
-        </Marker>
-      ));
+    const leafletMarkers = stationsList.map(stationData => (
+      <Marker
+        icon={L.divIcon({
+          className: 'custom-icon',
+          html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(stationData.available_bike_stands / stationData.bike_stands) * 100} />),
+          iconSize: [16, 45]
+        })}
+        position={[stationData.position.lat, stationData.position.lng]}
+        key={`marker_${stationData.name}`}
+      >
+        <Popup maxWidth={maxWidth} minWidth={minWidth}>
+          <PopupContent marker={stationData} />
+        </Popup>
+      </Marker>
+    ));
 
     const displayMarkers = error ? (
       <ModalWarning
@@ -91,7 +84,7 @@ class MarkersLayer extends Component {
         clearError={this.clearError}
         refresh={this.refreshStationsList}
       />)
-      : allStationsMarkers;
+      : leafletMarkers;
 
     return (
       <div>
@@ -101,4 +94,4 @@ class MarkersLayer extends Component {
   }
 }
 
-export default MarkersLayer;
+export default StationsLayer;

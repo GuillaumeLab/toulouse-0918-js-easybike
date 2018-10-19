@@ -3,16 +3,18 @@
 	{
 		display: none;
 	}
+};
+
+.stations-to-display {
+  word-break: break-word;
 }
 
-#SideMenu {
-  padding: 0;
+.stations-to-display input {
+  margin-top: 0.3rem;
+  margin-right: 1rem;
 }
 
-#SideMenu li {
-  list-style-type: none;
-}
-
-#SideMenu > div {
-  height: 100vh;
+.stations-to-display label {
+  display: inline;
+  
 }
