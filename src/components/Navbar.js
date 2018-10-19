@@ -16,9 +16,6 @@ class Navbar extends Component {
           <div className="navbar-nav text-right text-md-center mx-auto">
             <a className="nav-item nav-link" href="#">Prendre un vélo</a>
             <a className="nav-item nav-link" href="#">Déposer un vélo</a>
-            <a className="nav-item nav-link" href="#">Calcul d&apos;itinéraire</a>
-            <a className="nav-item nav-link" href="#">Filtrer</a>
-            <a className="nav-item nav-link" href="#">Favoris</a>
           </div>
         </div>
       </nav>
