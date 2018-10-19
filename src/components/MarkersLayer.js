@@ -94,7 +94,7 @@ class MarkersLayer extends Component {
 
     return (
       <div>
-        {displayMarkers}
+        {displayMarkers }
       </div>
     );
   }
