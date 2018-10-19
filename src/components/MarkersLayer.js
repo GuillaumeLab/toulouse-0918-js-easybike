@@ -59,7 +59,7 @@ class MarkersLayer extends Component {
 
   render() {
     const { stationsList, error } = this.state;
-    const { stationsToDisplay } = this.props;
+    const { stationsToDisplay } = this.props.stationsToDisplay;
     const maxWidth = 400;
     const minWidth = 340;
     const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||

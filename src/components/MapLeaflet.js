@@ -49,25 +49,23 @@ class MapLeaflet extends Component {
               longitude = defaultLongUser;
             }
             return (
-              <Fragment>
-                <Map center={ center } zoom={this.state.zoom} className="map__reactleaflet">
-                  <TileLayer
-                    url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
-                  />
-                  <MarkersLayer />
-                  <Control position="topright">
-                    <button type="button" onClick={getCurrentPosition}>
-                      Reset View
-                    </button>
-                  </Control>
-                  <Marker position={[latitude, longitude]}>
-                    <Popup>
-                      <span>USER</span>
-                    </Popup>
-                  </Marker>
-                </Map>
-              </Fragment>
+              <Map center={center} zoom={this.state.zoom} className="map__reactleaflet">
+                <TileLayer
+                  url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+                />
+                <MarkersLayer stationsToDisplay={this.props.stationsToDisplay}/>
+                <Control position="topright">
+                  <button type="button" onClick={getCurrentPosition}>
+                    Reset View
+                  </button>
+                </Control>
+                <Marker position={[latitude, longitude]}>
+                  <Popup>
+                    <span>USER</span>
+                  </Popup>
+                </Marker>
+              </Map>
             );
           }
           }
