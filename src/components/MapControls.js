@@ -18,34 +18,26 @@ class MapControls extends Component {
         <Control position="topright">
           <button
             type="button"
-            className="map-button"
+            className="map-button geoloc"
             onClick={() => centerMap(lat, lng)}
-          >
-            Geoloc
-          </button>
+          />
           <button
             type="button"
-            className="map-button"
+            className="map-button search display-button"
             onClick={() => this.setState({ bounds: [51.3, 0.7] })}
-          >
-            Search
-          </button>
+          />
           <button
             type="button"
-            className="map-button"
+            className="map-button fav display-button"
             onClick={() => this.setState({ bounds: [51.3, 0.7] })}
-          >
-            Fav
-          </button>
+          />
         </Control>
         <Control position="bottomright">
           <button
             type="button"
-            className="map-button"
+            className="map-button filter display-button"
             onClick={() => this.setState({ bounds: [51.3, 0.7] })}
-          >
-            filter
-          </button>
+          />
         </Control>
       </Fragment>
     );

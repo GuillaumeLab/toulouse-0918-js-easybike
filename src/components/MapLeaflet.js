@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import {
+  Map, TileLayer, Marker, Popup
+} from 'react-leaflet';
 import Geolocation from 'react-geolocation';
 import MapControls from './MapControls';
 
@@ -11,11 +13,6 @@ const defaultCenter = {
   center: [43.599761799999996, 1.443197],
   zoom: 15
 };
-
-// const mapConfig = {
-//   center: [43.6036786, 1.4328012],
-//   zoom: 15
-// };
 
 class MapLeaflet extends Component {
   constructor(props) {
@@ -35,8 +32,8 @@ class MapLeaflet extends Component {
 
   render() {
     const { stationsToDisplay } = this.props;
-    let [defaultLatUser, defaultLongUser] = defaultCenter.center;
-    let { center, zoom } = this.state;
+    const { center, zoom } = this.state;
+
     return (
       <div className="map">
         <Geolocation
@@ -47,10 +44,20 @@ class MapLeaflet extends Component {
             getCurrentPosition
           }) => {
             //     <div>{error.message}</div>
+            let isUserLocated = true;
             if (!latitude || !longitude) {
-              latitude = defaultLatUser;
-              longitude = defaultLongUser;
+              isUserLocated = false;
             }
+            const user = isUserLocated
+              ? (
+                <Marker position={[latitude, longitude]}>
+                  <Popup>
+                    <span>USER</span>
+                  </Popup>
+                </Marker>
+              )
+              : null;
+
             return (
               <Map center={center} zoom={zoom} className="map__reactleaflet">
                 <TileLayer
@@ -58,18 +65,14 @@ class MapLeaflet extends Component {
                   attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
                 />
                 <MarkersLayer
-                  stationsToDisplay={this.props.stationsToDisplay}  
+                  stationsToDisplay={stationsToDisplay}
                 />
                 <MapControls
                   lat={latitude}
                   lng={longitude}
                   centerMap={this.centerMap}
                 />
-                <Marker position={[latitude, longitude]}>
-                  <Popup>
-                    <span>USER</span>
-                  </Popup>
-                </Marker>
+                {user}
               </Map>
             );
           }
