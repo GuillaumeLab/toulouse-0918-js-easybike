@@ -12,14 +12,14 @@ class MapControls extends Component {
   }
 
   render() {
-    const { lat, lng, centerMap } = this.props;
+    const { lat, lng } = this.props;
     return (
       <Fragment>
         <Control position="topright">
           <button
             type="button"
             className="map-button"
-            onClick={() => { centerMap(lat, lng); }}
+            onClick={() => {this.props.centerMap(lat, lng);}
           >
             Geoloc
           </button>

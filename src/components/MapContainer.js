@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import MapLeaflet from './MapLeaflet';
 
-const MapContainer = (props) => (
-  <div id="mapContainer" className="container-fluid col-12 col-md-9">
-    <MapLeaflet stationsToDisplay={this.props.stationsToDisplay} />
-  </div>
-);
-
+class MapContainer extends Component {
+  render() {
+    const { stationsToDisplay } = this.props;
+    return (
+      <div id="mapContainer" className="container-fluid col-12 col-md-9">
+        <MapLeaflet stationsToDisplay={this.props.stationsToDisplay} />
+      </div>
+    );
+  }
+}
 export default MapContainer;
