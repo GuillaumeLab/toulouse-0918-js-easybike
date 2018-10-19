@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 const getItinararyUrl = (str1, str2) => {
   console.log(str1, str2);
-  let generateUrl = (`https://www.google.com/maps/dir/?api=1&origin=${str1}+toulouse&destination=${str2}toulouse&travelmode=bicycling`);
-  return generateUrl
+  const generateUrl = (`https://www.google.com/maps/dir/?api=1&origin=${str1}+toulouse&destination=${str2}toulouse&travelmode=bicycling`);
+  return generateUrl;
 };
 
 class Navbar extends Component {
@@ -28,6 +28,7 @@ class Navbar extends Component {
   }
 
   render() {
+    const { start, destination } = this.state;
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="col-2">
@@ -48,7 +49,7 @@ class Navbar extends Component {
           <div className="navbar-nav text-right text-md-center mx-auto">
             <a className="nav-item nav-link" href="#">Prendre un vélo</a>
             <a className="nav-item nav-link" href="#">Déposer un vélo</a>
-            <a className="nav-item nav-link" href={getItinararyUrl(this.state.start, this.state.destination)} target="_blank" rel="noopener noreferrer">Calcul d&apos;itinéraire</a>
+            <a className="nav-item nav-link" href={getItinararyUrl(start, destination)} target="_blank" rel="noopener noreferrer">Calcul d&apos;itinéraire</a>
             <a className="nav-item nav-link" href="#">Filtrer</a>
             <a className="nav-item nav-link" href="#">Favoris</a>
           </div>
@@ -60,7 +61,7 @@ class Navbar extends Component {
             <input onChange={this.handleChangeDestination} id="inputDestination" type="text" className="form-control" />
           </div>
         </div>
-      </nav >
+      </nav>
     );
   }
 }
