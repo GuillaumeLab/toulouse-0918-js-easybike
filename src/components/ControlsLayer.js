@@ -1,11 +1,10 @@
-import React from 'react';
-import Control from 'react-leaflet-control';
+import React, { Fragment } from 'react';
 import GeolocationButton from './GeolocationButton';
 
 const ControlsLayer = () => (
-  <Control position="topright">
+  <Fragment>
     <GeolocationButton />
-  </Control>
+  </Fragment>
 );
 
 export default ControlsLayer;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
-import MapContainer from './components/Map'
+import MapContainer from './components/MapContainer';
 
 
 import './App.css';

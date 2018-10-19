@@ -1,43 +1,40 @@
 import React, { Component, Fragment } from 'react';
 
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import {
+  Map, TileLayer, Marker, Popup 
+  } from 'react-leaflet';
 import Geolocation from 'react-geolocation';
-import Control from 'react-leaflet-control';
-import ControlsLayer from './ControlsLayer';
+import MapControls from './MapControls';
 
 import MarkersLayer from './MarkersLayer';
-
 
 const defaultCenter = {
   center: [43.599761799999996, 1.443197],
   zoom: 15
 };
 
-// const mapConfig = {
-//   center: [43.6036786, 1.4328012],
-//   zoom: 15
-// };
-
 class MapLeaflet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      centerMap: defaultCenter.center,
+      center: defaultCenter.center,
       zoom: defaultCenter.zoom
     };
+    this.centerMap = this.centerMap.bind(this);
   }
 
-  componentWillMount() {
-    this.forceUpdate();
+  centerMap(lat, lng) {
+    this.setState({
+      center: [lat, lng]
+    });
   }
 
   render() {
     let [defaultLatUser, defaultLongUser] = defaultCenter.center;
-    let center = this.state.centerMap;
+    let { center, zoom } = this.state;
     return (
       <div className="map">
         <Geolocation
-          lazy
           render={({
             fetchingPosition,
             position: { coords: { latitude, longitude } = {} } = {},
@@ -51,18 +48,17 @@ class MapLeaflet extends Component {
             }
             return (
               <Fragment>
-                <button type="button" onClick={e => this.forceUpdate()}>Force Update</button>
-                <Map center={ center } zoom={this.state.zoom} className="map__reactleaflet">
+                <Map center={center} zoom={zoom} onZoomLevelsChange={console.log()} className="map__reactleaflet">
                   <TileLayer
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
                   />
                   <MarkersLayer />
-                  <Control position="topright">
-                    <button type="button" onClick={getCurrentPosition}>
-                      Reset View
-                    </button>
-                  </Control>
+                  <MapControls
+                    lat={latitude}
+                    lng={longitude}
+                    centerMap={this.centerMap}
+                  />
                   <Marker position={[latitude, longitude]}>
                     <Popup>
                       <span>USER</span>
