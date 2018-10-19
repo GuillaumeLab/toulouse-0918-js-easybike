@@ -4,7 +4,6 @@ import './map.css';
 
 
 class MapControls extends Component {
-
   componentDidMount() {
     this.timerID = setTimeout(
       this.forceUpdate(),

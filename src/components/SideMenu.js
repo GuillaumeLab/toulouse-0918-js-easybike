@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Favorites from './Favorites';
+import NavigationModule from './NavigationModule';
+import StationsToDisplayMenu from './StationsToDisplayMenu';
 
-const SideMenu = () => (
-  <div id="SideMenu" className="col-md-3 align-self-center">    
-    <ul>
-      <li>Desktop menu placeholder</li>
-    </ul>    
-  </div>
-);
+import '../SideMenu.css';
+
+class SideMenu extends Component {
+  render() {
+    return (
+      <div id="SideMenu" className="col-md-3 p-2">
+        <StationsToDisplayMenu displayWhat={this.props.displayWhat} />
+        <NavigationModule />
+        <Favorites />
+      </div>
+    );
+  }
+}
 
 export default SideMenu;

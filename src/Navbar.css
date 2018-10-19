@@ -1,3 +1,12 @@
 .navbar {
   height: auto;
+  background-color: #1F57EC;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,1);
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
 }
