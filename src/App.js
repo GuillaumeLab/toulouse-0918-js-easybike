@@ -45,7 +45,7 @@ class App extends Component {
         />
         <div className="row">
           <SideMenu />
-          <MapContainer stationsToDisplay={this.state.stationsToDisplay}/>
+          <MapContainer stationsToDisplay={this.state.stationsToDisplay} displayWhat={this.displayWhat} />
         </div>
       </div>
     );

@@ -60,15 +60,16 @@ class MarkersLayer extends Component {
   render() {
     const { stationsList, error } = this.state;
     const stationsToDisplay = this.props.stationsToDisplay;
-    // const stationsToDisplay = 'all';
+    const displayWhat = this.props.displayWhat;
     const maxWidth = 400;
     const minWidth = 340;
-    // const leafletMarkers = stationsList.map(stationData => (
+    // filtrage des stations -velos dispos -emplacements dispos ou toutes les stations suivant valeur de la props stationsToDisplay
     const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") || 
                                                               (stationData.available_bike_stands !== 0 && stationsToDisplay === "freeSpaces") ||
                                                                stationsToDisplay === "all")
         .map(stationData => (
       <Marker
+        displayWhat={this.props.displayWhat}
         icon={L.divIcon({
           className: 'custom-icon',
           html: ReactDOMServer.renderToString(<SvgStationIconGauge perc={(stationData.available_bike_stands / stationData.bike_stands) * 100} />),
@@ -77,8 +78,8 @@ class MarkersLayer extends Component {
         position={[stationData.position.lat, stationData.position.lng]}
         key={`marker_${stationData.name}`}
       >
-        <Popup maxWidth={maxWidth} minWidth={minWidth}>
-          <PopupContent marker={stationData} />
+        <Popup maxWidth={maxWidth} minWidth={minWidth} displayWhat={displayWhat} >
+          <PopupContent marker={stationData} displayWhat={displayWhat} />
         </Popup>
       </Marker>
     ));

@@ -23,9 +23,11 @@ class MapLeaflet extends Component {
   render() {
     let [defaultLatUser, defaultLongUser] = defaultCenter.center;
     let center = this.state.centerMap;
+    const displayWhat = this.props.displayWhat;
     return (
       <div className="map">
         <Geolocation
+
           render={({
             fetchingPosition,
             position: { coords: { latitude, longitude } = {} } = {},
@@ -37,12 +39,12 @@ class MapLeaflet extends Component {
               longitude = defaultLongUser;
             }
             return (
-              <Map center={center} zoom={this.state.zoom} className="map__reactleaflet">
+              <Map center={center} zoom={this.state.zoom} displayWhat={displayWhat} className="map__reactleaflet">
                 <TileLayer
                   url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                   attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
                 />
-                <MarkersLayer stationsToDisplay={this.props.stationsToDisplay} />
+                <MarkersLayer stationsToDisplay={this.props.stationsToDisplay} displayWhat={this.props.displayWhat} />
                 <Marker position={[latitude, longitude]}>
                   <Popup>
                     <span>USER</span>
