@@ -40,7 +40,6 @@ class MapLeaflet extends Component {
     return (
       <div className="map">
         <Geolocation
-          lazy
           render={({
             fetchingPosition,
             position: { coords: { latitude, longitude } = {} } = {},
@@ -59,12 +58,13 @@ class MapLeaflet extends Component {
                   attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
                 />
                 <MarkersLayer
-                  stationsToDisplay={this.props.stationsToDisplay}
+                  stationsToDisplay={this.props.stationsToDisplay}  
+                />
+                <MapControls
                   lat={latitude}
                   lng={longitude}
                   centerMap={this.centerMap}
                 />
-                <MapControls />
                 <Marker position={[latitude, longitude]}>
                   <Popup>
                     <span>USER</span>
