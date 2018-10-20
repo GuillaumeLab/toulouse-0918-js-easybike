@@ -32,18 +32,8 @@ class MapLeaflet extends Component {
   }
 
   componentDidMount() {
-    const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
-    this.setState({ isLoading: true });
-
-    axios.get(request)
-      .then(result => this.setState({
-        stationsList: result.data,
-        isLoading: false
-      }))
-      .catch(error => this.setState({
-        error,
-        isLoading: false
-      }));
+    this.refreshStationsList();
+    this.interval = setInterval(this.refreshStationsList, 60000);
   }
 
   clearError() {
