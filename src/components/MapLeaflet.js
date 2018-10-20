@@ -18,48 +18,56 @@ class MapLeaflet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: defaultCenter.center,
+      viewCenter: defaultCenter.center,
       zoom: defaultCenter.zoom
     };
     this.centerMap = this.centerMap.bind(this);
   }
 
-  centerMap(lat, lng) {
+  centerMap(lat, long) {
     this.setState({
-      center: [lat, lng]
+      viewCenter: [lat, long]
     });
   }
 
+
   render() {
     const { stationsToDisplay } = this.props;
-    const { center, zoom } = this.state;
+    const { viewCenter, zoom } = this.state;
 
     return (
       <div className="map">
         <Geolocation
+          lazy
           render={({
             fetchingPosition,
             position: { coords: { latitude, longitude } = {} } = {},
             error,
             getCurrentPosition
           }) => {
-            //     <div>{error.message}</div>
-            let isUserLocated = true;
+            let isUserLocated = false;
             if (!latitude || !longitude) {
               isUserLocated = false;
+            } else {
+              isUserLocated = true;
             }
-            const user = isUserLocated
+
+            console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
+            console.log(`latitude = ${latitude} and longitude = ${longitude}`);
+            const userMarker = isUserLocated
               ? (
                 <Marker position={[latitude, longitude]}>
                   <Popup>
-                    <span>USER</span>
+                    <span>Votre position</span>
                   </Popup>
                 </Marker>
               )
               : null;
 
+            const setCenter = isUserLocated ? [latitude, longitude] : viewCenter;
+
             return (
-              <Map center={center} zoom={zoom} className="map__reactleaflet">
+              <Map center={setCenter} zoom={zoom} className="map__reactleaflet">
                 <TileLayer
                   url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                   attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
@@ -68,11 +76,12 @@ class MapLeaflet extends Component {
                   stationsToDisplay={stationsToDisplay}
                 />
                 <MapControls
-                  lat={latitude}
-                  lng={longitude}
+                  longitude={longitude}
+                  latitude={latitude}
+                  getCurrentPosition={getCurrentPosition}
                   centerMap={this.centerMap}
                 />
-                {user}
+                {userMarker}
               </Map>
             );
           }

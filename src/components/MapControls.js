@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Control from 'react-leaflet-control';
 import './map.css';
+import GeolocButton from './GeolocButton';
 
 
 class MapControls extends Component {
@@ -12,14 +13,12 @@ class MapControls extends Component {
   }
 
   render() {
-    const { lat, lng, centerMap } = this.props;
+    const { getCurrentPosition } = this.props;
     return (
       <Fragment>
         <Control position="topright">
-          <button
-            type="button"
-            className="map-button geoloc"
-            onClick={() => centerMap(lat, lng)}
+          <GeolocButton
+            getCurrentPosition={getCurrentPosition}
           />
           <button
             type="button"

@@ -20,17 +20,6 @@ class App extends Component {
     this.displayWhat = this.displayWhat.bind(this);
   }
 
-  getStyle(feature) {
-    return {
-      fillColor: '#ece7f2',
-      weight: 2,
-      opacity: 1,
-      color: 'blue',
-      dashArray: '3',
-      fillOpacity: 0.7
-    }
-  }
-
   displayWhat(stations) {
     this.setState({
       stationsToDisplay: stations
