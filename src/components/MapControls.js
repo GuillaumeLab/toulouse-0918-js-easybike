@@ -1,8 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import Control from 'react-leaflet-control';
-import './map.css';
-import GeolocButton from './GeolocButton';
 
+import GeolocButton from './GeolocButton';
+import FilterButton from './FilterButton';
+import RefreshButton from './RefreshButton';
+import FavButton from './FavButton';
+import SearchButton from './SearchButton';
+
+import './map.css';
 
 class MapControls extends Component {
   componentDidMount() {
@@ -20,32 +25,16 @@ class MapControls extends Component {
           <GeolocButton
             getCurrentPosition={getCurrentPosition}
           />
-          <button
-            type="button"
-            className="map-button search display-button"
-            onClick={() => this.setState({ bounds: [51.3, 0.7] })}
-          />
-          <button
-            type="button"
-            className="map-button fav display-button"
-            onClick={() => this.setState({ bounds: [51.3, 0.7] })}
-          />
+          <SearchButton />
+          <FavButton />
         </Control>
         <Control position="bottomright">
-          <button
-            type="button"
-            className="map-button filter display-button"
-            onClick={() => this.setState({ bounds: [51.3, 0.7] })}
-          />
+          <FilterButton />
         </Control>
         <Control position="bottomleft">
-          <button
-            type="button"
-            className="map-button"
-            onClick={refreshStationsList}
-          >
-            <i className="fas fa-sync-alt fa-2x" />
-          </button>
+          <RefreshButton
+            refreshStationsList={refreshStationsList}
+          />
         </Control>
       </Fragment>
     );
