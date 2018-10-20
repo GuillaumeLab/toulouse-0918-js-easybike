@@ -13,7 +13,7 @@ class MapControls extends Component {
   }
 
   render() {
-    const { getCurrentPosition } = this.props;
+    const { getCurrentPosition, refreshStationsList } = this.props;
     return (
       <Fragment>
         <Control position="topright">
@@ -37,6 +37,15 @@ class MapControls extends Component {
             className="map-button filter display-button"
             onClick={() => this.setState({ bounds: [51.3, 0.7] })}
           />
+        </Control>
+        <Control position="bottomleft">
+          <button
+            type="button"
+            className="map-button"
+            onClick={refreshStationsList}
+          >
+            <i className="fas fa-sync-alt fa-2x" />
+          </button>
         </Control>
       </Fragment>
     );
