@@ -3,7 +3,7 @@ import bicycle from '../images/bicycle.png';
 import parking from '../images/parking-sign.png';
 
 const PopupContent = props => {
-  const { marker } = props;
+  const { marker, refreshStationsList } = props;
   return (
     <div className="container">
       <div className="card border-0">
@@ -29,16 +29,16 @@ const PopupContent = props => {
               </div>
             </div>
           </div>
-          <br/>
+          <br />
           <div className="PopupFooter row">
             <div className="refreshText col-3 d-flex align-items-center">
               <p>Il y a 5 min.</p>
             </div>
             <div className="col-3 d-flex align-items-center">
-              <a href="#" target="blank"><i className="fas fa-sync-alt fa-2x"></i></a>
+              <button type="button" href="#" target="blank" className="btn" onClick={refreshStationsList}><i className="fas fa-sync-alt fa-2x" /></button>
             </div>
             <div className="col-3 d-flex align-items-center">
-              <a href="#" target="blank"><i className="far fa-star fa-2x"></i></a>
+              <a href="#" target="blank"><i className="far fa-star fa-2x" /></a>
             </div>
             <div className="Go col-3 d-flex align-items-center">
               <a className="btn btn-primary" href="#" role="button">Go</a>

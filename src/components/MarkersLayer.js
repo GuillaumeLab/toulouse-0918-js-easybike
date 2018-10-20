@@ -42,6 +42,7 @@ class MarkersLayer extends Component {
   }
 
   refreshStationsList() {
+    console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
@@ -80,7 +81,10 @@ class MarkersLayer extends Component {
           key={`marker_${stationData.name}`}
         >
           <Popup maxWidth={maxWidth} minWidth={minWidth}>
-            <PopupContent marker={stationData} />
+            <PopupContent
+              marker={stationData}
+              refreshStationsList={this.refreshStationsList}
+            />
           </Popup>
         </Marker>
       ));
