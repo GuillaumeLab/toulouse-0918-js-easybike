@@ -31,7 +31,9 @@ class MapControls extends Component {
           <FavButton />
         </Control>
         <Control position="bottomright">
-          <FilterButton />
+          <FilterButton
+            displayFeature={displayFeature}
+          />
         </Control>
         <Control position="bottomleft">
           <RefreshButton

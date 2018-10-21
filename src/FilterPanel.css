@@ -1,0 +1,20 @@
+.mobile-filter-panel {
+  position: absolute;
+  left: 0px;
+  z-index: 1500;
+  background-color: white;
+  width:80vw;
+  padding: 1rem;
+  font-size: 0.9rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 2px solid blue;
+  border-left: none;
+}
+
+
+@media screen and (min-width: 768px) {
+  .mobile-filter-panel {
+    display: none;
+  }
+};

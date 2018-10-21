@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
 import MapContainer from './components/MapContainer';
-
+import FunctionalitiesLayer from './components/FunctionalitiesLayer';
 
 import './App.css';
 import './Navbar.css';
 import './Map.css';
 import './SideMenu.css';
 import './PopupContent.css';
-import FunctionalitiesLayer from './components/FunctionalitiesLayer';
+import './MobileSearchPanel.css';
+import './FilterPanel.css';
 
 class App extends Component {
   constructor(props) {
@@ -101,6 +102,13 @@ class App extends Component {
             displayWhat={this.displayWhat}
           />
         </div>
+        <FunctionalitiesLayer
+          panelToDisplay={panelToDisplay}
+          selectedOption={selectedOption}
+          itinerary={itinerary}
+          selectNavigation={this.selectNavigation}
+          handleRadioChange={this.handleRadioChange}
+        />
         <div className="row">
           <SideMenu
             displayWhat={this.displayWhat}
@@ -108,12 +116,6 @@ class App extends Component {
             selectNavigation={this.selectNavigation}
             itinerary={itinerary}
             selectedOption={selectedOption}
-          />
-          <FunctionalitiesLayer
-            panelToDisplay={panelToDisplay}
-            selectedOption={selectedOption}
-            itinerary={itinerary}
-            selectNavigation={this.selectNavigation}
           />
           <MapContainer
             stationsToDisplay={stationsToDisplay}

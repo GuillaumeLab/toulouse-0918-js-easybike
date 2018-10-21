@@ -38,6 +38,10 @@ class MapLeaflet extends Component {
     this.interval = setInterval(this.refreshStationsList, 60000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   clearError() {
     this.setState({ error: null });
   }

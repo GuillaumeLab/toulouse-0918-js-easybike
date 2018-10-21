@@ -1,0 +1,25 @@
+
+.mobile-search-panel {
+  position: absolute;
+  left: 0px;
+  z-index: 1500;
+  background-color: white;
+  width:80vw;
+  padding: 1rem;
+  font-size: 1rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 2px solid blue;
+  border-left: none;
+}
+
+.navigation-input input{
+  height: 0.5rem;
+}
+
+
+@media screen and (min-width: 768px) {
+  .mobile-search-panel {
+    display: none;
+  }
+};
