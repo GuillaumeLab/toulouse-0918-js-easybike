@@ -12,12 +12,24 @@ import './map.css';
 class MapControls extends Component {
 
   render() {
-    const { getCurrentPosition, refreshStationsList, displayFeature } = this.props;
+    const {
+      getCurrentPosition,
+      refreshStationsList,
+      displayFeature,
+      centerOnUser,
+      latitude,
+      longitude,
+      userPosition
+    } = this.props;
+
     return (
       <Fragment>
         <Control position="topright">
           <GeolocButton
             getCurrentPosition={getCurrentPosition}
+            centerOnUser={centerOnUser}
+            latitude={latitude}
+            longitude={longitude}
           />
           <SearchButton
             displayFeature={displayFeature}
