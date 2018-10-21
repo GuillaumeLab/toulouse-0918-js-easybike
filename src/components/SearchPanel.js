@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import AdressInputModule from './AdressInputModule';
 import ItineraryInputModule from './ItineraryInputModule';
 
-class MobileSearchPanel extends Component {
+class SearchPanel extends Component {
   render() {
     const { selectNavigation, itinerary } = this.props;
     return (
-      <div className="mobile-search-panel">
+      <div className="search-panel">
         <form>
           <div className="form-check mb-2">
             <input
@@ -30,4 +30,4 @@ class MobileSearchPanel extends Component {
   }
 }
 
-export default MobileSearchPanel;
+export default SearchPanel;

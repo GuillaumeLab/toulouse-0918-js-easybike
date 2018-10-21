@@ -10,12 +10,6 @@ import SearchButton from './SearchButton';
 import './map.css';
 
 class MapControls extends Component {
-  componentDidMount() {
-    this.timerID = setTimeout(
-      this.forceUpdate(),
-      200
-    );
-  }
 
   render() {
     const { getCurrentPosition, refreshStationsList, displayFeature } = this.props;
@@ -28,7 +22,9 @@ class MapControls extends Component {
           <SearchButton
             displayFeature={displayFeature}
           />
-          <FavButton />
+          <FavButton
+            displayFeature={displayFeature}
+          />
         </Control>
         <Control position="bottomright">
           <FilterButton

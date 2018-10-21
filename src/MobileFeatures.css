@@ -1,4 +1,4 @@
-.mobile-search-panel, .mobile-filter-panel {
+.search-panel, .filter-panel, .favs-panel {
   position: absolute;
   left: 0px;
   z-index: 1500;
@@ -6,9 +6,9 @@
   width:80vw;
   padding: 1rem;
   font-size: 0.9rem;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: 2px solid blue;
+  border-bottom-right-radius: 10px;
+  border: 4px solid rgb(68, 68, 248);
+  border-top: none;
   border-left: none;
 }
 
@@ -18,7 +18,7 @@
 
 
 @media screen and (min-width: 768px) {
-  .mobile-search-panel, .mobile-filter-panel {
+  .mobile-search-panel, .mobile-filter-panel, .favs-panel {
     display: none;
   }
 };

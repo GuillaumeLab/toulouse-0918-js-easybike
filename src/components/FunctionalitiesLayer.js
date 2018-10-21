@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import Favorites from './Favorites';
-import MobileSearchPanel from './MobileSearchPanel';
+import SearchPanel from './SearchPanel';
 import FilterPanel from './FilterPanel';
+import FavsPanel from './FavsPanel';
 
 class FunctionalitiesLayer extends Component {
   componentDidMount() {
@@ -18,13 +19,12 @@ class FunctionalitiesLayer extends Component {
       itinerary,
       selectedOption,
       selectNavigation,
-      handleRadioChange 
+      handleRadioChange
     } = this.props;
 
     if (panelToDisplay === 'search') {
       return (
-        <MobileSearchPanel
-          className="mobile-search-panel"
+        <SearchPanel
           itinerary={itinerary}
           selectNavigation={selectNavigation}
         />
@@ -32,9 +32,9 @@ class FunctionalitiesLayer extends Component {
     }
     if (panelToDisplay === 'favs') {
       return (
-        <div className="feature-panel">
-          <Favorites />
-        </div>
+        <FavsPanel
+          classname="favs-panel"
+        />
       );
     }
     if (panelToDisplay === 'filter') {
