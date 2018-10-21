@@ -3,10 +3,13 @@ import MapLeaflet from './MapLeaflet';
 
 class MapContainer extends Component {
   render() {
-    const { stationsToDisplay } = this.props;
+    const { stationsToDisplay, displayFeature } = this.props;
     return (
       <div id="mapContainer" className="container-fluid col-12 col-md-9">
-        <MapLeaflet stationsToDisplay={this.props.stationsToDisplay} />
+        <MapLeaflet
+          stationsToDisplay={stationsToDisplay}
+          displayFeature={displayFeature}
+        />
       </div>
     );
   }

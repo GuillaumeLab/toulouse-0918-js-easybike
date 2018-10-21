@@ -3,40 +3,24 @@ import ItineraryInputModule from './ItineraryInputModule';
 import AdressInputModule from './AdressInputModule';
 
 class NavigationModule extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      itinerary: false
-    };
-    this.selectNavigation = this.selectNavigation.bind(this);
-  }
-
-  selectNavigation() {
-    const { itinerary } = this.state;
-    this.setState(() => ({
-      itinerary: !itinerary
-    }));
-  }
-
   render() {
-    const { itinerary } = this.state;
+    const { itinerary, selectNavigation } = this.props;
     return (
       <div className="card my-2">
         <div className="card-header font-weight-bold">NAVIGATION</div>
         <div className="card-body p-2">
           <div className="card-text">
-            <div className="form-check mb-2">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="itinerary"
-                onChange={this.selectNavigation}
-                checked={itinerary}
-              />
-              <span> Rechercher un trajet</span>
-            </div>
             <form>
+              <div className="form-check mb-2">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="itinerary"
+                  onChange={selectNavigation}
+                  checked={itinerary}
+                />
+                <span> Rechercher un trajet</span>
+              </div>
               <div className="form-group">
                 <AdressInputModule itinerary={itinerary} />
                 <ItineraryInputModule itinerary={itinerary} />

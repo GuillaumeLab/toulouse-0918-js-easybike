@@ -18,14 +18,16 @@ class MapControls extends Component {
   }
 
   render() {
-    const { getCurrentPosition, refreshStationsList } = this.props;
+    const { getCurrentPosition, refreshStationsList, displayFeature } = this.props;
     return (
       <Fragment>
         <Control position="topright">
           <GeolocButton
             getCurrentPosition={getCurrentPosition}
           />
-          <SearchButton />
+          <SearchButton
+            displayFeature={displayFeature}
+          />
           <FavButton />
         </Control>
         <Control position="bottomright">
