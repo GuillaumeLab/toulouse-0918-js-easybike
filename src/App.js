@@ -10,8 +10,7 @@ import './Navbar.css';
 import './Map.css';
 import './SideMenu.css';
 import './PopupContent.css';
-import './MobileSearchPanel.css';
-import './FilterPanel.css';
+import './MobileFeatures.css';
 
 class App extends Component {
   constructor(props) {

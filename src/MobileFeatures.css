@@ -1,4 +1,4 @@
-.mobile-filter-panel {
+.mobile-search-panel, .mobile-filter-panel {
   position: absolute;
   left: 0px;
   z-index: 1500;
@@ -12,9 +12,13 @@
   border-left: none;
 }
 
+.navigation-input input{
+  height: 0.5rem;
+}
+
 
 @media screen and (min-width: 768px) {
-  .mobile-filter-panel {
+  .mobile-search-panel, .mobile-filter-panel {
     display: none;
   }
 };
