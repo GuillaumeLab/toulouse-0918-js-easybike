@@ -27,7 +27,6 @@ class MapLeaflet extends Component<
   constructor(props) {
     super(props);
     this.state = {
-
       viewCenter: defaultCenter.center,
       zoom: defaultCenter.zoom,
       stationsList: [],
@@ -87,7 +86,7 @@ class MapLeaflet extends Component<
 
   render() {
     const { stationsToDisplay, displayFeature } = this.props;
-    const { viewCenter, zoom, stationsList } = this.state;
+    const { viewCenter, zoom, stationsList, viewport } = this.state;
 
     return (
       <div className="map">
@@ -117,16 +116,16 @@ class MapLeaflet extends Component<
                 </Marker>
               )
               : null;
-
-            const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+              
+                const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
 
             return (
               <Map
                 className="map__reactleaflet"
-                center={defaultCenter.center}
+                center={userPosition}
                 zoom={zoom}
                 onClick={displayFeature}
-                viewport={this.state.viewport}
+                viewport={viewport}
               >
                 <TileLayer
                   url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
