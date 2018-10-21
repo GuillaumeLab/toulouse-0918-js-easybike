@@ -17,9 +17,6 @@ class MapControls extends Component {
       refreshStationsList,
       displayFeature,
       centerOnUser,
-      latitude,
-      longitude,
-      userPosition
     } = this.props;
 
     return (
@@ -28,8 +25,6 @@ class MapControls extends Component {
           <GeolocButton
             getCurrentPosition={getCurrentPosition}
             centerOnUser={centerOnUser}
-            latitude={latitude}
-            longitude={longitude}
           />
           <SearchButton
             displayFeature={displayFeature}

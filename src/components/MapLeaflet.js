@@ -17,12 +17,12 @@ const defaultCenter = {
 };
 
 class MapLeaflet extends Component<
-    {},
-    { viewport: Viewport },
+  {},
+  { viewport: Viewport },
   > {
-    state = {
-      viewport: defaultCenter,
-    }
+  state = {
+    viewport: defaultCenter,
+  }
 
   constructor(props) {
     super(props);
@@ -47,14 +47,12 @@ class MapLeaflet extends Component<
 
   centerOnUser = (userPosition) => {
     console.log(`on centre sur ${userPosition}`);
-    this.setState({ viewport: {
-      center: userPosition,
-      zoom: 15
-    }})
-  }
-
-  onViewportChanged = (viewport: Viewport) => {
-    this.setState({ viewport })
+    this.setState({
+      viewport: {
+        center: userPosition,
+        zoom: 15
+      }
+    })
   }
 
   clearError = () => {
@@ -76,12 +74,6 @@ class MapLeaflet extends Component<
         error,
         isLoading: false
       }));
-  }
-
-  centerMap(lat, long) {
-    this.setState({
-      viewCenter: [lat, long]
-    });
   }
 
   render() {
@@ -116,8 +108,8 @@ class MapLeaflet extends Component<
                 </Marker>
               )
               : null;
-              
-                const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+
+            const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
 
             return (
               <Map
@@ -138,19 +130,15 @@ class MapLeaflet extends Component<
                   refreshStationsList={this.refreshStationsList}
                 />
                 <MapControls
-                  longitude={longitude}
-                  latitude={latitude}
                   getCurrentPosition={getCurrentPosition}
                   centerOnUser={this.centerOnUser}
                   refreshStationsList={this.refreshStationsList}
                   displayFeature={displayFeature}
-                  userPosition={userPosition}
                 />
                 {userMarker}
               </Map>
             );
-          }
-          }
+          }}
         />
       </div>
     );
