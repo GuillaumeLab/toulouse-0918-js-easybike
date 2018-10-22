@@ -15,7 +15,7 @@
   height: 0.5rem;
 }
 
-.filter-panel h3 {
+.filter-panel h3, .favs-panel h3, .search-panel h3 {
   font-size: 1rem;
   color: rgb(68, 68, 248);
   background-color: rgb(161, 191, 255, 0.5);
@@ -24,7 +24,7 @@
   border-bottom: 2px solid rgb(68, 68, 248);
 }
 
-.filter-panel .filters-container {
+.filters-container, .search-container, .favs-container {
   padding: 0.5rem;
 }
 
@@ -37,6 +37,14 @@
   box-shadow: 0 0;
   min-width: 30px;
   padding: 0;
+}
+
+.favs-panel h4 {
+  font-size: 1rem;
+}
+
+.favs-go {
+  margin: 1rem;
 }
 
 @media screen and (min-width: 768px) {

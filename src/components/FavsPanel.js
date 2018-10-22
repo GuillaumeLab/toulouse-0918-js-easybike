@@ -4,11 +4,61 @@ class FavsPanel extends Component {
   render() {
     return (
       <div className="favs-panel">
-        <div className="">
-          FAVORIS
-        </div>
-        <div className="">
-          <p className="">With supporting text below as a natural lead-in to additional content.</p>
+        <h3>FAVORIS</h3>
+        <div className="favs-container">
+          <div>
+            <h4>Nom de la station</h4>
+            <span>5 vélos</span>
+            <span>14 emplacements</span>
+            <button className="btn btn-primary favs-go" type="button">
+              Go !
+            </button>
+          </div>
+          <hr />
+          <div>
+            <h4>Nom de la station</h4>
+            <span>5 vélos</span>
+            <span>14 emplacements</span>
+            <button className="btn btn-primary favs-go" type="button">
+              Go !
+            </button>
+          </div>
+          <hr />
+          <div>
+            <h4>Nom de la station</h4>
+            <span>5 vélos</span>
+            <span>14 emplacements</span>
+            <button className="btn btn-primary favs-go" type="button">
+              Go !
+            </button>
+          </div>
+          <hr />
+          <div>
+            <h4>Nom de la station</h4>
+            <span>5 vélos</span>
+            <span>14 emplacements</span>
+            <button className="btn btn-primary favs-go" type="button">
+              Go !
+            </button>
+          </div>
+          <hr />
+          <div>
+            <h4>Nom de la station</h4>
+            <span>5 vélos</span>
+            <span>14 emplacements</span>
+            <button className="btn btn-primary favs-go" type="button">
+              Go !
+            </button>
+          </div>
+          <hr />
+          <div>
+            <h4>Nom de la station</h4>
+            <span>5 vélos</span>
+            <span>14 emplacements</span>
+            <button className="btn btn-primary favs-go" type="button">
+              Go !
+            </button>
+          </div>
         </div>
       </div>
     );

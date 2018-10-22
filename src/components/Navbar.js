@@ -14,8 +14,8 @@ class Navbar extends Component {
         </button>
         <div id="navbarNavAltMarkup" className="col-md-8 collapse navbar-collapse">
           <div className="navbar-nav text-right text-md-center mx-auto">
-            <a className="nav-item nav-link" href="#">Prendre un vélo</a>
-            <a className="nav-item nav-link" href="#">Déposer un vélo</a>
+            <a className="nav-item nav-link" href="#">Vite ! Un Vélo !</a>
+            <a className="nav-item nav-link" href="#">Vite ! Une Place !</a>
           </div>
         </div>
       </nav>

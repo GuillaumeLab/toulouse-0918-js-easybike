@@ -9,20 +9,20 @@ class SearchPanel extends Component {
     return (
       <div className="search-panel">
         <form>
-          <div className="form-check mb-2">
+          <h3>Recherche</h3>
+          <div className="search-container">
             <input
               type="checkbox"
-              className="form-check-input"
               id="itinerary"
               onChange={selectNavigation}
               checked={itinerary}
             />
             <span> Rechercher un trajet</span>
-          </div>
-          <div className="form-group">
-            <AdressInputModule classname="navigation-input" itinerary={itinerary} />
-            <ItineraryInputModule itinerary={itinerary} />
-            <button type="button" className="btn btn-primary mt-2">Rechercher</button>
+            <div className="form-group">
+              <AdressInputModule itinerary={itinerary} />
+              <ItineraryInputModule itinerary={itinerary} />
+              <button type="button" className="btn btn-primary mt-2">Rechercher</button>
+            </div>
           </div>
         </form>
       </div>
