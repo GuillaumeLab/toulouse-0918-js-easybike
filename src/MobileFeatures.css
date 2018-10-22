@@ -2,13 +2,16 @@
   position: absolute;
   left: 0px;
   z-index: 1500;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.9);
   width:80vw;
   padding: 0rem;
   font-size: 0.9rem;
   border-bottom-right-radius: 10px;
   border: 2px solid rgb(68, 68, 248);
+}
 
+.filter-panel {
+  width:60vw;
 }
 
 .navigation-input input{
@@ -32,11 +35,33 @@
   margin: 0;
 }
 
-.filter-panel button {
-  border-radius: 5px;
+.filter-input button {
+  border-radius: 40px;
   box-shadow: 0 0;
   min-width: 30px;
   padding: 0;
+  color:white;
+  background-color: rgb(68, 68, 248);
+  border: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.filter-input input {
+  color: rgb(41, 41, 41);
+  font-weight: bold;
+  font-size: 1rem;
+  width:2rem;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.favs-panel {
+  max-height: 90vh;
+  overflow: auto;
 }
 
 .favs-panel h4 {
@@ -48,7 +73,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .mobile-search-panel, .mobile-filter-panel, .favs-panel {
+  .search-panel, .filter-panel, .favs-panel {
     display: none;
   }
 };

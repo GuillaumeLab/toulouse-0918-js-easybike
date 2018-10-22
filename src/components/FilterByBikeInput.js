@@ -6,7 +6,7 @@ const FilterByBikeInput = ({ handleFilterChange, minBikesToDisplay }) => (
     <button type="button" onClick={() => handleFilterChange('minBikesToDisplay', -1)}>
       -
     </button>
-    <span>{minBikesToDisplay}</span>
+    <input type="text" value={minBikesToDisplay} readOnly />
     <button type="button" onClick={() => handleFilterChange('minBikesToDisplay', 1)}>
       +
     </button>

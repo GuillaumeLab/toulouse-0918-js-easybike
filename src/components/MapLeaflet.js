@@ -10,6 +10,7 @@ import { apiKey } from './settings';
 
 import MapControls from './MapControls';
 import MarkersLayer from './MarkersLayer';
+import UserMarker from './UserMarker';
 
 const defaultCenter = {
   center: [43.599761799999996, 1.443197],
@@ -138,7 +139,11 @@ class MapLeaflet extends Component<
                   refreshStationsList={this.refreshStationsList}
                   displayFeature={displayFeature}
                 />
-                {userMarker}
+                <UserMarker 
+                  latitude={latitude}
+                  longitude={longitude}
+                  isUserLocated={isUserLocated}
+                />
               </Map>
             );
           }}

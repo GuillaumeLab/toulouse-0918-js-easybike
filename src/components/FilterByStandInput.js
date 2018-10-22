@@ -7,7 +7,7 @@ const FilterByStandInput = ({ handleFilterChange, minStandsToDisplay }) => (
       <button type="button" onClick={() => handleFilterChange('minStandsToDisplay', -1)}>
         -
       </button>
-      <span>{minStandsToDisplay}</span>
+      <input type="text" value={minStandsToDisplay} readOnly />
       <button type="button" onClick={() => handleFilterChange('minStandsToDisplay', 1)}>
         +
       </button>
