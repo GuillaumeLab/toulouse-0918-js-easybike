@@ -10,7 +10,6 @@ class SideMenu extends Component {
     const {
       displayWhat,
       selectNavigation,
-      selectedOption,
       itinerary,
       handleFilterChange,
       minBikesToDisplay,
@@ -21,7 +20,6 @@ class SideMenu extends Component {
       <div id="SideMenu" className="col-md-3 p-2">
         <StationsToDisplayMenu
           displayWhat={displayWhat}
-          selectedOption={selectedOption}
           minBikesToDisplay={minBikesToDisplay}
           minStandsToDisplay={minStandsToDisplay}
           handleFilterChange={handleFilterChange}

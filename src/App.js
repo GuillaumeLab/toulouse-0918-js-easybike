@@ -87,10 +87,11 @@ class App extends Component {
         </div>
         <FunctionalitiesLayer
           panelToDisplay={panelToDisplay}
-          selectedOption={selectedOption}
           itinerary={itinerary}
           selectNavigation={this.selectNavigation}
-          handleRadioChange={this.handleRadioChange}
+          handleFilterChange={this.handleFilterChange}
+          minBikesToDisplay={minBikesToDisplay}
+          minStandsToDisplay={minStandsToDisplay}
         />
         <div className="row">
           <SideMenu

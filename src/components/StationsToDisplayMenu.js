@@ -12,16 +12,18 @@ class StationToDisplayMenu extends Component {
     return (
       <div>
         <div className="card">
-          <div className="card-header font-weight-bold">Affichage des stations</div>
+          <div className="card-header font-weight-bold">Filtrage des stations</div>
           <div className="card-body">
             <div className="card-text py-2">
               <form className="px-2">
                 <div className="stations-to-display">
                   <FilterByBikeInput
+                    className="filter-input"
                     handleFilterChange={handleFilterChange}
                     minBikesToDisplay={minBikesToDisplay}
                   />
                   <FilterByStandInput
+                    className="filter-input"
                     handleFilterChange={handleFilterChange}
                     minStandsToDisplay={minStandsToDisplay}
                   />

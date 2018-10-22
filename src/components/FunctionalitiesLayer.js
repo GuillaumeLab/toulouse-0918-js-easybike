@@ -16,9 +16,10 @@ class FunctionalitiesLayer extends Component {
     const {
       panelToDisplay,
       itinerary,
-      selectedOption,
       selectNavigation,
-      handleRadioChange
+      handleFilterChange,
+      minBikesToDisplay,
+      minStandsToDisplay
     } = this.props;
 
     if (panelToDisplay === 'search') {
@@ -39,8 +40,9 @@ class FunctionalitiesLayer extends Component {
     if (panelToDisplay === 'filter') {
       return (
         <FilterPanel
-          selectedOption={selectedOption}
-          handleRadioChange={handleRadioChange}
+          handleFilterChange={handleFilterChange}
+          minBikesToDisplay={minBikesToDisplay}
+          minStandsToDisplay={minStandsToDisplay}
         />
       );
     }

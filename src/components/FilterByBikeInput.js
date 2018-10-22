@@ -1,8 +1,8 @@
 import React from 'react';
 
 const FilterByBikeInput = ({ handleFilterChange, minBikesToDisplay }) => (
-  <div>
-    <p>Filtrer par nombre minimum vélos disponibles</p>
+  <div className="filter-input">
+    <p>Nombre de vélos disponibles</p>
     <button type="button" onClick={() => handleFilterChange('minBikesToDisplay', -1)}>
       -
     </button>
