@@ -100,15 +100,6 @@ class MapLeaflet extends Component<
 
             console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
             console.log(`latitude = ${latitude} and longitude = ${longitude}`);
-            const userMarker = isUserLocated
-              ? (
-                <Marker position={[latitude, longitude]}>
-                  <Popup>
-                    <span>Votre position</span>
-                  </Popup>
-                </Marker>
-              )
-              : null;
 
             const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
 
