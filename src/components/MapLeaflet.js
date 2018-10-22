@@ -77,7 +77,7 @@ class MapLeaflet extends Component<
   }
 
   render() {
-    const { stationsToDisplay, displayFeature } = this.props;
+    const { stationsToDisplay, displayFeature, minStandsToDisplay, minBikesToDisplay, selectedOption } = this.props;
     const { viewCenter, zoom, stationsList, viewport } = this.state;
 
     return (
@@ -128,6 +128,9 @@ class MapLeaflet extends Component<
                   stationsList={stationsList}
                   error={error}
                   refreshStationsList={this.refreshStationsList}
+                  minStandsToDisplay={minStandsToDisplay}
+                  minBikesToDisplay={minBikesToDisplay}
+                  selectedOption={selectedOption}
                 />
                 <MapControls
                   getCurrentPosition={getCurrentPosition}

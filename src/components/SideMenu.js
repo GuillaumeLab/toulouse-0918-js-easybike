@@ -7,14 +7,24 @@ import '../SideMenu.css';
 
 class SideMenu extends Component {
   render() {
-    const { displayWhat, handleRadioChange, selectNavigation, selectedOption, itinerary} = this.props;
+    const {
+      displayWhat,
+      selectNavigation,
+      selectedOption,
+      itinerary,
+      handleFilterChange,
+      minBikesToDisplay,
+      minStandsToDisplay
+    } = this.props;
 
     return (
       <div id="SideMenu" className="col-md-3 p-2">
         <StationsToDisplayMenu
           displayWhat={displayWhat}
           selectedOption={selectedOption}
-          handleRadioChange={handleRadioChange}
+          minBikesToDisplay={minBikesToDisplay}
+          minStandsToDisplay={minStandsToDisplay}
+          handleFilterChange={handleFilterChange}
         />
         <NavigationModule
           itinerary={itinerary}

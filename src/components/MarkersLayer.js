@@ -9,20 +9,19 @@ import PopupContent from './PopupContent';
 import ModalWarning from './ModalWarning';
 
 class MarkersLayer extends Component {
-
   render() {
     const {
-      stationsToDisplay,
       stationsList,
       error,
-      refreshStationsList
+      refreshStationsList,
+      minStandsToDisplay,
+      minBikesToDisplay,
     } = this.props;
-    
+
     const maxWidth = 400;
     const minWidth = 340;
-    const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
-      (stationData.available_bike_stands !== 0 && stationsToDisplay === 'freeSpaces')
-      || stationsToDisplay === 'all')
+    const allStationsMarkers = stationsList
+      .filter(stationData => (stationData.available_bike_stands >= minStandsToDisplay) && (stationData.available_bikes >= minBikesToDisplay))
       .map(stationData => (
         <Marker
           icon={L.divIcon({

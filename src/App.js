@@ -16,22 +16,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stationsToDisplay: 'all',
+      minBikesToDisplay: 0,
+      minStandsToDisplay: 0,
       panelToDisplay: 'none',
       itinerary: false,
       selectedOption: 'all'
     };
-    this.handleRadioChange = this.handleRadioChange.bind(this);
     this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  handleRadioChange(event) {
-    this.setState({
-      selectedOption: event.target.value
-    });
-    this.displayWhat(event.target.value);
+  handleFilterChange(key, increment) {
+    this.setState(
+      state => {
+        if ((increment < 0 && state[key] > 0) || (increment > 0 && state[key] < 10)) {
+          return {
+            [key]: state[key] + increment,
+            selectedOption: key
+          };
+        }
+        return {};
+      }
+    );
   }
 
   selectNavigation() {
@@ -60,38 +68,14 @@ class App extends Component {
     }
   }
 
-  displayFavs() {
-    const { panelToDisplay } = this.state;
-    if (panelToDisplay === 'favs') {
-      this.setState({
-        panelToDisplay: ''
-      });
-    } else {
-      this.setState({
-        panelToDisplay: 'favs'
-      });
-    }
-  }
-
-  displayFilter() {
-    const { panelToDisplay } = this.state;
-    if (panelToDisplay === 'filter') {
-      this.setState({
-        panelToDisplay: ''
-      });
-    } else {
-      this.setState({
-        panelToDisplay: 'filter'
-      });
-    }
-  }
-
   render() {
     const {
       stationsToDisplay,
       panelToDisplay,
       selectedOption,
-      itinerary
+      itinerary,
+      minBikesToDisplay,
+      minStandsToDisplay,
     } = this.state;
 
     return (
@@ -115,10 +99,16 @@ class App extends Component {
             selectNavigation={this.selectNavigation}
             itinerary={itinerary}
             selectedOption={selectedOption}
+            handleFilterChange={this.handleFilterChange}
+            minBikesToDisplay={minBikesToDisplay}
+            minStandsToDisplay={minStandsToDisplay}
           />
           <MapContainer
             stationsToDisplay={stationsToDisplay}
             displayFeature={this.displayFeature}
+            minBikesToDisplay={minBikesToDisplay}
+            minStandsToDisplay={minStandsToDisplay}
+            selectedOption={selectedOption}
           />
         </div>
       </div>
