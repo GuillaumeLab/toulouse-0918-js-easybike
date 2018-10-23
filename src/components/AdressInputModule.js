@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 const getItinararyUrl = (str2) => {
   console.log(str2);
-  const generateUrl = (`https://www.google.com/maps/dir/?api=1&origin=capitol+toulouse&destination=${str2}+toulouse&travelmode=bicycling`);
+  const generateUrl = (`https://www.google.com/maps/dir/?api=1&origin=toulouse&destination=${str2}+toulouse&travelmode=bicycling`);
   return generateUrl;
 };
 
