@@ -22,9 +22,6 @@ class Navbar extends Component {
           <div className="navbar-nav text-right text-md-center mx-auto">
             <a className="nav-item nav-link" href="#">Prendre un vélo</a>
             <a className="nav-item nav-link" href="#">Déposer un vélo</a>
-            <a className="nav-item nav-link" href="https://www.google.fr/maps/dir///@43.5995211,1.4529372,15z/data=!4m2!4m1!3e0" target="_blank" rel="noopener noreferrer">Calcul d&apos;itinéraire</a>
-            <a className="nav-item nav-link" href="#">Filtrer</a>
-            <a className="nav-item nav-link" href="#">Favoris</a>
           </div>
         </div>
       </nav>

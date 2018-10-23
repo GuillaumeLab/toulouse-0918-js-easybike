@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class SvgStationIconGauge extends Component {
   render() {
-    const perc = this.props.perc || 0;
+    const { perc } = this.props || 0;
     return (
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 50 120" className="icon-station">
         <title>Station marker</title>
