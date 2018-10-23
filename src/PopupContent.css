@@ -7,7 +7,15 @@
   width: 250px;
 }
 
+hr {
+  margin: 0.3rem
+}
+
 .PopupFooter {
+  margin: 0;
+}
+
+.infoRow {
   margin: 0;
 }
 
@@ -16,9 +24,6 @@
   margin: 0 0.3rem;
 }
 
-.infoColBtn {
-  pointer-events: none;
-}
 
 .popupImg {
   max-height: 40px;
@@ -32,10 +37,6 @@
   top: 0;
 }
 
-.Go > a {
-  color: #ffffff;
-}
-
 .bikes-infos {
   font-size: 1rem;
   font-weight: bold;
@@ -46,6 +47,12 @@
   width: 50px;
   height: 50px;
   padding: 0;
+}
+
+.no-bg {
+  background: none;
+  border-radius: 5px;
+  border: 1px solid rgb(127, 127, 127);
 }
 
 .infoCol {
@@ -68,14 +75,13 @@
     font-size: 0.8rem;
   }
 
-  .PopupFooter button.btn:focus, .PopupFooter button.btn:active, .PopupFooter button.btn:hover {
-    border:none
-  }
-
   .PopupFooter button {
     width: 40px;
-    height: 40px;
-    padding: 0;
+    height: 40px; 
+  }
+
+  .PopupFooter img {
+    width: 75%;
   }
 
   div.badge {

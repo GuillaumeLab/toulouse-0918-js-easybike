@@ -1,6 +1,10 @@
 import React from 'react';
 import bicycle from '../images/bicycle.png';
 import parking from '../images/parking-sign.png';
+import star from '../images/star.png';
+import starFill from '../images/star-fill.png';
+import refresh from '../images/refresh.png';
+
 
 const PopupContent = props => {
   const { marker, refreshStationsList } = props;
@@ -14,7 +18,7 @@ const PopupContent = props => {
             <h5 className="card-title">{name}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{marker.address}</h6>
           </div>
-          <br />
+          <hr />
           <div className="infoRow row justify-content-around">
             <div className="infoCol text-center">
               <img className="popupImg img-fluid" src={bicycle} alt="Bicycles" />
@@ -25,13 +29,15 @@ const PopupContent = props => {
               <div className="bikes-infos my-2">{marker.available_bike_stands}</div>
             </div>
           </div>
-          <br />
+          <hr />
           <div className="PopupFooter row justify-content-around">
             <div>
-              <button type="button" className="btn" onClick={refreshStationsList}><i className="fas fa-sync-alt fa-2x img-fluid" /></button>
+              <button type="button" className="btn no-bg" onClick={refreshStationsList}>
+                <img  src={refresh} alt="refresh" />
+              </button>
             </div>
             <div>
-              <button type="button" className="btn"><i className="far fa-star fa-2x img-fluid" /></button>
+              <button type="button" className="btn no-bg"><img src={star} alt="star" /></button>
             </div>
             <div>
               <button type="button" className="btn btn-primary">Go</button>

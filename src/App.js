@@ -31,7 +31,7 @@ class App extends Component {
   handleFilterChange(key, increment) {
     this.setState(
       state => {
-        if ((increment < 0 && state[key] > 0) || (increment > 0 && state[key] < 10)) {
+        if ((increment < 0 && state[key] > 0) || (increment > 0 && state[key] < 15)) {
           return {
             [key]: state[key] + increment,
             selectedOption: key
