@@ -39,6 +39,7 @@
 .bikes-infos {
   font-size: 1rem;
   font-weight: bold;
+
 }
 
 .PopupFooter button {
@@ -50,7 +51,7 @@
 .infoCol {
   border: 1px solid black;
   border-radius: 5px;
-  padding: 0.5rem 0.8rem;
+  padding: 0.3rem 0.8rem 0 0.8rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -75,11 +76,6 @@
     width: 40px;
     height: 40px;
     padding: 0;
-  }
-
-  .PopupFooter i {
-    width: 20px;
-    height: 20px;
   }
 
   div.badge {
