@@ -10,26 +10,26 @@ import SearchButton from './SearchButton';
 import './map.css';
 
 class MapControls extends Component {
-  componentDidMount() {
-    this.timerID = setTimeout(
-      this.forceUpdate(),
-      200
-    );
-  }
 
   render() {
-    const { getCurrentPosition, refreshStationsList } = this.props;
+    const { getCurrentPosition, refreshStationsList, displayFeature } = this.props;
     return (
       <Fragment>
         <Control position="topright">
           <GeolocButton
             getCurrentPosition={getCurrentPosition}
           />
-          <SearchButton />
-          <FavButton />
+          <SearchButton
+            displayFeature={displayFeature}
+          />
+          <FavButton
+            displayFeature={displayFeature}
+          />
         </Control>
         <Control position="bottomright">
-          <FilterButton />
+          <FilterButton
+            displayFeature={displayFeature}
+          />
         </Control>
         <Control position="bottomleft">
           <RefreshButton

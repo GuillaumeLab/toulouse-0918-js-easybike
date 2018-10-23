@@ -1,9 +1,10 @@
 import React from 'react';
 
-const SearchButton = () => (
+const SearchButton = ({ displayFeature }) => (
   <button
     type="button"
     className="map-button search display-button"
+    onClick={() => displayFeature('search')}
   />
 );
 

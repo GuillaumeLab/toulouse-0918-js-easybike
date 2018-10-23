@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { apiKey } from './settings';
 
@@ -24,7 +24,9 @@ class MapLeaflet extends Component {
       zoom: defaultCenter.zoom,
       stationsList: [],
       isLoading: false,
-      error: null
+      error: null,
+      panelToDisplay: ''
+
     };
     this.clearError = this.clearError.bind(this);
     this.refreshStationsList = this.refreshStationsList.bind(this);
@@ -34,6 +36,10 @@ class MapLeaflet extends Component {
   componentDidMount() {
     this.refreshStationsList();
     this.interval = setInterval(this.refreshStationsList, 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   clearError() {
@@ -65,7 +71,7 @@ class MapLeaflet extends Component {
 
 
   render() {
-    const { stationsToDisplay } = this.props;
+    const { stationsToDisplay, displayFeature } = this.props;
     const { viewCenter, zoom, stationsList } = this.state;
 
     return (
@@ -117,6 +123,7 @@ class MapLeaflet extends Component {
                   getCurrentPosition={getCurrentPosition}
                   centerMap={this.centerMap}
                   refreshStationsList={this.refreshStationsList}
+                  displayFeature={displayFeature}
                 />
                 {userMarker}
               </Map>

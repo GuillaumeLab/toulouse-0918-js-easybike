@@ -1,0 +1,13 @@
+@media screen and (min-width: 768px) {
+  .mobile-search-panel {
+    display: none;
+  }
+};
+
+.mobile-search-panel {
+  z-index: 1500;
+  background-color: white;
+  width:80vw;
+  padding: 1rem;
+  color: red;
+}
