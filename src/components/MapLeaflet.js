@@ -91,12 +91,7 @@ class MapLeaflet extends Component<
             error,
             getCurrentPosition
           }) => {
-            let isUserLocated = false;
-            if (!latitude || !longitude) {
-              isUserLocated = false;
-            } else {
-              isUserLocated = true;
-            }
+            const isUserLocated = latitude && longitude;
 
             console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
             console.log(`latitude = ${latitude} and longitude = ${longitude}`);

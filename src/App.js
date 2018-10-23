@@ -22,7 +22,6 @@ class App extends Component {
       itinerary: false,
       selectedOption: 'all'
     };
-    this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -47,12 +46,6 @@ class App extends Component {
     this.setState(() => ({
       itinerary: !itinerary
     }));
-  }
-
-  displayWhat(stations) {
-    this.setState({
-      stationsToDisplay: stations
-    });
   }
 
   displayFeature(panel) {
@@ -81,9 +74,7 @@ class App extends Component {
     return (
       <div className="App container-fluid">
         <div className="row">
-          <Navbar
-            displayWhat={this.displayWhat}
-          />
+          <Navbar />
         </div>
         <FunctionalitiesLayer
           panelToDisplay={panelToDisplay}
@@ -95,7 +86,6 @@ class App extends Component {
         />
         <div className="row">
           <SideMenu
-            displayWhat={this.displayWhat}
             handleRadioChange={this.handleRadioChange}
             selectNavigation={this.selectNavigation}
             itinerary={itinerary}

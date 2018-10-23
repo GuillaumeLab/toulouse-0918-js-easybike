@@ -8,7 +8,6 @@ import '../SideMenu.css';
 class SideMenu extends Component {
   render() {
     const {
-      displayWhat,
       selectNavigation,
       itinerary,
       handleFilterChange,
@@ -19,7 +18,6 @@ class SideMenu extends Component {
     return (
       <div id="SideMenu" className="col-md-3 p-2">
         <StationsToDisplayMenu
-          displayWhat={displayWhat}
           minBikesToDisplay={minBikesToDisplay}
           minStandsToDisplay={minStandsToDisplay}
           handleFilterChange={handleFilterChange}
