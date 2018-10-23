@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { apiKey } from './settings';
 
 import {
-  Map, TileLayer, Marker, Popup
+  Map, TileLayer, Marker, Popup, type Viewport
 } from 'react-leaflet';
+
 import Geolocation from 'react-geolocation';
+import { apiKey } from './settings';
+
 import MapControls from './MapControls';
-
 import MarkersLayer from './MarkersLayer';
-
 
 const defaultCenter = {
   center: [43.599761799999996, 1.443197],
   zoom: 15
 };
 
-class MapLeaflet extends Component {
+class MapLeaflet extends Component<
+  {},
+  { viewport: Viewport },
+  > {
+  state = {
+    viewport: defaultCenter,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,11 +33,7 @@ class MapLeaflet extends Component {
       isLoading: false,
       error: null,
       panelToDisplay: ''
-
     };
-    this.clearError = this.clearError.bind(this);
-    this.refreshStationsList = this.refreshStationsList.bind(this);
-    this.centerMap = this.centerMap.bind(this);
   }
 
   componentDidMount() {
@@ -42,11 +45,21 @@ class MapLeaflet extends Component {
     clearInterval(this.interval);
   }
 
-  clearError() {
+  centerOnUser = (userPosition) => {
+    console.log(`on centre sur ${userPosition}`);
+    this.setState({
+      viewport: {
+        center: userPosition,
+        zoom: 15
+      }
+    })
+  }
+
+  clearError = () => {
     this.setState({ error: null });
   }
 
-  refreshStationsList() {
+  refreshStationsList = () => {
     console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
@@ -63,16 +76,9 @@ class MapLeaflet extends Component {
       }));
   }
 
-  centerMap(lat, long) {
-    this.setState({
-      viewCenter: [lat, long]
-    });
-  }
-
-
   render() {
     const { stationsToDisplay, displayFeature } = this.props;
-    const { viewCenter, zoom, stationsList } = this.state;
+    const { viewCenter, zoom, stationsList, viewport } = this.state;
 
     return (
       <div className="map">
@@ -103,10 +109,16 @@ class MapLeaflet extends Component {
               )
               : null;
 
-            const setCenter = isUserLocated ? [latitude, longitude] : viewCenter;
+            const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
 
             return (
-              <Map center={setCenter} zoom={zoom} className="map__reactleaflet">
+              <Map
+                className="map__reactleaflet"
+                center={userPosition}
+                zoom={zoom}
+                onClick={displayFeature}
+                viewport={viewport}
+              >
                 <TileLayer
                   url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                   attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
@@ -118,18 +130,15 @@ class MapLeaflet extends Component {
                   refreshStationsList={this.refreshStationsList}
                 />
                 <MapControls
-                  longitude={longitude}
-                  latitude={latitude}
                   getCurrentPosition={getCurrentPosition}
-                  centerMap={this.centerMap}
+                  centerOnUser={this.centerOnUser}
                   refreshStationsList={this.refreshStationsList}
                   displayFeature={displayFeature}
                 />
                 {userMarker}
               </Map>
             );
-          }
-          }
+          }}
         />
       </div>
     );

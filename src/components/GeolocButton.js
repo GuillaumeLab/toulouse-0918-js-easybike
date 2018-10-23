@@ -1,10 +1,17 @@
 import React from 'react';
 
-const GeolocButton = ({ getCurrentPosition }) => (
+const GeolocButton = ({
+  getCurrentPosition,
+  centerOnUser,
+  userPosition
+}) => (
   <button
     type="button"
     className="map-button geoloc"
-    onClick={getCurrentPosition}
+    onClick={() => {
+      getCurrentPosition();
+      centerOnUser(userPosition);
+    }}
   />
 );
 

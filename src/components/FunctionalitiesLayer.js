@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Favorites from './Favorites';
 import SearchPanel from './SearchPanel';
 import FilterPanel from './FilterPanel';
 import FavsPanel from './FavsPanel';
