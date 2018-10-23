@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
+import { apiKey } from './settings';
 
 import {
   Map, TileLayer, Marker, Popup
@@ -19,9 +21,40 @@ class MapLeaflet extends Component {
     super(props);
     this.state = {
       viewCenter: defaultCenter.center,
-      zoom: defaultCenter.zoom
+      zoom: defaultCenter.zoom,
+      stationsList: [],
+      isLoading: false,
+      error: null
     };
+    this.clearError = this.clearError.bind(this);
+    this.refreshStationsList = this.refreshStationsList.bind(this);
     this.centerMap = this.centerMap.bind(this);
+  }
+
+  componentDidMount() {
+    this.refreshStationsList();
+    this.interval = setInterval(this.refreshStationsList, 60000);
+  }
+
+  clearError() {
+    this.setState({ error: null });
+  }
+
+  refreshStationsList() {
+    console.log('refresh');
+    this.setState({ error: null });
+    const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
+    this.setState({ isLoading: true });
+
+    axios.get(request)
+      .then(result => this.setState({
+        stationsList: result.data,
+        isLoading: false
+      }))
+      .catch(error => this.setState({
+        error,
+        isLoading: false
+      }));
   }
 
   centerMap(lat, long) {
@@ -33,7 +66,7 @@ class MapLeaflet extends Component {
 
   render() {
     const { stationsToDisplay } = this.props;
-    const { viewCenter, zoom } = this.state;
+    const { viewCenter, zoom, stationsList } = this.state;
 
     return (
       <div className="map">
@@ -74,12 +107,16 @@ class MapLeaflet extends Component {
                 />
                 <MarkersLayer
                   stationsToDisplay={stationsToDisplay}
+                  stationsList={stationsList}
+                  error={error}
+                  refreshStationsList={this.refreshStationsList}
                 />
                 <MapControls
                   longitude={longitude}
                   latitude={latitude}
                   getCurrentPosition={getCurrentPosition}
                   centerMap={this.centerMap}
+                  refreshStationsList={this.refreshStationsList}
                 />
                 {userMarker}
               </Map>

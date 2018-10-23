@@ -15,7 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stationsToDisplay: 'all'
+      stationsToDisplay: 'all',
+      panelToDisplay: ''
     };
     this.displayWhat = this.displayWhat.bind(this);
   }
@@ -26,13 +27,30 @@ class App extends Component {
     });
   }
 
+  displaySearch() {
+    this.setState({
+      panelToDisplay: 'search'
+    });
+  }
+
+  displayFavs() {
+    this.setState({
+      panelToDisplay: 'favs'
+    });
+  }
+
   render() {
-    const { stationsToDisplay } = this.state;
+    const { stationsToDisplay, panelToDisplay } = this.state;
+    const panel = panelToDisplay;
+
+
     return (
       <div className="App container-fluid">
-        <Navbar
-          displayWhat={this.displayWhat}
-        />
+        <div className="row">
+          <Navbar
+            displayWhat={this.displayWhat}
+          />
+        </div>
         <div className="row">
           <SideMenu displayWhat={this.displayWhat} />
           <MapContainer stationsToDisplay={stationsToDisplay} />
