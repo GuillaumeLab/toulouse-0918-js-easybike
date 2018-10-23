@@ -18,8 +18,6 @@ class MarkersLayer extends Component {
       minBikesToDisplay,
     } = this.props;
 
-    const maxWidth = 400;
-    const minWidth = 340;
     const allStationsMarkers = stationsList
       .filter(stationData => (stationData.available_bike_stands >= minStandsToDisplay) && (stationData.available_bikes >= minBikesToDisplay))
       .map(stationData => (
@@ -36,7 +34,7 @@ class MarkersLayer extends Component {
           position={[stationData.position.lat, stationData.position.lng]}
           key={`marker_${stationData.name}`}
         >
-          <Popup maxWidth={maxWidth} minWidth={minWidth}>
+          <Popup>
             <PopupContent
               marker={stationData}
               refreshStationsList={refreshStationsList}

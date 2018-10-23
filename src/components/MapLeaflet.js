@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import {
-  Map, TileLayer, Marker, Popup, type Viewport
+  Map, TileLayer, type Viewport
 } from 'react-leaflet';
 
 import Geolocation from 'react-geolocation';
