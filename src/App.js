@@ -11,6 +11,7 @@ import './Map.css';
 import './SideMenu.css';
 import './PopupContent.css';
 import './MobileFeatures.css';
+import './Favorites.css';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class App extends Component {
       itinerary: false,
       selectedOption: 'all',
       favStations: [],
-      favStationsId
+      favStationsId,
+      currentFavorite : []
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
@@ -117,7 +119,8 @@ class App extends Component {
       itinerary,
       minBikesToDisplay,
       minStandsToDisplay,
-      favStationsId
+      favStationsId,
+      favStations
     } = this.state;
 
     return (
@@ -142,6 +145,7 @@ class App extends Component {
             selectNavigation={this.selectNavigation}
             handleFilterChange={this.handleFilterChange}
             handleRadioChange={this.handleRadioChange}
+            favStations={favStations}
           />
           <MapContainer
             stationsToDisplay={stationsToDisplay}

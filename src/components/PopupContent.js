@@ -31,7 +31,7 @@ class PopupContent extends Component {
     const {
       marker,
       refreshStationsList,
-      handleFavList
+      handleFavList,
     } = this.props;
 
     const { isFavorite } = this.state;

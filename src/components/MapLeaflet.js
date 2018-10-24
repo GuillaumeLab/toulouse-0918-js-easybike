@@ -35,6 +35,9 @@ class MapLeaflet extends Component<
       error: null,
       panelToDisplay: ''
     };
+    this.clearError = this.clearError.bind(this);
+    this.refreshStationsList = this.refreshStationsList.bind(this);
+    this.centerOnUser = this.centerOnUser.bind(this);
   }
 
   componentDidMount() {
@@ -46,8 +49,8 @@ class MapLeaflet extends Component<
     clearInterval(this.interval);
   }
 
-  centerOnUser = (userPosition) => {
-    console.log(`on centre sur ${userPosition}`);
+  centerOnUser(userPosition) {
+    // console.log(`on centre sur ${userPosition}`);
     this.setState({
       viewport: {
         center: userPosition,
@@ -56,13 +59,13 @@ class MapLeaflet extends Component<
     })
   }
 
-  clearError = () => {
+  clearError() {
     this.setState({ error: null });
   }
 
-  refreshStationsList = () => {
+  refreshStationsList() {
     const { favStationsId,updateStationsList } = this.props;
-    console.log('refresh');
+    // console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
@@ -75,11 +78,11 @@ class MapLeaflet extends Component<
             return { ...station,isFavorite:isFavorite}
           }
         );
+        updateStationsList(stationsList);
         this.setState({
           stationsList: stationsList,
           isLoading: false
         })
-        updateStationsList(stationsList);
       })
       .catch(error => this.setState({
         error,

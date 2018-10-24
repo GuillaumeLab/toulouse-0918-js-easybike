@@ -17,7 +17,8 @@ class MarkersLayer extends Component {
       minStandsToDisplay,
       minBikesToDisplay,
       handleFavList,
-      favStationsId
+      favStationsId,
+      refresh
     } = this.props;
 
     const allStationsMarkers = stationsList
@@ -42,6 +43,7 @@ class MarkersLayer extends Component {
               refreshStationsList={refreshStationsList}
               favStationsId={favStationsId}
               handleFavList={handleFavList}
+              refresh={refresh}
             />
           </Popup>
         </Marker>
@@ -51,7 +53,6 @@ class MarkersLayer extends Component {
       <ModalWarning
         error={error}
         clearError={this.clearError}
-        refresh={this.refreshStationsList}
       />)
       : allStationsMarkers;
 
