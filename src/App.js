@@ -15,16 +15,33 @@ import './MobileFeatures.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    const favStationsId = this.readStoredFav();
     this.state = {
       stationsToDisplay: 'all',
       panelToDisplay: 'none',
       itinerary: false,
-      selectedOption: 'all'
+      selectedOption: 'all',
+      favStations: [],
+      favStationsId : favStationsId
     };
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
+  }
+
+  readStoredFav() {
+    let favIds = JSON.parse(localStorage.getItem('favorites'));
+    return favIds || [];
+  }
+
+  updateStationsList(stationsList) {
+    const favorites = stationsList.filter(station => station.isFavorite);
+    console.log(`liste station fav ${favorites}`, favorites);
+    this.setState({
+      favStations : [...this.state.favStations, favorites]
+    });
+    // console.log(this.state.favStations);
   }
 
   handleRadioChange(event) {
@@ -84,14 +101,15 @@ class App extends Component {
         panelToDisplay: 'filter'
       });
     }
-  }
+}
 
   render() {
     const {
       stationsToDisplay,
       panelToDisplay,
       selectedOption,
-      itinerary
+      itinerary,
+      favStationsId
     } = this.state;
 
     return (
@@ -119,6 +137,8 @@ class App extends Component {
           <MapContainer
             stationsToDisplay={stationsToDisplay}
             displayFeature={this.displayFeature}
+            favStationsId={favStationsId}
+            updateStationsList={this.updateStationsList}
           />
         </div>
       </div>
