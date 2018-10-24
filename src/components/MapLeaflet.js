@@ -61,16 +61,26 @@ class MapLeaflet extends Component<
   }
 
   refreshStationsList = () => {
+    const { favStationsId,updateStationsList } = this.props;
     console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
 
     axios.get(request)
-      .then(result => this.setState({
-        stationsList: result.data,
-        isLoading: false
-      }))
+      .then(result => {
+        const stationsList = result.data.map(
+          station => {
+            const isFavorite = favStationsId.includes(station.number);
+            return { ...station,isFavorite:isFavorite}
+          }
+        );
+        this.setState({
+          stationsList: stationsList,
+          isLoading: false
+        })
+        updateStationsList(stationsList);
+      })
       .catch(error => this.setState({
         error,
         isLoading: false
@@ -78,7 +88,15 @@ class MapLeaflet extends Component<
   }
 
   render() {
-    const { stationsToDisplay, displayFeature, minStandsToDisplay, minBikesToDisplay, selectedOption } = this.props;
+    const { 
+      stationsToDisplay,
+      displayFeature,
+      minStandsToDisplay,
+      minBikesToDisplay,
+      selectedOption,
+      handleFavList,
+      favStationsId
+  } = this.props;
     const { viewCenter, zoom, stationsList, viewport } = this.state;
 
     return (
@@ -118,6 +136,8 @@ class MapLeaflet extends Component<
                   minStandsToDisplay={minStandsToDisplay}
                   minBikesToDisplay={minBikesToDisplay}
                   selectedOption={selectedOption}
+                  handleFavList={handleFavList}   
+                  favStationsId={favStationsId}
                 />
                 <MapControls
                   getCurrentPosition={getCurrentPosition}

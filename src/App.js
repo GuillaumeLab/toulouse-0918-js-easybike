@@ -15,16 +15,21 @@ import './MobileFeatures.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    const favStationsId = this.readStoredFav();
     this.state = {
       minBikesToDisplay: 0,
       minStandsToDisplay: 0,
       panelToDisplay: 'none',
       itinerary: false,
-      selectedOption: 'all'
+      selectedOption: 'all',
+      favStations: [],
+      favStationsId
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.updateStationsList = this.updateStationsList.bind(this);
+    this.handleFavList = this.handleFavList.bind(this);
   }
 
   handleFilterChange(key, increment) {
@@ -39,6 +44,49 @@ class App extends Component {
         return {};
       }
     );
+  }
+
+  readStoredFav() {
+    const favIds = JSON.parse(localStorage.getItem('favorites'));
+    return favIds || [];
+  }
+
+  addFavorite(stationNumber) {
+    const previousFavList = JSON.parse(localStorage.getItem('favorites'));
+    localStorage.setItem('favorites', JSON.stringify([...previousFavList, stationNumber]));
+  }
+
+  removeFavorite(stationNumber) {
+    const previousFavList = JSON.parse(localStorage.getItem('favorites'));
+    const iDToRemove = previousFavList.findIndex(id => id === stationNumber);
+    previousFavList.splice(iDToRemove, 1);
+    localStorage.setItem('favorites', JSON.stringify(previousFavList));
+  }
+
+  updateStationsList(stationsList) {
+    const favorites = stationsList.filter(station => station.isFavorite);
+    this.setState({
+      favStationsId: this.readStoredFav(),
+      favStations: favorites
+    });
+    console.log('Liste des stations à afficher :', this.state.favStations);
+    console.log(`Liste des stations à dans localStorage : ${this.state.favStationsId}`);
+  }
+
+  handleFavList(stationNumber) {
+    const { favStationsId } = this.state;
+    if (favStationsId.includes(stationNumber)) {
+      this.removeFavorite(stationNumber);
+    } else {
+      this.addFavorite(stationNumber);
+    }
+  }
+
+  handleRadioChange(event) {
+    this.setState({
+      selectedOption: event.target.value
+    });
+    this.displayWhat(event.target.value);
   }
 
   selectNavigation() {
@@ -69,6 +117,7 @@ class App extends Component {
       itinerary,
       minBikesToDisplay,
       minStandsToDisplay,
+      favStationsId
     } = this.state;
 
     return (
@@ -79,27 +128,31 @@ class App extends Component {
         <FunctionalitiesLayer
           panelToDisplay={panelToDisplay}
           itinerary={itinerary}
-          selectNavigation={this.selectNavigation}
-          handleFilterChange={this.handleFilterChange}
           minBikesToDisplay={minBikesToDisplay}
           minStandsToDisplay={minStandsToDisplay}
+          selectNavigation={this.selectNavigation}
+          handleFilterChange={this.handleFilterChange}
         />
         <div className="row">
           <SideMenu
-            handleRadioChange={this.handleRadioChange}
-            selectNavigation={this.selectNavigation}
             itinerary={itinerary}
             selectedOption={selectedOption}
-            handleFilterChange={this.handleFilterChange}
             minBikesToDisplay={minBikesToDisplay}
             minStandsToDisplay={minStandsToDisplay}
+            selectNavigation={this.selectNavigation}
+            handleFilterChange={this.handleFilterChange}
+            handleRadioChange={this.handleRadioChange}
           />
           <MapContainer
             stationsToDisplay={stationsToDisplay}
-            displayFeature={this.displayFeature}
             minBikesToDisplay={minBikesToDisplay}
             minStandsToDisplay={minStandsToDisplay}
             selectedOption={selectedOption}
+            favStationsId={favStationsId}
+            readStoredFav={this.readStoredFav}
+            updateStationsList={this.updateStationsList}
+            displayFeature={this.displayFeature}
+            handleFavList={this.handleFavList}
           />
         </div>
       </div>
