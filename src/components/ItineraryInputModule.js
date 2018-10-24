@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-const getItinararyUrl = (str1, str2) => {
+const getItineraryUrl = (str1, str2) => {
   console.log(str1, str2);
   const generateUrl = `https://www.google.com/maps/dir/?api=1&origin=${str1}+toulouse&destination=${str2}+toulouse&travelmode=bicycling`;
   return generateUrl;
@@ -54,7 +54,7 @@ class ItineraryInputModule extends Component {
         <br />
         <a
           className="btn btn-primary"
-          href={getItinararyUrl(start, destination)}
+          href={getItineraryUrl(start, destination)}
           target="_blank"
           rel="noopener noreferrer"
           role="button"
