@@ -7,13 +7,6 @@ class PopupContent extends Component {
     super(props);
   }
 
-writeFavorite = () => {
-  const { marker, refreshStationsList } = this.props;
-  console.log(marker.address);
-  // let laStation = refreshStationsList.filter(station => station.number === marker.number);
-  console.log(refreshStationsList.isFavorite);
-}
-
 render(){
     const { marker, refreshStationsList } = this.props;
     return (
@@ -50,7 +43,7 @@ render(){
                 <button type="button" href="#" target="blank" className="btn" onClick={refreshStationsList}><i className="fas fa-sync-alt fa-2x" /></button>
               </div>
               <div className="col-3 d-flex align-items-center">
-              <button type="button" href="#" target="blank" className="btn" onClick={()=>this.writeFavorite()}><i className="far fa-star fa-2x" /></button>
+              <button type="button" href="#" target="blank" className="btn" ><i className="far fa-star fa-2x" /></button>
               </div>
               <div className="Go col-3 d-flex align-items-center">
                 <a className="btn btn-primary" href="#" role="button">Go</a>

@@ -11,6 +11,7 @@ import './Map.css';
 import './SideMenu.css';
 import './PopupContent.css';
 import './MobileFeatures.css';
+import './Favorites.css';
 
 class App extends Component {
   constructor(props) {
@@ -22,12 +23,14 @@ class App extends Component {
       itinerary: false,
       selectedOption: 'all',
       favStations: [],
-      favStationsId : favStationsId
+      favStationsId : favStationsId,
+      currentFavorite : []
     };
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
+    this.updateStationsList = this.updateStationsList.bind(this);
   }
 
   readStoredFav() {
@@ -37,11 +40,12 @@ class App extends Component {
 
   updateStationsList(stationsList) {
     const favorites = stationsList.filter(station => station.isFavorite);
-    console.log(`liste station fav ${favorites}`, favorites);
+    // console.log(`liste station fav ${favorites}`, favorites);
+
     this.setState({
-      favStations : [...this.state.favStations, favorites]
+      // favStations : [...this.state.favStations, ...favorites]
+      favStations : favorites
     });
-    // console.log(this.state.favStations);
   }
 
   handleRadioChange(event) {
@@ -109,7 +113,8 @@ class App extends Component {
       panelToDisplay,
       selectedOption,
       itinerary,
-      favStationsId
+      favStationsId,
+      favStations
     } = this.state;
 
     return (
@@ -133,6 +138,7 @@ class App extends Component {
             selectNavigation={this.selectNavigation}
             itinerary={itinerary}
             selectedOption={selectedOption}
+            favStations={favStations}            
           />
           <MapContainer
             stationsToDisplay={stationsToDisplay}

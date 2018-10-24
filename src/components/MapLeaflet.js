@@ -46,7 +46,7 @@ class MapLeaflet extends Component<
   }
 
   centerOnUser = (userPosition) => {
-    console.log(`on centre sur ${userPosition}`);
+    // console.log(`on centre sur ${userPosition}`);
     this.setState({
       viewport: {
         center: userPosition,
@@ -61,7 +61,7 @@ class MapLeaflet extends Component<
 
   refreshStationsList = () => {
     const { favStationsId,updateStationsList } = this.props;
-    console.log('refresh');
+    // console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
@@ -78,7 +78,6 @@ class MapLeaflet extends Component<
           stationsList: stationsList ,
           isLoading: false
         })
-
         updateStationsList(stationsList);
       })
       .catch(error => this.setState({
