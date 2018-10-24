@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItineraryInputModule from './ItineraryInputModule';
-import AdressInputModule from './AdressInputModule';
+import AddressInputModule from './AddressInputModule';
 
 class NavigationModule extends Component {
   render() {
@@ -22,7 +22,7 @@ class NavigationModule extends Component {
                 <span> Rechercher un trajet</span>
               </div>
               <div className="form-group">
-                <AdressInputModule itinerary={itinerary} />
+                <AddressInputModule itinerary={itinerary} />
                 <ItineraryInputModule itinerary={itinerary} />
                 <button type="button" className="btn btn-primary mt-2">Rechercher</button>
               </div>
@@ -32,7 +32,7 @@ class NavigationModule extends Component {
       </div>
     );
   }
-};
+}
 
 
 export default NavigationModule;

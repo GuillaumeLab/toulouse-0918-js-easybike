@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import AdressInputModule from './AdressInputModule';
+import AddressInputModule from './AddressInputModule';
 import ItineraryInputModule from './ItineraryInputModule';
 
 class SearchPanel extends Component {
@@ -19,7 +19,7 @@ class SearchPanel extends Component {
             />
             <span> Rechercher un trajet</span>
             <div className="form-group">
-              <AdressInputModule itinerary={itinerary} />
+              <AddressInputModule itinerary={itinerary} />
               <ItineraryInputModule itinerary={itinerary} />
               <button type="button" className="btn btn-primary mt-2">Rechercher</button>
             </div>

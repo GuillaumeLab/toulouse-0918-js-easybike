@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Favorites from './Favorites';
 import NavigationModule from './NavigationModule';
 import StationsToDisplayMenu from './StationsToDisplayMenu';
@@ -31,5 +32,22 @@ class SideMenu extends Component {
     );
   }
 }
+
+SideMenu.propTypes = {
+  selectNavigation: PropTypes.func,
+  handleFilterChange: PropTypes.func,
+  itinerary: PropTypes.bool,
+  minBikesToDisplay: PropTypes.number,
+  minStandsToDisplay: PropTypes.number
+};
+
+SideMenu.defaultProps = {
+  selectNavigation: PropTypes.func,
+  handleFilterChange: PropTypes.func,
+  itinerary: PropTypes.bool,
+  minBikesToDisplay: PropTypes.number,
+  minStandsToDisplay: PropTypes.number
+};
+
 
 export default SideMenu;

@@ -22,6 +22,7 @@ class StationToDisplayMenu extends Component {
                     handleFilterChange={handleFilterChange}
                     minBikesToDisplay={minBikesToDisplay}
                   />
+                  <hr />
                   <FilterByStandInput
                     className="filter-input"
                     handleFilterChange={handleFilterChange}

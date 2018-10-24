@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-class AdressInputModule extends Component {
+class AddressInputModule extends Component {
   render() {
     if (this.props.itinerary) {
       return null;
@@ -12,4 +12,4 @@ class AdressInputModule extends Component {
     );
   }
 }
-export default AdressInputModule;
+export default AddressInputModule;
