@@ -35,12 +35,35 @@ class ItineraryInputModule extends Component {
     }
     return (
       <Fragment>
-        <input onChange={this.handleChangeStart} type="text" className="form-control my-2" id="exampleInputEmail1" aria-describedby="itinerary start" placeholder="Départ" />
-        <input onChange={this.handleChangeDestination} type="text" className="form-control my-2" id="exampleInputEmail1" aria-describedby="itinerary end" placeholder="Arrivée" />
+        <input
+          onChange={this.handleChangeStart}
+          type="text"
+          className="form-control my-2"
+          id="exampleInputEmail1"
+          aria-describedby="itinerary start"
+          placeholder="Départ"
+        />
+        <input
+          onChange={this.handleChangeDestination}
+          type="text"
+          className="form-control my-2"
+          id="exampleInputEmail1"
+          aria-describedby="itinerary end"
+          placeholder="Arrivée"
+        />
         <br />
-        <a className="btn btn-primary" href={getItinararyUrl(start, destination)} target="_blank" rel="noopener noreferrer" role="button">Calcul d&apos;itinéraire</a>
+        <a
+          className="btn btn-primary"
+          href={getItinararyUrl(start, destination)}
+          target="_blank"
+          rel="noopener noreferrer"
+          role="button"
+        >
+          Calcul d&apos;itinéraire
+        </a>
       </Fragment>
     );
   }
 }
+
 export default ItineraryInputModule;

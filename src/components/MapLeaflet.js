@@ -128,6 +128,7 @@ class MapLeaflet extends Component<
                   stationsList={stationsList}
                   error={error}
                   refreshStationsList={this.refreshStationsList}
+                  userPosition={userPosition}
                 />
                 <MapControls
                   getCurrentPosition={getCurrentPosition}

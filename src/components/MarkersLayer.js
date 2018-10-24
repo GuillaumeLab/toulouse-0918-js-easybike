@@ -15,9 +15,10 @@ class MarkersLayer extends Component {
       stationsToDisplay,
       stationsList,
       error,
-      refreshStationsList
+      refreshStationsList,
+      userPosition
     } = this.props;
-    
+
     const maxWidth = 400;
     const minWidth = 340;
     const allStationsMarkers = stationsList.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
@@ -41,6 +42,7 @@ class MarkersLayer extends Component {
             <PopupContent
               marker={stationData}
               refreshStationsList={refreshStationsList}
+              userPosition={userPosition}
             />
           </Popup>
         </Marker>
