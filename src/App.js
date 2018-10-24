@@ -40,10 +40,8 @@ class App extends Component {
 
   updateStationsList(stationsList) {
     const favorites = stationsList.filter(station => station.isFavorite);
-    // console.log(`liste station fav ${favorites}`, favorites);
 
     this.setState({
-      // favStations : [...this.state.favStations, ...favorites]
       favStations : favorites
     });
   }

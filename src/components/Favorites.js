@@ -9,12 +9,12 @@ const Favorites = ({favStations}) => {
         FAVORIS
       </div>
       <div className="card-body">
-        <p className="card-text font-weight-normal">
-          <ul> 
+
+          <ul className="card-text font-weight-normal"> 
             {favStations.map(station =>
-              <li>
+              <li key={station.number}>
                 <div >{station.address}</div>
-                <div class="statInfo" >
+                <div className="statInfo" >
                   <span>
                     <img className="popupImg img-fluid" src={bicycle} alt="Bicycles" />
                   </span>
@@ -31,7 +31,6 @@ const Favorites = ({favStations}) => {
               </li>
             )}
           </ul>
-        </p>
        
       </div>
     </div>
