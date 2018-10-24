@@ -4,7 +4,7 @@ import AddressInputModule from './AddressInputModule';
 
 class NavigationModule extends Component {
   render() {
-    const { itinerary, selectNavigation } = this.props;
+    const { itinerary, selectNavigation, userPosition } = this.props;
     return (
       <div className="card my-2">
         <div className="card-header font-weight-bold">NAVIGATION</div>
@@ -22,7 +22,7 @@ class NavigationModule extends Component {
                 <span> Rechercher un trajet</span>
               </div>
               <div className="form-group">
-                <AddressInputModule itinerary={itinerary} />
+                <AddressInputModule itinerary={itinerary} userPosition={userPosition} />
                 <ItineraryInputModule itinerary={itinerary} />
               </div>
             </div>

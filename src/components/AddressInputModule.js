@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
-const getItineraryUrl = (str2) => {
+const getItineraryUrl = (userPosition, str2) => {
   console.log(str2);
-  const generateUrl = `https://www.google.com/maps/dir/?api=1&origin=toulouse&destination=${str2}+toulouse&travelmode=bicycling`;
-  return generateUrl;
+  return `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${str2}+toulouse`;
 };
 
 class AddressInputModule extends Component {
@@ -27,7 +26,7 @@ class AddressInputModule extends Component {
 
   render() {
     const { destination } = this.state;
-    const { itinerary } = this.props;
+    const { itinerary, userPosition } = this.props;
     if (itinerary) {
       return null;
     }
@@ -44,7 +43,7 @@ class AddressInputModule extends Component {
         <br />
         <a
           className="btn btn-primary"
-          href={getItineraryUrl(destination)}
+          href={getItineraryUrl(userPosition, destination)}
           target="_blank"
           rel="noopener noreferrer"
           role="button"

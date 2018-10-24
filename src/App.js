@@ -150,6 +150,7 @@ class App extends Component {
                   selectNavigation={this.selectNavigation}
                   itinerary={itinerary}
                   selectedOption={selectedOption}
+                  userPosition={userPosition}
                 />
                 <MapContainer
                   stationsToDisplay={stationsToDisplay}

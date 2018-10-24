@@ -4,7 +4,6 @@ import parking from '../images/parking-sign.png';
 
 const getItineraryUrl = (userPosition, marker) => `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}`;
 
-
 class PopupContent extends Component {
   render() {
     const { marker, refreshStationsList, userPosition } = this.props;

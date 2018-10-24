@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 const getItineraryUrl = (str1, str2) => {
   console.log(str1, str2);
-  const generateUrl = `https://www.google.com/maps/dir/?api=1&origin=${str1}+toulouse&destination=${str2}+toulouse&travelmode=bicycling`;
-  return generateUrl;
+  return `https://www.google.com/maps/dir/?api=1&origin=${str1}+toulouse&destination=${str2}+toulouse`;
 };
 
 class ItineraryInputModule extends Component {
