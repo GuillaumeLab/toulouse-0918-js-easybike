@@ -12,7 +12,6 @@ class MarkersLayer extends Component {
   render() {
     const {
       stationsList,
-      geolocationError,
       refreshStationsList,
       minStandsToDisplay,
       minBikesToDisplay,
@@ -20,6 +19,7 @@ class MarkersLayer extends Component {
       favStationsId,
       refresh,
       userPosition,
+      apiDataError,
       clearError,
     } = this.props;
 
@@ -52,9 +52,9 @@ class MarkersLayer extends Component {
         </Marker>
       ));
 
-    const displayMarkers = geolocationError ? (
+    const displayMarkers = apiDataError ? (
       <ModalWarning
-        geolocationError={geolocationError}
+        apiDataError={apiDataError}
         clearError={clearError}
       />)
       : allStationsMarkers;

@@ -32,15 +32,12 @@ class App extends Component {
       favStationsId,
       viewCenter: defaultCenter.center,
       userPosition: [],
-      geolocationError: null,
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
-    this.updateStationsList = this.updateStationsList.bind(this);
+    this.updateFavStationsList = this.updateFavStationsList.bind(this);
     this.handleFavList = this.handleFavList.bind(this);
-    this.clearError = this.clearError.bind(this);
-    this.detectError = this.detectError.bind(this);
   }
 
   handleFilterChange(key, increment) {
@@ -55,16 +52,6 @@ class App extends Component {
         return {};
       }
     );
-  }
-
-  detectError(error) {
-    this.setState({
-      geolocationError: error,
-    });
-  }
-
-  clearError() {
-    this.setState({ geolocationError: null });
   }
 
   readStoredFav() {
@@ -87,7 +74,7 @@ class App extends Component {
     localStorage.setItem('favorites', JSON.stringify(previousFavList));
   }
 
-  updateStationsList(stationsList) {
+  updateFavStationsList(stationsList) {
     this.setState({
       favStationsId: this.readStoredFav(),
     });
@@ -202,7 +189,7 @@ class App extends Component {
                 <MapContainer
                   stationsToDisplay={stationsToDisplay}
                   displayFeature={this.displayFeature}
-                  updateStationsList={this.updateStationsList}
+                  updateFavStationsList={this.updateFavStationsList}
                   favStationsId={favStationsId}
                   getUserPosition={this.getUserPosition}
                   geolocationError={error}
@@ -213,8 +200,6 @@ class App extends Component {
                   minStandsToDisplay={minStandsToDisplay}
                   readStoredFav={this.readStoredFav}
                   handleFavList={this.handleFavList}
-                  clearError={this.clearError}
-                  detectError={this.detectError}
                 />
               </div>
             </div>

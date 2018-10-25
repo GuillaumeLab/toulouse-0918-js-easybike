@@ -33,7 +33,6 @@ class SideMenu extends Component {
         />
         <Favorites
           favStations={favStations}
-          getCurrentPosition={getCurrentPosition}
         />
       </div>
     );

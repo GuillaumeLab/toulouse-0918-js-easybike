@@ -4,7 +4,7 @@ import parking from '../images/parking-sign.png';
 
 class Favorites extends Component {
   render() {
-    const { favStations, userPosition } = this.props;
+    const { favStations } = this.props;
     const regexp = /\d+ - /;
 
     return (

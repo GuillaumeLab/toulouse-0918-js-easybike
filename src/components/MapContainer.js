@@ -10,7 +10,7 @@ class MapContainer extends Component {
       minBikesToDisplay,
       selectedOption,
       favStationsId,
-      updateStationsList,
+      updateFavStationsList,
       handleFavList,
       getUserPosition,
       geolocationError,
@@ -31,7 +31,7 @@ class MapContainer extends Component {
           minBikesToDisplay={minBikesToDisplay}
           selectedOption={selectedOption}
           favStationsId={favStationsId}
-          updateStationsList={updateStationsList}
+          updateFavStationsList={updateFavStationsList}
           handleFavList={handleFavList}
           getUserPosition={getUserPosition}
           geolocationError={geolocationError}
@@ -39,8 +39,6 @@ class MapContainer extends Component {
           userPosition={userPosition}
           isUserLocated={isUserLocated}
           readStoredFav={readStoredFav}
-          clearError={clearError}
-          detectError={detectError}
         />
       </div>
     );
