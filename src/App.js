@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
 import MapContainer from './components/MapContainer';
 import FunctionalitiesLayer from './components/FunctionalitiesLayer';
+import tapOrClick from 'react-tap-or-click';
 
 import './App.css';
 import './Navbar.css';
@@ -185,7 +186,7 @@ class App extends Component {
                 />
               </div>
               <div style={{ position: 'fixed', bottom: 0, zIndex: 2000, left: 0, right: 0, background: '#ffffff', padding: 10 }}>
-                {latitude}, {longitude} <button type="button" onTouchStart={getCurrentPosition}>Get Position!</button>
+                {latitude}, {longitude} <button type="button" {...tapOrClick(getCurrentPosition)}>Get Position!</button>
               </div>
             </div>
           );
