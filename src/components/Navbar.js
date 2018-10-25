@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 class Navbar extends Component {
   getBike = event => {
-    event.PreventDefaut()
+    event.preventDefault()
     this.props.getCurrentPosition()
+    console.log(event)
   }
-  
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
