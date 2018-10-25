@@ -26,7 +26,7 @@ class Navbar extends Component {
         </button>
         <div id="navbarNavAltMarkup" className="col-md-8 collapse navbar-collapse">
           <div className="navbar-nav text-right text-md-center mx-auto">
-            <a className="nav-item nav-link" onClick={this.getBike}>Prendre un vélo</a>
+            <a className="nav-item nav-link" onClick={this.getBike} onTouchStart={this.getBike}>Prendre un vélo</a>
             <a className="nav-item nav-link" href="#">Déposer un vélo</a>
           </div>
         </div>
