@@ -105,6 +105,7 @@ class MapLeaflet extends Component<
 
     const { zoom, stationsList, viewport, apiDataError } = this.state;
     const [latitude, longitude] = userPosition;
+    console.log(`latitude et longitude ${latitude}, ${longitude}, ${userPosition}`)
 
     // console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
     // console.log(`latitude = ${latitude} and longitude = ${longitude}`);

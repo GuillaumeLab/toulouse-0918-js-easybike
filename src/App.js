@@ -140,7 +140,6 @@ class App extends Component {
       favStationsId,
       favStations,
       viewCenter,
-      userPosition
     } = this.state;
 
     return (

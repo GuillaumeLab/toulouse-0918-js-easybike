@@ -16,7 +16,6 @@ class SideMenu extends Component {
       minStandsToDisplay,
       favStations,
       userPosition,
-      getCurrentPosition
     } = this.props;
 
     return (

@@ -18,8 +18,6 @@ class MapContainer extends Component {
       userPosition,
       isUserLocated,
       readStoredFav,
-      clearError,
-      detectError
     } = this.props;
 
     return (
