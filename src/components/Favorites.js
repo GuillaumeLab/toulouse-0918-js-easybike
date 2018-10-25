@@ -4,15 +4,22 @@ import parking from '../images/parking-sign.png';
 
 class Favorites extends Component {
   render() {
-    const { favStations } = this.props;
+    const { favStations, userPosition } = this.props;
     const regexp = /\d+ - /;
+    const getItineraryUrl = (stations) => (
+      `https://www.google.com/maps/dir/?api=1
+       &origin=${userPosition}
+       &destination=${stations.position.lat},${stations.position.lng}
+       &travelmode=walking`
+    );
+
     return (
-      <div className="card text-text-secondary my-2 favs">
+      <div className="card text-text-secondary favs">
         <div className="card-header font-weight-bold ">
           FAVORIS
         </div>
         <div className="card-body">
-          <ul className="card-text font-weight-normal">
+          <ul className="card-text">
             {favStations.map(station => (
               <li key={station.number}>
                 <h4>{station.name.replace(regexp, '')}</h4>
@@ -29,6 +36,17 @@ class Favorites extends Component {
                   <span>
                     {station.available_bike_stands}
                   </span>
+                  <div>
+                    <a
+                      className="btn btn-primary go-button align-content-center"
+                      href={getItineraryUrl(station)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="button"
+                    >
+                      Go
+                    </a>
+                  </div>
                 </div>
                 <hr />
               </li>

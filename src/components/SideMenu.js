@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Favorites from './Favorites';
 import NavigationModule from './NavigationModule';
-import StationsToDisplayMenu from './StationsToDisplayMenu';
+import FilterModule from './FilterModule';
 
 import '../SideMenu.css';
 
@@ -15,12 +15,13 @@ class SideMenu extends Component {
       minBikesToDisplay,
       minStandsToDisplay,
       favStations,
-      userPosition
+      userPosition,
+      getCurrentPosition
     } = this.props;
 
     return (
       <div id="SideMenu" className="col-md-3 p-2">
-        <StationsToDisplayMenu
+        <FilterModule
           minBikesToDisplay={minBikesToDisplay}
           minStandsToDisplay={minStandsToDisplay}
           handleFilterChange={handleFilterChange}
@@ -30,8 +31,9 @@ class SideMenu extends Component {
           selectNavigation={selectNavigation}
           userPosition={userPosition}
         />
-        <Favorites 
+        <Favorites
           favStations={favStations}
+          getCurrentPosition={getCurrentPosition}
         />
       </div>
     );
@@ -43,7 +45,7 @@ SideMenu.propTypes = {
   handleFilterChange: PropTypes.func,
   itinerary: PropTypes.bool,
   minBikesToDisplay: PropTypes.number,
-  minStandsToDisplay: PropTypes.number
+  minStandsToDisplay: PropTypes.number,
 };
 
 SideMenu.defaultProps = {
@@ -51,7 +53,7 @@ SideMenu.defaultProps = {
   handleFilterChange: PropTypes.func,
   itinerary: PropTypes.bool,
   minBikesToDisplay: PropTypes.number,
-  minStandsToDisplay: PropTypes.number
+  minStandsToDisplay: PropTypes.number,
 };
 
 

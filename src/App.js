@@ -30,15 +30,17 @@ class App extends Component {
       selectedOption: 'all',
       favStations: [],
       favStationsId,
-      currentFavorite: [],
       viewCenter: defaultCenter.center,
-      userPosition: []
+      userPosition: [],
+      geolocationError: null,
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.updateStationsList = this.updateStationsList.bind(this);
     this.handleFavList = this.handleFavList.bind(this);
+    this.clearError = this.clearError.bind(this);
+    this.detectError = this.detectError.bind(this);
   }
 
   handleFilterChange(key, increment) {
@@ -53,6 +55,16 @@ class App extends Component {
         return {};
       }
     );
+  }
+
+  detectError(error) {
+    this.setState({
+      geolocationError: error,
+    });
+  }
+
+  clearError() {
+    this.setState({ geolocationError: null });
   }
 
   readStoredFav() {
@@ -76,9 +88,11 @@ class App extends Component {
   }
 
   updateStationsList(stationsList) {
-    const favorites = stationsList.filter(station => station.isFavorite);
     this.setState({
       favStationsId: this.readStoredFav(),
+    });
+    const favorites = stationsList.filter(station => station.isFavorite);
+    this.setState({
       favStations: favorites
     });
     console.log('Liste des stations à afficher :', this.state.favStations);
@@ -150,12 +164,7 @@ class App extends Component {
           error,
           getCurrentPosition
         }) => {
-          let isUserLocated = false;
-          if (!latitude || !longitude) {
-            isUserLocated = false;
-          } else {
-            isUserLocated = true;
-          }
+          const isUserLocated = latitude && longitude;
 
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
 
@@ -187,6 +196,7 @@ class App extends Component {
                   minStandsToDisplay={minStandsToDisplay}
                   handleFilterChange={this.handleFilterChange}
                   handleRadioChange={this.handleRadioChange}
+                  getCurrentPosition={getCurrentPosition}
                 />
                 <MapContainer
                   stationsToDisplay={stationsToDisplay}
@@ -202,6 +212,8 @@ class App extends Component {
                   minStandsToDisplay={minStandsToDisplay}
                   readStoredFav={this.readStoredFav}
                   handleFavList={this.handleFavList}
+                  clearError={this.clearError}
+                  detectError={this.detectError}
                 />
               </div>
             </div>

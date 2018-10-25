@@ -30,10 +30,8 @@ class MapLeaflet extends Component<
       zoom: defaultCenter.zoom,
       stationsList: [],
       isLoading: false,
-      error: null,
       panelToDisplay: ''
     };
-    this.clearError = this.clearError.bind(this);
     this.refreshStationsList = this.refreshStationsList.bind(this);
     this.centerOnUser = this.centerOnUser.bind(this);
   }
@@ -56,16 +54,14 @@ class MapLeaflet extends Component<
     })
   }
 
-  clearError() {
-    this.setState({ error: null });
-  }
-
   refreshStationsList() {
-    const { favStationsId, updateStationsList } = this.props;
+    const { updateStationsList, readStoredFav, detectError, clearError } = this.props;
     // console.log('refresh');
-    this.setState({ error: null });
+    clearError();
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
+    
+    const favStationsId = readStoredFav();
 
     axios.get(request)
       .then(result => {
@@ -81,10 +77,7 @@ class MapLeaflet extends Component<
         })
         updateStationsList(stationsList);
       })
-      .catch(error => this.setState({
-        error,
-        isLoading: false
-      }));
+      .catch(error => detectError(error));
   }
 
   render() {
@@ -100,7 +93,8 @@ class MapLeaflet extends Component<
       geolocationError,
       getCurrentPosition,
       userPosition,
-      isUserLocated
+      isUserLocated,
+      clearError,
     } = this.props;
 
     const { zoom, stationsList, viewport } = this.state;
@@ -133,6 +127,7 @@ class MapLeaflet extends Component<
             handleFavList={handleFavList}
             favStationsId={favStationsId}
             userPosition={userPosition}
+            clearError={clearError}
           />
           <MapControls
             getCurrentPosition={getCurrentPosition}

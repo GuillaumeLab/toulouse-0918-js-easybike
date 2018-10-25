@@ -16,7 +16,10 @@ class MapContainer extends Component {
       geolocationError,
       getCurrentPosition,
       userPosition,
-      isUserLocated
+      isUserLocated,
+      readStoredFav,
+      clearError,
+      detectError
     } = this.props;
 
     return (
@@ -35,6 +38,9 @@ class MapContainer extends Component {
           getCurrentPosition={getCurrentPosition}
           userPosition={userPosition}
           isUserLocated={isUserLocated}
+          readStoredFav={readStoredFav}
+          clearError={clearError}
+          detectError={detectError}
         />
       </div>
     );
