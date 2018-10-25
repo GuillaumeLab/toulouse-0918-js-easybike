@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Navbar extends Component {
   getBike = event => {
-    event.preventDefault()
     this.props.getCurrentPosition()
     console.log(event)
   }
