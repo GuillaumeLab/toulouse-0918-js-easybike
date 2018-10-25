@@ -190,7 +190,6 @@ class App extends Component {
                   displayFeature={this.displayFeature}
                   updateFavStationsList={this.updateFavStationsList}
                   favStationsId={favStationsId}
-                  getUserPosition={this.getUserPosition}
                   geolocationError={error}
                   getCurrentPosition={getCurrentPosition}
                   userPosition={userPosition}

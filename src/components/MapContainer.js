@@ -31,7 +31,6 @@ class MapContainer extends Component {
           favStationsId={favStationsId}
           updateFavStationsList={updateFavStationsList}
           handleFavList={handleFavList}
-          getUserPosition={getUserPosition}
           geolocationError={geolocationError}
           getCurrentPosition={getCurrentPosition}
           userPosition={userPosition}

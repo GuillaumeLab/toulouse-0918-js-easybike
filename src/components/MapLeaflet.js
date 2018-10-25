@@ -60,6 +60,15 @@ class MapLeaflet extends Component<
     })
   }
 
+  centerOnStation(station) {
+    this.setState({
+      viewport: {
+        center: station,
+        zoom: 15
+      }
+    })
+  }
+
   refreshStationsList() {
     const { updateFavStationsList, readStoredFav } = this.props;
     // console.log('refresh');
