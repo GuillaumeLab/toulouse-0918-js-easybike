@@ -173,6 +173,7 @@ class App extends Component {
                 minBikesToDisplay={minBikesToDisplay}
                 minStandsToDisplay={minStandsToDisplay}
                 handleFilterChange={this.handleFilterChange}
+                favStations={favStations}
               />
               <div className="row">
                 <SideMenu

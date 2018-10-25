@@ -19,7 +19,8 @@ class FunctionalitiesLayer extends Component {
       selectNavigation,
       handleFilterChange,
       minBikesToDisplay,
-      minStandsToDisplay
+      minStandsToDisplay,
+      favStations
     } = this.props;
 
     if (panelToDisplay === 'search') {
@@ -34,6 +35,7 @@ class FunctionalitiesLayer extends Component {
       return (
         <FavsPanel
           classname="favs-panel"
+          favStations={favStations}
         />
       );
     }

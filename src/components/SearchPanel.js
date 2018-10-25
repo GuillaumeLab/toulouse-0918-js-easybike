@@ -21,7 +21,6 @@ class SearchPanel extends Component {
             <div className="form-group">
               <AddressInputModule classname="navigation-input" itinerary={itinerary} />
               <ItineraryInputModule itinerary={itinerary} />
-              <button type="button" className="btn btn-primary mt-2">Rechercher</button>
             </div>
           </div>
         </form>
