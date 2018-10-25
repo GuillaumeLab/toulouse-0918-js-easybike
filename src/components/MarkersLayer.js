@@ -29,13 +29,13 @@ class MarkersLayer extends Component {
             className: 'custom-icon',
             html: ReactDOMServer.renderToString(
               <SvgStationIconGauge
-                perc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
-              />
-            ),
-            iconSize: [16, 45]
-          })}
-          position={[stationData.position.lat, stationData.position.lng]}
-          key={`marker_${stationData.name}`}
+                perefreshStationsListrc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
+              />refreshStationsList
+            ),refreshStationsList
+            iconSirefreshStationsListze: [16, 45]
+          })}refreshStationsList
+          positionrefreshStationsList={[stationData.position.lat, stationData.position.lng]}
+          key={`marefreshStationsListrker_${stationData.name}`}
         >
           <Popup maxWidth={maxWidth} minWidth={minWidth}>
             <PopupContent

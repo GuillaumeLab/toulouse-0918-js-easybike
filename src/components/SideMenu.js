@@ -7,7 +7,7 @@ import '../SideMenu.css';
 
 class SideMenu extends Component {
   render() {
-    const { displayWhat, handleRadioChange, selectNavigation, selectedOption, itinerary, favStations,showCurrentFavorite} = this.props;
+    const { displayWhat, handleRadioChange, selectNavigation, selectedOption, itinerary, favStations, showCurrentFavorite, userPosition } = this.props;
 
     return (
       <div id="SideMenu" className="col-md-3 p-2">
@@ -19,6 +19,7 @@ class SideMenu extends Component {
         <NavigationModule
           itinerary={itinerary}
           selectNavigation={selectNavigation}
+          userPosition={userPosition}
         />
         <Favorites 
           favStations={favStations}

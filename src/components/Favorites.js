@@ -9,7 +9,6 @@ const Favorites = ({favStations}) => {
         FAVORIS
       </div>
       <div className="card-body">
-
           <ul className="card-text font-weight-normal"> 
             {favStations.map(station =>
               <li key={station.number}>

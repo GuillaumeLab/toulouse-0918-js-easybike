@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Geolocation from 'react-geolocation';
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
 import MapContainer from './components/MapContainer';
@@ -13,6 +13,11 @@ import './PopupContent.css';
 import './MobileFeatures.css';
 import './Favorites.css';
 
+const defaultCenter = {
+  center: [43.599761799999996, 1.443197],
+  zoom: 15
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +29,9 @@ class App extends Component {
       selectedOption: 'all',
       favStations: [],
       favStationsId : favStationsId,
-      currentFavorite : []
+      currentFavorite : [],
+      viewCenter: defaultCenter.center,
+      userPosition: []
     };
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.displayWhat = this.displayWhat.bind(this);
@@ -45,6 +52,13 @@ class App extends Component {
       favStations : favorites
     });
   }
+
+//  getUserPosition(userPosition) {
+//    console.log(userPosition)
+//    // this.setState({
+//    //   userPosition: userPosition
+//    // });
+//  }
 
   handleRadioChange(event) {
     this.setState({
@@ -112,40 +126,69 @@ class App extends Component {
       selectedOption,
       itinerary,
       favStationsId,
-      favStations
+      favStations,
+      viewCenter
     } = this.state;
 
     return (
-      <div className="App container-fluid">
-        <div className="row">
-          <Navbar
-            displayWhat={this.displayWhat}
-          />
-        </div>
-        <FunctionalitiesLayer
-          panelToDisplay={panelToDisplay}
-          selectedOption={selectedOption}
-          itinerary={itinerary}
-          selectNavigation={this.selectNavigation}
-          handleRadioChange={this.handleRadioChange}
-        />
-        <div className="row">
-          <SideMenu
-            displayWhat={this.displayWhat}
-            handleRadioChange={this.handleRadioChange}
-            selectNavigation={this.selectNavigation}
-            itinerary={itinerary}
-            selectedOption={selectedOption}
-            favStations={favStations}            
-          />
-          <MapContainer
-            stationsToDisplay={stationsToDisplay}
-            displayFeature={this.displayFeature}
-            favStationsId={favStationsId}
-            updateStationsList={this.updateStationsList}
-          />
-        </div>
-      </div>
+
+      <Geolocation
+        lazy
+        render={({
+          fetchingPosition,
+          position: { coords: { latitude, longitude } = {} } = {},
+          error,
+          getCurrentPosition
+        }) => {
+          let isUserLocated = false;
+          if (!latitude || !longitude) {
+            isUserLocated = false;
+          } else {
+            isUserLocated = true;
+          }
+
+          const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+
+          return (
+            <div className="App container-fluid">
+              <div className="row">
+                <Navbar
+                  displayWhat={this.displayWhat}
+                />
+              </div>
+              <FunctionalitiesLayer
+                panelToDisplay={panelToDisplay}
+                selectedOption={selectedOption}
+                itinerary={itinerary}
+                selectNavigation={this.selectNavigation}
+                handleRadioChange={this.handleRadioChange}
+              />
+              <div className="row">
+                <SideMenu
+                  displayWhat={this.displayWhat}
+                  handleRadioChange={this.handleRadioChange}
+                  selectNavigation={this.selectNavigation}
+                  itinerary={itinerary}
+                  selectedOption={selectedOption}
+                  userPosition={userPosition}
+                  favStations={favStations}
+                />
+                <MapContainer
+                  stationsToDisplay={stationsToDisplay}
+                  displayFeature={this.displayFeature}
+                  updateStationsList={this.updateStationsList}
+                  favStationsId={favStationsId}
+                  getUserPosition={this.getUserPosition}
+                  geolocationError={error}
+                  getCurrentPosition={getCurrentPosition}
+                  userPosition={userPosition}
+                  isUserLocated={isUserLocated}
+                />
+              </div>
+            </div>
+          );
+        }}
+      />
     );
   }
 }
