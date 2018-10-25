@@ -15,7 +15,8 @@ class SideMenu extends Component {
       minBikesToDisplay,
       minStandsToDisplay,
       favStations,
-      showCurrentFavorite
+      showCurrentFavorite,
+      userPosition
     } = this.props;
 
     return (
@@ -28,8 +29,9 @@ class SideMenu extends Component {
         <NavigationModule
           itinerary={itinerary}
           selectNavigation={selectNavigation}
+          userPosition={userPosition}
         />
-        <Favorites
+        <Favorites 
           favStations={favStations}
         />
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Geolocation from 'react-geolocation';
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
 import MapContainer from './components/MapContainer';
@@ -13,6 +13,11 @@ import './PopupContent.css';
 import './MobileFeatures.css';
 import './Favorites.css';
 
+const defaultCenter = {
+  center: [43.599761799999996, 1.443197],
+  zoom: 15
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +30,9 @@ class App extends Component {
       selectedOption: 'all',
       favStations: [],
       favStationsId,
-      currentFavorite : []
+      currentFavorite : [],
+      viewCenter: defaultCenter.center,
+      userPosition: []
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
@@ -84,6 +91,21 @@ class App extends Component {
     }
   }
 
+  updateStationsList(stationsList) {
+    const favorites = stationsList.filter(station => station.isFavorite);
+
+    this.setState({
+      favStations : favorites
+    });
+  }
+
+//  getUserPosition(userPosition) {
+//    console.log(userPosition)
+//    // this.setState({
+//    //   userPosition: userPosition
+//    // });
+//  }
+
   handleRadioChange(event) {
     this.setState({
       selectedOption: event.target.value
@@ -110,7 +132,7 @@ class App extends Component {
       });
     }
   }
-
+  
   render() {
     const {
       stationsToDisplay,
@@ -120,46 +142,76 @@ class App extends Component {
       minBikesToDisplay,
       minStandsToDisplay,
       favStationsId,
-      favStations
+      favStations,
+      viewCenter
     } = this.state;
 
     return (
-      <div className="App container-fluid">
-        <div className="row">
-          <Navbar />
-        </div>
-        <FunctionalitiesLayer
-          panelToDisplay={panelToDisplay}
-          itinerary={itinerary}
-          minBikesToDisplay={minBikesToDisplay}
-          minStandsToDisplay={minStandsToDisplay}
-          selectNavigation={this.selectNavigation}
-          handleFilterChange={this.handleFilterChange}
-        />
-        <div className="row">
-          <SideMenu
-            itinerary={itinerary}
-            selectedOption={selectedOption}
-            minBikesToDisplay={minBikesToDisplay}
-            minStandsToDisplay={minStandsToDisplay}
-            selectNavigation={this.selectNavigation}
-            handleFilterChange={this.handleFilterChange}
-            handleRadioChange={this.handleRadioChange}
-            favStations={favStations}
-          />
-          <MapContainer
-            stationsToDisplay={stationsToDisplay}
-            minBikesToDisplay={minBikesToDisplay}
-            minStandsToDisplay={minStandsToDisplay}
-            selectedOption={selectedOption}
-            favStationsId={favStationsId}
-            readStoredFav={this.readStoredFav}
-            updateStationsList={this.updateStationsList}
-            displayFeature={this.displayFeature}
-            handleFavList={this.handleFavList}
-          />
-        </div>
-      </div>
+      <Geolocation
+        lazy
+        render={({
+          fetchingPosition,
+          position: { coords: { latitude, longitude } = {} } = {},
+          error,
+          getCurrentPosition
+        }) => {
+          let isUserLocated = false;
+          if (!latitude || !longitude) {
+            isUserLocated = false;
+          } else {
+            isUserLocated = true;
+          }
+
+          const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+
+          return (
+            <div className="App container-fluid">
+              <div className="row">
+                <Navbar
+                  displayWhat={this.displayWhat}
+                />
+              </div>
+              <FunctionalitiesLayer
+                panelToDisplay={panelToDisplay}
+                itinerary={itinerary}
+                selectNavigation={this.selectNavigation}
+                minBikesToDisplay={minBikesToDisplay}
+                minStandsToDisplay={minStandsToDisplay}
+                handleFilterChange={this.handleFilterChange}
+              />
+              <div className="row">
+                <SideMenu
+                  displayWhat={this.displayWhat}
+                  selectNavigation={this.selectNavigation}
+                  itinerary={itinerary}
+                  selectedOption={selectedOption}
+                  userPosition={userPosition}
+                  favStations={favStations}
+                  minBikesToDisplay={minBikesToDisplay}
+                  minStandsToDisplay={minStandsToDisplay}
+                  handleFilterChange={this.handleFilterChange}
+                  handleRadioChange={this.handleRadioChange}
+                />
+                <MapContainer
+                  stationsToDisplay={stationsToDisplay}
+                  displayFeature={this.displayFeature}
+                  updateStationsList={this.updateStationsList}
+                  favStationsId={favStationsId}
+                  getUserPosition={this.getUserPosition}
+                  geolocationError={error}
+                  getCurrentPosition={getCurrentPosition}
+                  userPosition={userPosition}
+                  isUserLocated={isUserLocated}
+                  minBikesToDisplay={minBikesToDisplay}
+                  minStandsToDisplay={minStandsToDisplay}
+                  readStoredFav={this.readStoredFav}
+                  handleFavList={this.handleFavList}
+                />
+              </div>
+            </div>
+          );
+        }}
+      />
     );
   }
 }

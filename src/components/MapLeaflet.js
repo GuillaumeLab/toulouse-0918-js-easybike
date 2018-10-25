@@ -5,7 +5,6 @@ import {
   Map, TileLayer, type Viewport
 } from 'react-leaflet';
 
-import Geolocation from 'react-geolocation';
 import { apiKey } from './settings';
 
 import MapControls from './MapControls';
@@ -28,7 +27,6 @@ class MapLeaflet extends Component<
   constructor(props) {
     super(props);
     this.state = {
-      viewCenter: defaultCenter.center,
       zoom: defaultCenter.zoom,
       stationsList: [],
       isLoading: false,
@@ -49,7 +47,11 @@ class MapLeaflet extends Component<
     clearInterval(this.interval);
   }
 
+<<<<<<< HEAD
   centerOnUser(userPosition) {
+=======
+  centerOnUser = (userPosition) => {
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
     // console.log(`on centre sur ${userPosition}`);
     this.setState({
       viewport: {
@@ -63,7 +65,11 @@ class MapLeaflet extends Component<
     this.setState({ error: null });
   }
 
+<<<<<<< HEAD
   refreshStationsList() {
+=======
+  refreshStationsList = () => {
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
     const { favStationsId,updateStationsList } = this.props;
     // console.log('refresh');
     this.setState({ error: null });
@@ -78,11 +84,19 @@ class MapLeaflet extends Component<
             return { ...station,isFavorite:isFavorite}
           }
         );
+<<<<<<< HEAD
         updateStationsList(stationsList);
         this.setState({
           stationsList: stationsList,
           isLoading: false
         })
+=======
+        this.setState({
+          stationsList: stationsList ,
+          isLoading: false
+        })
+        updateStationsList(stationsList);
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
       })
       .catch(error => this.setState({
         error,
@@ -91,6 +105,7 @@ class MapLeaflet extends Component<
   }
 
   render() {
+<<<<<<< HEAD
     const { 
       stationsToDisplay,
       displayFeature,
@@ -157,6 +172,55 @@ class MapLeaflet extends Component<
             );
           }}
         />
+=======
+    const { stationsToDisplay, displayFeature, geolocationError, getCurrentPosition, userPosition, isUserLocated } = this.props;
+    const { zoom, stationsList, viewport } = this.state;
+    const [latitude, longitude] = userPosition;
+
+    // console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
+    // console.log(`latitude = ${latitude} and longitude = ${longitude}`);
+    const userMarker = isUserLocated
+      ? (
+        <Marker position={[latitude, longitude]}>
+          <Popup>
+            <span>Votre position</span>
+          </Popup>
+        </Marker>
+      )
+      : null;
+
+    return (
+      <div className="map">
+        <Map
+          className="map__reactleaflet"
+          center={userPosition}
+          zoom={zoom}
+          onClick={displayFeature}
+          viewport={viewport}
+        >
+          <TileLayer
+            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+          />
+          <MarkersLayer
+            stationsToDisplay={stationsToDisplay}
+            stationsList={stationsList}
+            error={geolocationError}
+            refreshStationsList={this.refreshStationsList}
+            userPosition={userPosition}
+          />
+          <MapControls
+            getCurrentPosition={getCurrentPosition}
+            centerOnUser={this.centerOnUser}
+            refreshStationsList={this.refreshStationsList}
+            displayFeature={displayFeature}
+          />
+          {userMarker}
+        </Map>
+        );
+      }}
+    />
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
       </div>
     );
   }

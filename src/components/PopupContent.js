@@ -39,11 +39,17 @@ class PopupContent extends Component {
     const regexp = /\d+ - /;
     const name = marker.name.replace(regexp, '');
 
+const getItineraryUrl = (userPosition, marker) => `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}`;
+
+class PopupContent extends Component {
+  render() {
+    const { marker, refreshStationsList, userPosition } = this.props;
     return (
       <div className="container">
         <div className="card border-0">
           <div className="card-body">
             <div>
+<<<<<<< HEAD
               <h5 className="card-title">{name}</h5>
               <h6 className="card-subtitle mb-2 text-muted">{marker.address}</h6>
             </div>
@@ -79,7 +85,17 @@ class PopupContent extends Component {
                 </button>
               </div>
               <div>
-                <button type="button" className="btn btn-primary">Go</button>
+                <button type="button" className="btn btn-primary"
+              {/* <div className="Go col-3 d-flex align-items-center">
+                <a */}
+                  className="btn btn-primary"
+                  href={getItineraryUrl(userPosition, marker)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="button"
+                >
+                  Go
+                </button>
               </div>
             </div>
           </div>

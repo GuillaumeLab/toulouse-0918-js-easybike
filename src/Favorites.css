@@ -1,17 +1,32 @@
+<<<<<<< HEAD
 .card-text ul li {
+=======
+.card-text li {
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
   display:block;
   padding:5px;
   border-bottom: solid 1px rgb(185, 183, 183);
 }
+<<<<<<< HEAD
 .card-text ul li:hover {
 background-color: beige;
 }
 .card-text ul li span img{
+=======
+.card-text li:hover {
+background-color: beige;
+}
+.card-text li div span img{
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
   max-width: 25px;
 }
 .statInfo{
   text-align: center;
 }
+<<<<<<< HEAD
 .card-text ul li div span{
+=======
+.card-text li div span{
+>>>>>>> 13862e6870821b9136fb71f54783ea0320440f9f
   padding: 0 8px;
 }

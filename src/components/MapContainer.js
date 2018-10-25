@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MapLeaflet from './MapLeaflet';
+import { get } from 'https';
 
 class MapContainer extends Component {
   render() {
@@ -11,7 +12,12 @@ class MapContainer extends Component {
       selectedOption,
       favStationsId,
       updateStationsList,
-      handleFavList
+      handleFavList,
+      getUserPosition,
+      geolocationError,
+      getCurrentPosition,
+      userPosition,
+      isUserLocated
     } = this.props;
 
     return (
@@ -25,6 +31,11 @@ class MapContainer extends Component {
           favStationsId={favStationsId}
           updateStationsList={updateStationsList}
           handleFavList={handleFavList}
+          getUserPosition={getUserPosition}
+          geolocationError={geolocationError}
+          getCurrentPosition={getCurrentPosition}
+          userPosition={userPosition}
+          isUserLocated={isUserLocated}
         />
       </div>
     );
