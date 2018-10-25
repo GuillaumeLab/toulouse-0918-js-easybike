@@ -30,7 +30,7 @@ class App extends Component {
       selectedOption: 'all',
       favStations: [],
       favStationsId,
-      currentFavorite : [],
+      currentFavorite: [],
       viewCenter: defaultCenter.center,
       userPosition: []
     };
@@ -61,6 +61,9 @@ class App extends Component {
   }
 
   addFavorite(stationNumber) {
+    if (!localStorage.getItem('favorites')) {
+      localStorage.setItem('favorites', JSON.stringify([git ]));  
+    }
     const previousFavList = JSON.parse(localStorage.getItem('favorites'));
     localStorage.setItem('favorites', JSON.stringify([...previousFavList, stationNumber]));
   }
@@ -91,20 +94,12 @@ class App extends Component {
     }
   }
 
-  updateStationsList(stationsList) {
-    const favorites = stationsList.filter(station => station.isFavorite);
-
-    this.setState({
-      favStations : favorites
-    });
-  }
-
-//  getUserPosition(userPosition) {
-//    console.log(userPosition)
-//    // this.setState({
-//    //   userPosition: userPosition
-//    // });
-//  }
+  //  getUserPosition(userPosition) {
+  //    console.log(userPosition)
+  //    // this.setState({
+  //    //   userPosition: userPosition
+  //    // });
+  //  }
 
   handleRadioChange(event) {
     this.setState({
@@ -132,7 +127,7 @@ class App extends Component {
       });
     }
   }
-  
+
   render() {
     const {
       stationsToDisplay,
