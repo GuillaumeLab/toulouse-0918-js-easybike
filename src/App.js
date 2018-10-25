@@ -28,10 +28,10 @@ class App extends Component {
       itinerary: false,
       selectedOption: 'all',
       favStations: [],
-      favStationsId : favStationsId,
-      currentFavorite : [],
+      favStationsId: favStationsId,
+      currentFavorite: [],
       viewCenter: defaultCenter.center,
-      userPosition: []
+      userPosition: [],
     };
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.displayWhat = this.displayWhat.bind(this);
@@ -49,16 +49,13 @@ class App extends Component {
     const favorites = stationsList.filter(station => station.isFavorite);
 
     this.setState({
-      favStations : favorites
+      favStations: favorites
     });
   }
 
-//  getUserPosition(userPosition) {
-//    console.log(userPosition)
-//    // this.setState({
-//    //   userPosition: userPosition
-//    // });
-//  }
+  getUserPosition(userPosition) {
+    console.log('This is getUserPosition', userPosition);
+  }
 
   handleRadioChange(event) {
     this.setState({
@@ -148,12 +145,14 @@ class App extends Component {
           }
 
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+          this.getUserPosition(userPosition);
 
           return (
             <div className="App container-fluid">
               <div className="row">
                 <Navbar
                   displayWhat={this.displayWhat}
+                  getCurrentPosition={getCurrentPosition}
                 />
               </div>
               <FunctionalitiesLayer
@@ -184,6 +183,9 @@ class App extends Component {
                   userPosition={userPosition}
                   isUserLocated={isUserLocated}
                 />
+              </div>
+              <div style={{ position: 'fixed', bottom: 0, zIndex: 2000, left: 0, right: 0, background: '#ffffff', padding: 10 }}>
+                {latitude}, {longitude} ({this.state.count})
               </div>
             </div>
           );

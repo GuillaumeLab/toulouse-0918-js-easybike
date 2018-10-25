@@ -58,7 +58,7 @@ class MapLeaflet extends Component<
   }
 
   refreshStationsList = () => {
-    const { favStationsId,updateStationsList } = this.props;
+    const { favStationsId, updateStationsList } = this.props;
     // console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
@@ -69,11 +69,11 @@ class MapLeaflet extends Component<
         const stationsList = result.data.map(
           station => {
             const isFavorite = favStationsId.includes(station.number);
-            return { ...station,isFavorite:isFavorite}
+            return { ...station, isFavorite: isFavorite }
           }
         );
         this.setState({
-          stationsList: stationsList ,
+          stationsList: stationsList,
           isLoading: false
         })
         updateStationsList(stationsList);

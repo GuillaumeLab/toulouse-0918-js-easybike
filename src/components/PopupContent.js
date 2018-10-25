@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import bicycle from '../images/bicycle.png';
 import parking from '../images/parking-sign.png';
 
-const getItineraryUrl = (userPosition, marker) => `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}`;
+const getItineraryUrl = (userPosition, marker) => `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}&travelmode=walking`;
 
 class PopupContent extends Component {
   render() {

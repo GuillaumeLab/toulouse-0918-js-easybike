@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 class Navbar extends Component {
+  getBike = event => {
+    event.PreventDefaut()
+    this.props.getCurrentPosition()
+  }
+  
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -20,7 +25,7 @@ class Navbar extends Component {
         </button>
         <div id="navbarNavAltMarkup" className="col-md-8 collapse navbar-collapse">
           <div className="navbar-nav text-right text-md-center mx-auto">
-            <a className="nav-item nav-link" href="#">Prendre un vélo</a>
+            <a className="nav-item nav-link" onClick={this.getBike}>Prendre un vélo</a>
             <a className="nav-item nav-link" href="#">Déposer un vélo</a>
           </div>
         </div>
