@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Geolocation from 'react-geolocation';
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
 import MapContainer from './components/MapContainer';
@@ -12,6 +12,11 @@ import './SideMenu.css';
 import './PopupContent.css';
 import './MobileFeatures.css';
 
+const defaultCenter = {
+  center: [43.599761799999996, 1.443197],
+  zoom: 15
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +24,22 @@ class App extends Component {
       stationsToDisplay: 'all',
       panelToDisplay: 'none',
       itinerary: false,
-      selectedOption: 'all'
+      selectedOption: 'all',
+      viewCenter: defaultCenter.center,
+      userPosition: []
     };
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
+    this.getUserPosition = this.getUserPosition.bind(this);
+  }
+
+  getUserPosition(userPosition) {
+    console.log(userPosition)
+    // this.setState({
+    //   userPosition: userPosition
+    // });
   }
 
   handleRadioChange(event) {
@@ -91,37 +106,66 @@ class App extends Component {
       stationsToDisplay,
       panelToDisplay,
       selectedOption,
-      itinerary
+      itinerary,
+      viewCenter
     } = this.state;
 
     return (
-      <div className="App container-fluid">
-        <div className="row">
-          <Navbar
-            displayWhat={this.displayWhat}
-          />
-        </div>
-        <FunctionalitiesLayer
-          panelToDisplay={panelToDisplay}
-          selectedOption={selectedOption}
-          itinerary={itinerary}
-          selectNavigation={this.selectNavigation}
-          handleRadioChange={this.handleRadioChange}
-        />
-        <div className="row">
-          <SideMenu
-            displayWhat={this.displayWhat}
-            handleRadioChange={this.handleRadioChange}
-            selectNavigation={this.selectNavigation}
-            itinerary={itinerary}
-            selectedOption={selectedOption}
-          />
-          <MapContainer
-            stationsToDisplay={stationsToDisplay}
-            displayFeature={this.displayFeature}
-          />
-        </div>
-      </div>
+
+      <Geolocation
+        lazy
+        render={({
+          fetchingPosition,
+          position: { coords: { latitude, longitude } = {} } = {},
+          error,
+          getCurrentPosition
+        }) => {
+          let isUserLocated = false;
+          if (!latitude || !longitude) {
+            isUserLocated = false;
+          } else {
+            isUserLocated = true;
+          }
+
+          const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+
+          return (
+            <div className="App container-fluid">
+              <div className="row">
+                <Navbar
+                  displayWhat={this.displayWhat}
+                />
+              </div>
+              <FunctionalitiesLayer
+                panelToDisplay={panelToDisplay}
+                selectedOption={selectedOption}
+                itinerary={itinerary}
+                selectNavigation={this.selectNavigation}
+                handleRadioChange={this.handleRadioChange}
+              />
+              <div className="row">
+                <SideMenu
+                  displayWhat={this.displayWhat}
+                  handleRadioChange={this.handleRadioChange}
+                  selectNavigation={this.selectNavigation}
+                  itinerary={itinerary}
+                  selectedOption={selectedOption}
+                  userPosition={userPosition}
+                />
+                <MapContainer
+                  stationsToDisplay={stationsToDisplay}
+                  displayFeature={this.displayFeature}
+                  getUserPosition={this.getUserPosition}
+                  geolocationError={error}
+                  getCurrentPosition={getCurrentPosition}
+                  userPosition={userPosition}
+                  isUserLocated={isUserLocated}
+                />
+              </div>
+            </div>
+          );
+        }}
+      />
     );
   }
 }
