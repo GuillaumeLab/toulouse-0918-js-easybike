@@ -62,7 +62,7 @@ class App extends Component {
 
   addFavorite(stationNumber) {
     if (!localStorage.getItem('favorites')) {
-      localStorage.setItem('favorites', JSON.stringify([git ]));  
+      localStorage.setItem('favorites', JSON.stringify([]));  
     }
     const previousFavList = JSON.parse(localStorage.getItem('favorites'));
     localStorage.setItem('favorites', JSON.stringify([...previousFavList, stationNumber]));
