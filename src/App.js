@@ -185,7 +185,7 @@ class App extends Component {
                 />
               </div>
               <div style={{ position: 'fixed', bottom: 0, zIndex: 2000, left: 0, right: 0, background: '#ffffff', padding: 10 }}>
-                {latitude}, {longitude} ({this.state.count})
+                {latitude}, {longitude} <button type="button" onTouchStart={getCurrentPosition}>Get Position!</button>
               </div>
             </div>
           );
