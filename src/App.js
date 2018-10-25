@@ -11,6 +11,7 @@ import './Map.css';
 import './SideMenu.css';
 import './PopupContent.css';
 import './MobileFeatures.css';
+import './Favorites.css';
 
 const defaultCenter = {
   center: [43.599761799999996, 1.443197],
@@ -20,11 +21,15 @@ const defaultCenter = {
 class App extends Component {
   constructor(props) {
     super(props);
+    const favStationsId = this.readStoredFav();
     this.state = {
       stationsToDisplay: 'all',
       panelToDisplay: 'none',
       itinerary: false,
       selectedOption: 'all',
+      favStations: [],
+      favStationsId : favStationsId,
+      currentFavorite : [],
       viewCenter: defaultCenter.center,
       userPosition: []
     };
@@ -32,15 +37,28 @@ class App extends Component {
     this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
-    this.getUserPosition = this.getUserPosition.bind(this);
+    this.updateStationsList = this.updateStationsList.bind(this);
   }
 
-  getUserPosition(userPosition) {
-    console.log(userPosition)
-    // this.setState({
-    //   userPosition: userPosition
-    // });
+  readStoredFav() {
+    let favIds = JSON.parse(localStorage.getItem('favorites'));
+    return favIds || [];
   }
+
+  updateStationsList(stationsList) {
+    const favorites = stationsList.filter(station => station.isFavorite);
+
+    this.setState({
+      favStations : favorites
+    });
+  }
+
+//  getUserPosition(userPosition) {
+//    console.log(userPosition)
+//    // this.setState({
+//    //   userPosition: userPosition
+//    // });
+//  }
 
   handleRadioChange(event) {
     this.setState({
@@ -107,6 +125,8 @@ class App extends Component {
       panelToDisplay,
       selectedOption,
       itinerary,
+      favStationsId,
+      favStations,
       viewCenter
     } = this.state;
 
@@ -151,10 +171,13 @@ class App extends Component {
                   itinerary={itinerary}
                   selectedOption={selectedOption}
                   userPosition={userPosition}
+                  favStations={favStations}
                 />
                 <MapContainer
                   stationsToDisplay={stationsToDisplay}
                   displayFeature={this.displayFeature}
+                  updateStationsList={this.updateStationsList}
+                  favStationsId={favStationsId}
                   getUserPosition={this.getUserPosition}
                   geolocationError={error}
                   getCurrentPosition={getCurrentPosition}

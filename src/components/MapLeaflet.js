@@ -44,7 +44,7 @@ class MapLeaflet extends Component<
   }
 
   centerOnUser = (userPosition) => {
-    console.log(`on centre sur ${userPosition}`);
+    // console.log(`on centre sur ${userPosition}`);
     this.setState({
       viewport: {
         center: userPosition,
@@ -58,16 +58,26 @@ class MapLeaflet extends Component<
   }
 
   refreshStationsList = () => {
-    console.log('refresh');
+    const { favStationsId,updateStationsList } = this.props;
+    // console.log('refresh');
     this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
 
     axios.get(request)
-      .then(result => this.setState({
-        stationsList: result.data,
-        isLoading: false
-      }))
+      .then(result => {
+        const stationsList = result.data.map(
+          station => {
+            const isFavorite = favStationsId.includes(station.number);
+            return { ...station,isFavorite:isFavorite}
+          }
+        );
+        this.setState({
+          stationsList: stationsList ,
+          isLoading: false
+        })
+        updateStationsList(stationsList);
+      })
       .catch(error => this.setState({
         error,
         isLoading: false
