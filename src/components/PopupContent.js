@@ -82,7 +82,7 @@ class PopupContent extends Component {
                 </button>
               </div>
               <div>
-                <button type="button" className="btn btn-primary"
+                <a
                   className="btn btn-primary"
                   href={getItineraryUrl(userPosition, marker)}
                   target="_blank"
@@ -90,7 +90,7 @@ class PopupContent extends Component {
                   role="button"
                 >
                   Go
-                </button>
+                </a>
               </div>
             </div>
           </div>
