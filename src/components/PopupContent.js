@@ -14,7 +14,7 @@ class PopupContent extends Component {
     const isFavorite = favStationsId.includes(marker.number);
 
     this.state = {
-      isFavorite: isFavorite
+      isFavorite
     };
 
     this.handleFavIcon = this.handleFavIcon.bind(this);
@@ -36,10 +36,8 @@ class PopupContent extends Component {
     } = this.props;
 
     const { isFavorite } = this.state;
-
     const regexp = /\d+ - /;
     const name = marker.name.replace(regexp, '');
-
     const getItineraryUrl = (userPosition, marker) => `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}`;
 
     return (

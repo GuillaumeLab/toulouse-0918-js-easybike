@@ -132,6 +132,7 @@ class MapLeaflet extends Component<
             selectedOption={selectedOption}
             handleFavList={handleFavList}
             favStationsId={favStationsId}
+            userPosition={userPosition}
           />
           <MapControls
             getCurrentPosition={getCurrentPosition}
