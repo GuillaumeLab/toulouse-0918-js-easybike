@@ -20,7 +20,7 @@ class MarkersLayer extends Component {
       favStationsId,
       refresh,
       userPosition,
-      clearError
+      clearError,
     } = this.props;
 
     const allStationsMarkers = stationsList

@@ -152,7 +152,8 @@ class App extends Component {
       minStandsToDisplay,
       favStationsId,
       favStations,
-      viewCenter
+      viewCenter,
+      userPosition
     } = this.state;
 
     return (

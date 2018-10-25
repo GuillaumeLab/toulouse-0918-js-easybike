@@ -6,12 +6,6 @@ class Favorites extends Component {
   render() {
     const { favStations, userPosition } = this.props;
     const regexp = /\d+ - /;
-    const getItineraryUrl = (stations) => (
-      `https://www.google.com/maps/dir/?api=1
-       &origin=${userPosition}
-       &destination=${stations.position.lat},${stations.position.lng}
-       &travelmode=walking`
-    );
 
     return (
       <div className="card text-text-secondary favs">
@@ -36,17 +30,6 @@ class Favorites extends Component {
                   <span>
                     {station.available_bike_stands}
                   </span>
-                  <div>
-                    <a
-                      className="btn btn-primary go-button align-content-center"
-                      href={getItineraryUrl(station)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      role="button"
-                    >
-                      Go
-                    </a>
-                  </div>
                 </div>
                 <hr />
               </li>

@@ -38,7 +38,7 @@ class PopupContent extends Component {
     const { isFavorite } = this.state;
     const regexp = /\d+ - /;
     const name = marker.name.replace(regexp, '');
-    const getItineraryUrl = (userPosition, marker) => `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}&travelmode=walking`;
+    const urlRequest = `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${marker.position.lat},${marker.position.lng}&travelmode=walking`;
     return (
       <div className="container">
         <div className="card border-0">
@@ -81,7 +81,7 @@ class PopupContent extends Component {
               <div>
                 <a
                   className="btn btn-primary go-button align-content-center"
-                  href={getItineraryUrl(userPosition, marker)}
+                  href={urlRequest}
                   target="_blank"
                   rel="noopener noreferrer"
                   role="button"
