@@ -15,7 +15,8 @@ class MarkersLayer extends Component {
       stationsToDisplay,
       stationsList,
       error,
-      refreshStationsList
+      refreshStationsList,
+      userPosition
     } = this.props;
     
     const maxWidth = 400;
@@ -24,26 +25,27 @@ class MarkersLayer extends Component {
       (stationData.available_bike_stands !== 0 && stationsToDisplay === 'freeSpaces')
       || stationsToDisplay === 'all')
       .map(stationData => (
-        <Marker
+      <Marker
           icon={L.divIcon({
             className: 'custom-icon',
             html: ReactDOMServer.renderToString(
               <SvgStationIconGauge
-                perefreshStationsListrc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
-              />refreshStationsList
-            ),refreshStationsList
-            iconSirefreshStationsListze: [16, 45]
-          })}refreshStationsList
-          positionrefreshStationsList={[stationData.position.lat, stationData.position.lng]}
-          key={`marefreshStationsListrker_${stationData.name}`}
+                perc={(stationData.available_bike_stands / stationData.bike_stands) * 110}
+              />
+            ),
+            iconSize: [16, 45]
+          })}
+          position={[stationData.position.lat, stationData.position.lng]}
+          key={`marker_${stationData.name}`}
         >
           <Popup maxWidth={maxWidth} minWidth={minWidth}>
             <PopupContent
               marker={stationData}
               refreshStationsList={refreshStationsList}
+              userPosition={userPosition}
             />
           </Popup>
-        </Marker>
+    </Marker>
       ));
 
     const displayMarkers = error ? (

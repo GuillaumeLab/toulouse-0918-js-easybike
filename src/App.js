@@ -14,7 +14,7 @@ import './MobileFeatures.css';
 import './Favorites.css';
 
 const defaultCenter = {
-  center: [43.599761799999996, 1.443197],
+  center: [43, 1.443197],
   zoom: 15
 };
 
@@ -28,6 +28,7 @@ class App extends Component {
       itinerary: false,
       selectedOption: 'all',
       favStations: [],
+      allStations: [],
       favStationsId : favStationsId,
       currentFavorite : [],
       viewCenter: defaultCenter.center,
@@ -49,16 +50,49 @@ class App extends Component {
     const favorites = stationsList.filter(station => station.isFavorite);
 
     this.setState({
-      favStations : favorites
+      favStations : favorites,
+      allStations : stationsList
     });
   }
 
-//  getUserPosition(userPosition) {
-//    console.log(userPosition)
-//    // this.setState({
-//    //   userPosition: userPosition
-//    // });
-//  }
+getClosestStationPosition(){
+  let userPosition = JSON.parse(localStorage.getItem('userposition'));
+  const [lat,lng] = userPosition;
+  const stations = this.state.allStations;
+  let plusProche = [];
+  if (stations.length!==0){
+    let x = stations[35].position.lat-lat;
+    let y = stations[35].position.lng-lng;
+    console.log("mon premier ",stations[35].position);
+    let distance = Math.sqrt(x*x+y*y);
+    let min = distance;
+    plusProche.push(stations[35].position);
+
+    console.log("userPosition",userPosition);
+    console.log("Init",plusProche);
+    
+    let ind=0;
+
+    for(let i=0;i<stations.length;i++){
+      console.log("en cours",stations[i].position);
+      x = stations[i].position.lat-lat;
+      y = stations[i].position.lng-lng;
+      distance = Math.sqrt(x*x+y*y);
+      if(distance<min){
+        ind=i;
+        min=distance;
+      }
+      plusProche.splice(0,1,stations[ind].position)
+    }
+    console.log("final ",stations[ind].position);
+    console.log("final ",plusProche," indice ",ind);
+  }
+}
+
+ setUserPosition(userPosition) {
+   console.log("ecriture",userPosition);
+   localStorage.setItem('userposition',JSON.stringify(userPosition));
+ }
 
   handleRadioChange(event) {
     this.setState({
@@ -139,7 +173,7 @@ class App extends Component {
           position: { coords: { latitude, longitude } = {} } = {},
           error,
           getCurrentPosition
-        }) => {
+          }) => {
           let isUserLocated = false;
           if (!latitude || !longitude) {
             isUserLocated = false;
@@ -148,6 +182,9 @@ class App extends Component {
           }
 
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+          this.setUserPosition(userPosition);
+          this.getClosestStationPosition(userPosition);
+          
 
           return (
             <div className="App container-fluid">
