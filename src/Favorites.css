@@ -1,8 +1,9 @@
 
-.card-text li {
+.card-text ul li {
   display:block;
   padding:5px;
   border-bottom: solid 1px rgb(185, 183, 183);
+  list-style: none;
 }
 .card-text ul li:hover {
 background-color: beige;

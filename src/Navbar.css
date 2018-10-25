@@ -13,13 +13,16 @@
   font-size: 1.5rem;
 }
 
+.vite-button {
+  margin-left: 3rem;
+}
+
 .vite-button, .vite-button:active {
   background-color: rgb(247, 247, 247);
   color: #1F57EC;
   border-radius: 15px;
   width: 100px;
   font-weight: bold;
-  margin-left: 3rem;
 }
 .vite-button:hover {
   background-color: #1F57EC;

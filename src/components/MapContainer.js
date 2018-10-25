@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MapLeaflet from './MapLeaflet';
-import { get } from 'https';
 
 class MapContainer extends Component {
   render() {
