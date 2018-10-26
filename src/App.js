@@ -14,7 +14,7 @@ import './MobileFeatures.css';
 import './Favorites.css';
 
 const defaultCenter = {
-  center: [43, 1.443197],
+  center: [43.6000109, 1.4427647999999635],
   zoom: 15
 };
 
@@ -83,7 +83,7 @@ getClosestStationPosition(stationsToDisplay){
     });
   // console.log("coord + proche ",Closest);
   if(Closest.length===0){
-    return [43, 1.443197];
+    return [43.6000109, 1.4427647999999635];
   }
   return Object.values(Closest[0]);
 }
