@@ -23,42 +23,83 @@ class App extends Component {
     super(props);
     const favStationsId = this.readStoredFav();
     this.state = {
-      stationsToDisplay: 'all',
+      minBikesToDisplay: 0,
+      minStandsToDisplay: 0,
       panelToDisplay: 'none',
       itinerary: false,
       selectedOption: 'all',
       favStations: [],
-      favStationsId : favStationsId,
-      currentFavorite : [],
+      favStationsId,
+      currentFavorite: [],
       viewCenter: defaultCenter.center,
       userPosition: []
     };
-    this.handleRadioChange = this.handleRadioChange.bind(this);
-    this.displayWhat = this.displayWhat.bind(this);
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
     this.updateStationsList = this.updateStationsList.bind(this);
+    this.handleFavList = this.handleFavList.bind(this);
+  }
+
+  handleFilterChange(key, increment) {
+    this.setState(
+      state => {
+        if ((increment < 0 && state[key] > 0) || (increment > 0 && state[key] < 15)) {
+          return {
+            [key]: state[key] + increment,
+            selectedOption: key
+          };
+        }
+        return {};
+      }
+    );
   }
 
   readStoredFav() {
-    let favIds = JSON.parse(localStorage.getItem('favorites'));
+    const favIds = JSON.parse(localStorage.getItem('favorites'));
     return favIds || [];
+  }
+
+  addFavorite(stationNumber) {
+    if (!localStorage.getItem('favorites')) {
+      localStorage.setItem('favorites', JSON.stringify([]));  
+    }
+    const previousFavList = JSON.parse(localStorage.getItem('favorites'));
+    localStorage.setItem('favorites', JSON.stringify([...previousFavList, stationNumber]));
+  }
+
+  removeFavorite(stationNumber) {
+    const previousFavList = JSON.parse(localStorage.getItem('favorites'));
+    const iDToRemove = previousFavList.findIndex(id => id === stationNumber);
+    previousFavList.splice(iDToRemove, 1);
+    localStorage.setItem('favorites', JSON.stringify(previousFavList));
   }
 
   updateStationsList(stationsList) {
     const favorites = stationsList.filter(station => station.isFavorite);
-
     this.setState({
-      favStations : favorites
+      favStationsId: this.readStoredFav(),
+      favStations: favorites
     });
+    console.log('Liste des stations à afficher :', this.state.favStations);
+    console.log(`Liste des stations à dans localStorage : ${this.state.favStationsId}`);
   }
 
-//  getUserPosition(userPosition) {
-//    console.log(userPosition)
-//    // this.setState({
-//    //   userPosition: userPosition
-//    // });
-//  }
+  handleFavList(stationNumber) {
+    const { favStationsId } = this.state;
+    if (favStationsId.includes(stationNumber)) {
+      this.removeFavorite(stationNumber);
+    } else {
+      this.addFavorite(stationNumber);
+    }
+  }
+
+  //  getUserPosition(userPosition) {
+  //    console.log(userPosition)
+  //    // this.setState({
+  //    //   userPosition: userPosition
+  //    // });
+  //  }
 
   handleRadioChange(event) {
     this.setState({
@@ -74,12 +115,6 @@ class App extends Component {
     }));
   }
 
-  displayWhat(stations) {
-    this.setState({
-      stationsToDisplay: stations
-    });
-  }
-
   displayFeature(panel) {
     const { panelToDisplay } = this.state;
     if (panelToDisplay === panel) {
@@ -93,45 +128,20 @@ class App extends Component {
     }
   }
 
-  displayFavs() {
-    const { panelToDisplay } = this.state;
-    if (panelToDisplay === 'favs') {
-      this.setState({
-        panelToDisplay: ''
-      });
-    } else {
-      this.setState({
-        panelToDisplay: 'favs'
-      });
-    }
-  }
-
-  displayFilter() {
-    const { panelToDisplay } = this.state;
-    if (panelToDisplay === 'filter') {
-      this.setState({
-        panelToDisplay: ''
-      });
-    } else {
-      this.setState({
-        panelToDisplay: 'filter'
-      });
-    }
-  }
-
   render() {
     const {
       stationsToDisplay,
       panelToDisplay,
       selectedOption,
       itinerary,
+      minBikesToDisplay,
+      minStandsToDisplay,
       favStationsId,
       favStations,
       viewCenter
     } = this.state;
 
     return (
-
       <Geolocation
         lazy
         render={({
@@ -158,20 +168,25 @@ class App extends Component {
               </div>
               <FunctionalitiesLayer
                 panelToDisplay={panelToDisplay}
-                selectedOption={selectedOption}
                 itinerary={itinerary}
                 selectNavigation={this.selectNavigation}
-                handleRadioChange={this.handleRadioChange}
+                minBikesToDisplay={minBikesToDisplay}
+                minStandsToDisplay={minStandsToDisplay}
+                handleFilterChange={this.handleFilterChange}
+                favStations={favStations}
               />
               <div className="row">
                 <SideMenu
                   displayWhat={this.displayWhat}
-                  handleRadioChange={this.handleRadioChange}
                   selectNavigation={this.selectNavigation}
                   itinerary={itinerary}
                   selectedOption={selectedOption}
                   userPosition={userPosition}
                   favStations={favStations}
+                  minBikesToDisplay={minBikesToDisplay}
+                  minStandsToDisplay={minStandsToDisplay}
+                  handleFilterChange={this.handleFilterChange}
+                  handleRadioChange={this.handleRadioChange}
                 />
                 <MapContainer
                   stationsToDisplay={stationsToDisplay}
@@ -183,6 +198,10 @@ class App extends Component {
                   getCurrentPosition={getCurrentPosition}
                   userPosition={userPosition}
                   isUserLocated={isUserLocated}
+                  minBikesToDisplay={minBikesToDisplay}
+                  minStandsToDisplay={minStandsToDisplay}
+                  readStoredFav={this.readStoredFav}
+                  handleFavList={this.handleFavList}
                 />
               </div>
             </div>

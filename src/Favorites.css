@@ -1,17 +1,43 @@
-.card-text li {
+ul.card-text {
   display:block;
-  padding:5px;
+  padding: 1rem;
   border-bottom: solid 1px rgb(185, 183, 183);
+  list-style: none;
+  width:auto;
 }
-.card-text li:hover {
+
+.favs h4 {
+  font-size: 1rem;
+}
+
+.card-text ul li:hover {
 background-color: beige;
 }
-.card-text li div span img{
+.card-text ul li span img{
   max-width: 25px;
+  margin-right: 1rem;
 }
-.statInfo{
-  text-align: center;
+.favs span {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
-.card-text li div span{
-  padding: 0 8px;
+
+.favs img {
+  max-width: 40px;
+  margin: 0rem 0.5rem;
 }
+
+.favs li:hover {
+  background-color: rgb(226, 226, 255);
+  padding:0.2rem; 
+}
+
+hr {
+  margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .favs span {
+  }
+};

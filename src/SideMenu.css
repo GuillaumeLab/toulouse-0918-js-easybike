@@ -1,9 +1,3 @@
-@media screen and (max-width: 768px) {
-	#SideMenu
-	{
-		display: none;
-	}
-};
 
 .stations-to-display {
   word-break: break-word;
@@ -15,6 +9,20 @@
 }
 
 .stations-to-display label {
-  display: inline;
-  
+  display: inline; 
 }
+
+.filter-input button {
+  padding: 0.5rem;
+}
+
+.filter-input span {
+  margin: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  #SideMenu
+  {
+    display: none;
+  }
+};

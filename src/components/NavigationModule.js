@@ -31,7 +31,7 @@ class NavigationModule extends Component {
       </div>
     );
   }
-};
+}
 
 
 export default NavigationModule;

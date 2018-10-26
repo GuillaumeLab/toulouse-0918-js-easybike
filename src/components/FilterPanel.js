@@ -1,47 +1,27 @@
 import React, { Component } from 'react';
+import FilterByBikeInput from './FilterByBikeInput';
+import FilterByStandInput from './FilterByStandInput';
 
 class FilterPanel extends Component {
   render() {
-    const { selectedOption, handleRadioChange } = this.props;
+    const { handleFilterChange, minBikesToDisplay, minStandsToDisplay } = this.props;
 
     return (
       <div className="filter-panel">
-        <form className="px-2">
-          <div className="stations-to-display">
-            <input
-              name="stations"
-              id="all-bikes"
-              type="radio"
-              value="all"
-              checked={selectedOption === 'all'}
-              onChange={handleRadioChange}
-              aria-label="Display all stations"
+        <form>
+          <h3>Filtrer par</h3>
+          <div className="filters-container">
+            <FilterByBikeInput
+              className="filter-input"
+              handleFilterChange={handleFilterChange}
+              minBikesToDisplay={minBikesToDisplay}
             />
-            <label htmlFor="all-bikes">Toutes les stations</label>
-          </div>
-          <div className="stations-to-display">
-            <input
-              name="stations"
-              id="only-bikes"
-              type="radio"
-              value="bikes"
-              checked={selectedOption === 'bikes'}
-              onChange={handleRadioChange}
-              aria-label="Display stations with bikes"
+            <hr />
+            <FilterByStandInput
+              className="filter-input"
+              handleFilterChange={handleFilterChange}
+              minStandsToDisplay={minStandsToDisplay}
             />
-            <label htmlFor="only-bikes">Seulement avec vélos disponibles</label>
-          </div>
-          <div className="stations-to-display">
-            <input
-              name="stations"
-              id="only-free-spaces"
-              type="radio"
-              value="freeSpaces"
-              checked={selectedOption === 'freeSpaces'}
-              onChange={handleRadioChange}
-              aria-label="Display stations with free bikes stands"
-            />
-            <label htmlFor="only-free-spaces">Seulement avec emplacements disponibles</label>
           </div>
         </form>
       </div>

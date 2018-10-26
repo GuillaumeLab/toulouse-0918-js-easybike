@@ -4,7 +4,7 @@ import { Marker, Popup } from 'react-leaflet';
 class UserMarker extends Component {
   render() {
     const { latitude, longitude, isUserLocated } = this.props;
-    const userMarker = isUserLocated
+    const UserMarker = isUserLocated
       ? (
         <Marker position={[latitude, longitude]}>
           <Popup>
@@ -14,9 +14,7 @@ class UserMarker extends Component {
       )
       : null;
 
-    return (
-      { userMarker }
-    );
+    return UserMarker;
   }
 }
 
