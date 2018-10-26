@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class ModalWarning extends Component {
   render() {
-    const { error, clearError, refresh } = this.props;
-    if (!error) {
+    const { apiDataError, clearError, refresh } = this.props;
+    if (!apiDataError) {
       return null;
     }
 

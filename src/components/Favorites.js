@@ -6,13 +6,14 @@ class Favorites extends Component {
   render() {
     const { favStations } = this.props;
     const regexp = /\d+ - /;
+
     return (
-      <div className="card text-text-secondary my-2 favs">
+      <div className="card text-text-secondary favs">
         <div className="card-header font-weight-bold ">
           FAVORIS
         </div>
         <div className="card-body">
-          <ul className="card-text font-weight-normal">
+          <ul className="card-text">
             {favStations.map(station => (
               <li key={station.number}>
                 <h4>{station.name.replace(regexp, '')}</h4>

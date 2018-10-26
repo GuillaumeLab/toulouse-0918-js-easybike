@@ -29,13 +29,17 @@ class MapLeaflet extends Component<
     this.state = {
       zoom: defaultCenter.zoom,
       stationsList: [],
+      apiDataError: null,
       isLoading: false,
-      error: null,
       panelToDisplay: ''
     };
-    this.clearError = this.clearError.bind(this);
     this.refreshStationsList = this.refreshStationsList.bind(this);
     this.centerOnUser = this.centerOnUser.bind(this);
+    this.clearError = this.clearError.bind(this);
+  }
+
+  clearError() {
+    this.setState({ apiDataError: null });
   }
 
   componentDidMount() {
@@ -56,16 +60,22 @@ class MapLeaflet extends Component<
     })
   }
 
-  clearError() {
-    this.setState({ error: null });
+  centerOnStation(station) {
+    this.setState({
+      viewport: {
+        center: station,
+        zoom: 15
+      }
+    })
   }
 
   refreshStationsList() {
-    const { favStationsId, updateStationsList } = this.props;
+    const { updateFavStationsList, readStoredFav } = this.props;
     // console.log('refresh');
-    this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
+
+    const favStationsId = readStoredFav();
 
     axios.get(request)
       .then(result => {
@@ -79,10 +89,10 @@ class MapLeaflet extends Component<
           stationsList: stationsList,
           isLoading: false
         })
-        updateStationsList(stationsList);
+        updateFavStationsList(stationsList);
       })
       .catch(error => this.setState({
-        error,
+        apiDataError: error,
         isLoading: false
       }));
   }
@@ -97,18 +107,18 @@ class MapLeaflet extends Component<
       selectedOption,
       handleFavList,
       favStationsId,
-      geolocationError,
       getCurrentPosition,
       userPosition,
-      isUserLocated
+      isUserLocated,
     } = this.props;
 
-    const { zoom, stationsList, viewport } = this.state;
+    const { zoom, stationsList, viewport, apiDataError } = this.state;
     const [latitude, longitude] = userPosition;
+    console.log(`latitude et longitude ${latitude}, ${longitude}, ${userPosition}`)
 
     // console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
     // console.log(`latitude = ${latitude} and longitude = ${longitude}`);
-    
+
     return (
       <div className="map">
         <Map
@@ -125,7 +135,6 @@ class MapLeaflet extends Component<
           <MarkersLayer
             stationsToDisplay={stationsToDisplay}
             stationsList={stationsList}
-            error={geolocationError}
             refreshStationsList={this.refreshStationsList}
             minStandsToDisplay={minStandsToDisplay}
             minBikesToDisplay={minBikesToDisplay}
@@ -133,6 +142,8 @@ class MapLeaflet extends Component<
             handleFavList={handleFavList}
             favStationsId={favStationsId}
             userPosition={userPosition}
+            apiDataError={apiDataError}
+            clearError={this.clearError}
           />
           <MapControls
             getCurrentPosition={getCurrentPosition}

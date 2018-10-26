@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const FilterByStandInput = ({ handleFilterChange, minStandsToDisplay }) => (
-  <div className="filter-input">
-    <p>Nombre d&apos;emplacements disponibles</p>
-    <div>
-      <button type="button" onClick={() => handleFilterChange('minStandsToDisplay', -1)}>
-        -
-      </button>
-      <input type="text" value={minStandsToDisplay} readOnly />
-      <button type="button" onClick={() => handleFilterChange('minStandsToDisplay', 1)}>
-        +
-      </button>
-    </div>
-    {/* <div className="slidecontainer">
-      <input type="range" min="1" max="100" value="50" className="slider" id="myRange" />
-    </div> */}
-  </div>
-);
+class FilterByStandInput extends Component {
+  render() {
+    const { handleFilterChange, minStandsToDisplay } = this.props;
+    const DisplayPlus = minStandsToDisplay !== 15
+      ? (<button type="button" onClick={() => handleFilterChange('minStandsToDisplay', +1)}> + </button>)
+      : null;
+
+    const DisplayLess = minStandsToDisplay !== 0
+      ? (<button type="button" onClick={() => handleFilterChange('minStandsToDisplay', -1)}> - </button>)
+      : null;
+
+    return (
+      <div className="filter-input">
+        <p>Nombre d&apos;emplacements disponibles</p>
+        <div>
+          {DisplayLess}
+          <input type="text" value={minStandsToDisplay} readOnly />
+          {DisplayPlus}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default FilterByStandInput;

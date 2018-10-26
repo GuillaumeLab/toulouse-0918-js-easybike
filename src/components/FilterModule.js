@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FilterByBikeInput from './FilterByBikeInput';
 import FilterByStandInput from './FilterByStandInput';
 
-class StationToDisplayMenu extends Component {
+class FilterModule extends Component {
   render() {
     const {
       handleFilterChange,
@@ -24,7 +24,7 @@ class StationToDisplayMenu extends Component {
                   />
                   <hr />
                   <FilterByStandInput
-                    className="filter-input"
+                    className="filter-input text-center"
                     handleFilterChange={handleFilterChange}
                     minStandsToDisplay={minStandsToDisplay}
                   />
@@ -37,4 +37,4 @@ class StationToDisplayMenu extends Component {
     );
   }
 }
-export default StationToDisplayMenu;
+export default FilterModule;

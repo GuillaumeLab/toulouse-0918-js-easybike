@@ -10,13 +10,13 @@ class MapContainer extends Component {
       minBikesToDisplay,
       selectedOption,
       favStationsId,
-      updateStationsList,
+      updateFavStationsList,
       handleFavList,
-      getUserPosition,
       geolocationError,
       getCurrentPosition,
       userPosition,
-      isUserLocated
+      isUserLocated,
+      readStoredFav,
     } = this.props;
 
     return (
@@ -28,13 +28,13 @@ class MapContainer extends Component {
           minBikesToDisplay={minBikesToDisplay}
           selectedOption={selectedOption}
           favStationsId={favStationsId}
-          updateStationsList={updateStationsList}
+          updateFavStationsList={updateFavStationsList}
           handleFavList={handleFavList}
-          getUserPosition={getUserPosition}
           geolocationError={geolocationError}
           getCurrentPosition={getCurrentPosition}
           userPosition={userPosition}
           isUserLocated={isUserLocated}
+          readStoredFav={readStoredFav}
         />
       </div>
     );

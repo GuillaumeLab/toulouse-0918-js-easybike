@@ -30,14 +30,13 @@ class App extends Component {
       selectedOption: 'all',
       favStations: [],
       favStationsId,
-      currentFavorite: [],
       viewCenter: defaultCenter.center,
-      userPosition: []
+      userPosition: [],
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
-    this.updateStationsList = this.updateStationsList.bind(this);
+    this.updateFavStationsList = this.updateFavStationsList.bind(this);
     this.handleFavList = this.handleFavList.bind(this);
   }
 
@@ -75,10 +74,12 @@ class App extends Component {
     localStorage.setItem('favorites', JSON.stringify(previousFavList));
   }
 
-  updateStationsList(stationsList) {
-    const favorites = stationsList.filter(station => station.isFavorite);
+  updateFavStationsList(stationsList) {
     this.setState({
       favStationsId: this.readStoredFav(),
+    });
+    const favorites = stationsList.filter(station => station.isFavorite);
+    this.setState({
       favStations: favorites
     });
     console.log('Liste des stations à afficher :', this.state.favStations);
@@ -138,7 +139,7 @@ class App extends Component {
       minStandsToDisplay,
       favStationsId,
       favStations,
-      viewCenter
+      viewCenter,
     } = this.state;
 
     return (
@@ -150,12 +151,7 @@ class App extends Component {
           error,
           getCurrentPosition
         }) => {
-          let isUserLocated = false;
-          if (!latitude || !longitude) {
-            isUserLocated = false;
-          } else {
-            isUserLocated = true;
-          }
+          const isUserLocated = latitude && longitude;
 
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
 
@@ -187,13 +183,13 @@ class App extends Component {
                   minStandsToDisplay={minStandsToDisplay}
                   handleFilterChange={this.handleFilterChange}
                   handleRadioChange={this.handleRadioChange}
+                  getCurrentPosition={getCurrentPosition}
                 />
                 <MapContainer
                   stationsToDisplay={stationsToDisplay}
                   displayFeature={this.displayFeature}
-                  updateStationsList={this.updateStationsList}
+                  updateFavStationsList={this.updateFavStationsList}
                   favStationsId={favStationsId}
-                  getUserPosition={this.getUserPosition}
                   geolocationError={error}
                   getCurrentPosition={getCurrentPosition}
                   userPosition={userPosition}
