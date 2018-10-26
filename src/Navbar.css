@@ -2,12 +2,54 @@
   height: auto;
   width:100%;
   background-color: #1F57EC;
+  color: white;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.navbar-brand {
   color: rgba(255,255,255,1);
 }
 
 .navbar h1 {
   font-size: 1.5rem;
+}
+
+.vite-button {
+  margin-left: 3rem;
+}
+
+.vite-button, .vite-button:active {
+  background-color: rgb(247, 247, 247);
+  color: #1F57EC;
+  border-radius: 15px;
+  width: 100px;
+  font-weight: bold;
+}
+.vite-button:hover {
+  background-color: #1F57EC;
+  color: rgb(247, 247, 247);
+  border-radius: 15px;
+  font-weight: bold;
+  border: 2px solid white;
+}
+
+@media screen and (max-width: 768px) {
+  .vite-button {
+    font-size: 0.8rem;
+    width: 80px;
+    height: 8.5vh;
+    padding: 0rem;
+    margin-left: 0.3rem;
+  }
+
+  .vite-button:hover {
+    font-weight: bold;
+    width: 80px;
+    background-color: rgb(247, 247, 247);
+    color: #1F57EC;
+  }
+
+  .vite-button:active {
+    background-color: #1F57EC;
+    color: rgb(247, 247, 247);
+  }
 }

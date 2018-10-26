@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const getItineraryUrl = (userPosition, str2) => {
   console.log(str2);
-  return `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${str2}+toulouse`;
+  return `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${str2}+toulouse&travelmode=walking`;
 };
 
 class AddressInputModule extends Component {

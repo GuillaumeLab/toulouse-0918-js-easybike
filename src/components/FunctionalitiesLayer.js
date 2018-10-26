@@ -16,9 +16,11 @@ class FunctionalitiesLayer extends Component {
     const {
       panelToDisplay,
       itinerary,
-      selectedOption,
       selectNavigation,
-      handleRadioChange
+      handleFilterChange,
+      minBikesToDisplay,
+      minStandsToDisplay,
+      favStations
     } = this.props;
 
     if (panelToDisplay === 'search') {
@@ -33,14 +35,16 @@ class FunctionalitiesLayer extends Component {
       return (
         <FavsPanel
           classname="favs-panel"
+          favStations={favStations}
         />
       );
     }
     if (panelToDisplay === 'filter') {
       return (
         <FilterPanel
-          selectedOption={selectedOption}
-          handleRadioChange={handleRadioChange}
+          handleFilterChange={handleFilterChange}
+          minBikesToDisplay={minBikesToDisplay}
+          minStandsToDisplay={minStandsToDisplay}
         />
       );
     }

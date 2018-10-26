@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import {
-  Map, TileLayer, Marker, Popup, type Viewport
+  Map, TileLayer, type Viewport
 } from 'react-leaflet';
 
 import { apiKey } from './settings';
 
 import MapControls from './MapControls';
 import MarkersLayer from './MarkersLayer';
+import UserMarker from './UserMarker';
 
 const defaultCenter = {
   center: [43.599761799999996, 1.443197],
@@ -28,10 +29,17 @@ class MapLeaflet extends Component<
     this.state = {
       zoom: defaultCenter.zoom,
       stationsList: [],
+      apiDataError: null,
       isLoading: false,
-      error: null,
       panelToDisplay: ''
     };
+    this.refreshStationsList = this.refreshStationsList.bind(this);
+    this.centerOnUser = this.centerOnUser.bind(this);
+    this.clearError = this.clearError.bind(this);
+  }
+
+  clearError() {
+    this.setState({ apiDataError: null });
   }
 
   componentDidMount() {
@@ -43,8 +51,7 @@ class MapLeaflet extends Component<
     clearInterval(this.interval);
   }
 
-  centerOnUser = (userPosition) => {
-    // console.log(`on centre sur ${userPosition}`);
+  centerOnUser(userPosition) {
     this.setState({
       viewport: {
         center: userPosition,
@@ -53,53 +60,64 @@ class MapLeaflet extends Component<
     })
   }
 
-  clearError = () => {
-    this.setState({ error: null });
+  centerOnStation(station) {
+    this.setState({
+      viewport: {
+        center: station,
+        zoom: 15
+      }
+    })
   }
 
-  refreshStationsList = () => {
-    const { favStationsId,updateStationsList } = this.props;
+  refreshStationsList() {
+    const { updateFavStationsList, readStoredFav } = this.props;
     // console.log('refresh');
-    this.setState({ error: null });
     const request = `https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=${apiKey}`;
     this.setState({ isLoading: true });
+
+    const favStationsId = readStoredFav();
 
     axios.get(request)
       .then(result => {
         const stationsList = result.data.map(
           station => {
             const isFavorite = favStationsId.includes(station.number);
-            return { ...station,isFavorite:isFavorite}
+            return { ...station, isFavorite: isFavorite }
           }
         );
         this.setState({
-          stationsList: stationsList ,
+          stationsList: stationsList,
           isLoading: false
         })
-        updateStationsList(stationsList);
+        updateFavStationsList(stationsList);
       })
       .catch(error => this.setState({
-        error,
+        apiDataError: error,
         isLoading: false
       }));
   }
 
   render() {
-    const { stationsToDisplay, displayFeature, geolocationError, getCurrentPosition, userPosition, isUserLocated } = this.props;
-    const { zoom, stationsList, viewport } = this.state;
+
+    const {
+      stationsToDisplay,
+      displayFeature,
+      minStandsToDisplay,
+      minBikesToDisplay,
+      selectedOption,
+      handleFavList,
+      favStationsId,
+      getCurrentPosition,
+      userPosition,
+      isUserLocated,
+    } = this.props;
+
+    const { zoom, stationsList, viewport, apiDataError } = this.state;
     const [latitude, longitude] = userPosition;
+    console.log(`latitude et longitude ${latitude}, ${longitude}, ${userPosition}`)
 
     // console.log(`is fetching : ${fetchingPosition}, is user located : ${isUserLocated} `);
     // console.log(`latitude = ${latitude} and longitude = ${longitude}`);
-    const userMarker = isUserLocated
-      ? (
-        <Marker position={[latitude, longitude]}>
-          <Popup>
-            <span>Votre position</span>
-          </Popup>
-        </Marker>
-      )
-      : null;
 
     return (
       <div className="map">
@@ -117,9 +135,15 @@ class MapLeaflet extends Component<
           <MarkersLayer
             stationsToDisplay={stationsToDisplay}
             stationsList={stationsList}
-            error={geolocationError}
             refreshStationsList={this.refreshStationsList}
+            minStandsToDisplay={minStandsToDisplay}
+            minBikesToDisplay={minBikesToDisplay}
+            selectedOption={selectedOption}
+            handleFavList={handleFavList}
+            favStationsId={favStationsId}
             userPosition={userPosition}
+            apiDataError={apiDataError}
+            clearError={this.clearError}
           />
           <MapControls
             getCurrentPosition={getCurrentPosition}
@@ -127,7 +151,11 @@ class MapLeaflet extends Component<
             refreshStationsList={this.refreshStationsList}
             displayFeature={displayFeature}
           />
-          {userMarker}
+          <UserMarker
+            latitude={latitude}
+            longitude={longitude}
+            isUserLocated={isUserLocated}
+          />
         </Map>
         );
       }}
