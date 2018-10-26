@@ -3,6 +3,7 @@
   width:100%;
   background-color: #1F57EC;
   color: white;
+  max-height: 10vh;
 }
 
 .navbar-brand {
@@ -34,6 +35,7 @@
 
 @media screen and (max-width: 768px) {
   .vite-button {
+    box-sizing: border-box;
     font-size: 0.8rem;
     width: 80px;
     height: 8.5vh;
