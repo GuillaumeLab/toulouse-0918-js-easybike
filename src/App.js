@@ -73,15 +73,15 @@ getClosestStationPosition(stationsToDisplay){
         y = stationData.position.lng-lng;
         distance = Math.sqrt(x*x+y*y);
         if(distance<min || min===-1){
-          console.log("avant ",Closest);
+          // console.log("avant ",Closest);
           Closest.splice(0,2,stationData.position)
-          console.log("apres ",Closest);
-          console.log("no station ",stationData.number," adresse ",stationData.address);
+          // console.log("apres ",Closest);
+          // console.log("no station ",stationData.number," adresse ",stationData.address);
           min=distance;
         }
       }
     });
-  console.log("coord + proche ",Closest);
+  // console.log("coord + proche ",Closest);
   if(Closest.length===0){
     return [43, 1.443197];
   }
