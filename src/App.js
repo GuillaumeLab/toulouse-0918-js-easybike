@@ -37,7 +37,7 @@ class App extends Component {
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
-    this.updateStationsList = this.updateStationsList.bind(this);
+    this.updateFavStationsList = this.updateFavStationsList.bind(this);
     this.getClosestStationPosition = this.getClosestStationPosition.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.updateFavStationsList = this.updateFavStationsList.bind(this);
