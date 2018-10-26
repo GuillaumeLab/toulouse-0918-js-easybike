@@ -13,18 +13,19 @@ ul.card-text {
 .card-text ul li:hover {
 background-color: beige;
 }
+
 .card-text ul li span img{
   max-width: 25px;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 .favs span {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
 }
 
 .favs img {
-  max-width: 40px;
+  max-width: 30px;
   margin: 0rem 0.5rem;
 }
 
@@ -35,5 +36,20 @@ hr {
 
 @media screen and (min-width: 768px) {
   .favs span {
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
   }
+ 
+  .card-text ul li span img{
+    max-width: 25px;
+    margin-right: 1rem;
+  }
+
+  .favs img {
+    max-width: 40px;
+    margin: 0rem 0.5rem;
+  }
+  
+  
 };

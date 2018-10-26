@@ -9,7 +9,7 @@ class SearchPanel extends Component {
     return (
       <div className="search-panel">
         <form>
-          <h3>Recherche</h3>
+          <h3>Navigation</h3>
           <div className="search-container">
             <input
               type="checkbox"

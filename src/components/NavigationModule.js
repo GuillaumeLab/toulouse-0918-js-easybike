@@ -7,7 +7,7 @@ class NavigationModule extends Component {
     const { itinerary, selectNavigation, userPosition } = this.props;
     return (
       <div className="card my-2">
-        <div className="card-header font-weight-bold">NAVIGATION</div>
+        <div className="card-header font-weight-bold">Navigation</div>
         <div className="card-body p-2">
           <div className="card-text">
             <div>

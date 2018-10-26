@@ -80,13 +80,15 @@ class PopupContent extends Component {
               </div>
               <div>
                 <a
-                  className="btn btn-primary go-button align-content-center"
+                  className="go-button align-content-center"
                   href={urlRequest}
                   target="_blank"
                   rel="noopener noreferrer"
                   role="button"
                 >
-                  Go
+                  <button type="button" className="btn btn-primary">
+                    Go
+                  </button>
                 </a>
               </div>
             </div>
