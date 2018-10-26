@@ -14,7 +14,7 @@ import './MobileFeatures.css';
 import './Favorites.css';
 
 const defaultCenter = {
-  center: [43.599761799999996, 1.443197],
+  center: [43.6000109, 1.4427647999999635],
   zoom: 15
 };
 
@@ -29,12 +29,16 @@ class App extends Component {
       itinerary: false,
       selectedOption: 'all',
       favStations: [],
+      allStations: [],
       favStationsId,
+      currentFavorite : [],
       viewCenter: defaultCenter.center,
       userPosition: [],
     };
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
+    this.updateStationsList = this.updateStationsList.bind(this);
+    this.getClosestStationPosition = this.getClosestStationPosition.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.updateFavStationsList = this.updateFavStationsList.bind(this);
     this.handleFavList = this.handleFavList.bind(this);
@@ -80,7 +84,8 @@ class App extends Component {
     });
     const favorites = stationsList.filter(station => station.isFavorite);
     this.setState({
-      favStations: favorites
+      favStations : favorites,
+      allStations : stationsList
     });
     console.log('Liste des stations à afficher :', this.state.favStations);
     console.log(`Liste des stations à dans localStorage : ${this.state.favStationsId}`);
@@ -95,12 +100,41 @@ class App extends Component {
     }
   }
 
-  //  getUserPosition(userPosition) {
-  //    console.log(userPosition)
-  //    // this.setState({
-  //    //   userPosition: userPosition
-  //    // });
-  //  }
+getClosestStationPosition(stationsToDisplay){
+
+  let userPosition = JSON.parse(localStorage.getItem('userposition'));
+  const [lat,lng] = userPosition;
+  let Closest = [];
+  let distance;
+  let min=-1;
+  let x,y;
+  this.state.allStations.filter(stationData => 
+    (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
+    (stationData.available_bike_stands !== 0 && stationsToDisplay === 'freeSpaces')).
+    map(stationData => {
+      if (this.state.allStations.length!==0){
+        x = stationData.position.lat-lat;
+        y = stationData.position.lng-lng;
+        distance = Math.sqrt(x*x+y*y);
+        if(distance<min || min===-1){
+          // console.log("avant ",Closest);
+          Closest.splice(0,2,stationData.position)
+          // console.log("apres ",Closest);
+          // console.log("no station ",stationData.number," adresse ",stationData.address);
+          min=distance;
+        }
+      }
+    });
+  // console.log("coord + proche ",Closest);
+  if(Closest.length===0){
+    return [43.6000109, 1.4427647999999635];
+  }
+  return Object.values(Closest[0]);
+}
+
+ setUserPosition(userPosition) {
+   localStorage.setItem('userposition',JSON.stringify(userPosition));
+ }
 
   handleRadioChange(event) {
     this.setState({
@@ -154,12 +188,17 @@ class App extends Component {
           const isUserLocated = latitude && longitude;
 
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
+          this.setUserPosition(userPosition);
+          // this.getClosestStationPosition('bikes');
+          
 
           return (
             <div className="App container-fluid">
               <div className="row">
                 <Navbar
                   displayWhat={this.displayWhat}
+                  userPosition={userPosition}
+                  getClosestStationPosition={this.getClosestStationPosition}
                 />
               </div>
               <FunctionalitiesLayer

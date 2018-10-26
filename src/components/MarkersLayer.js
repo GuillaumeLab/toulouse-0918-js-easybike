@@ -26,7 +26,7 @@ class MarkersLayer extends Component {
     const allStationsMarkers = stationsList
       .filter(stationData => (stationData.available_bike_stands >= minStandsToDisplay) && (stationData.available_bikes >= minBikesToDisplay))
       .map(stationData => (
-        <Marker
+      <Marker
           icon={L.divIcon({
             className: 'custom-icon',
             html: ReactDOMServer.renderToString(
@@ -49,7 +49,7 @@ class MarkersLayer extends Component {
               userPosition={userPosition}
             />
           </Popup>
-        </Marker>
+    </Marker>
       ));
 
     const displayMarkers = apiDataError ? (
