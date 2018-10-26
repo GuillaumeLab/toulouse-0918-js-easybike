@@ -18,6 +18,13 @@ const defaultCenter = {
   zoom: 15
 };
 
+const resize = () => {
+  // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+  const vh = window.innerHeight * 0.01;
+  // Then we set the value in the --vh custom property to the root of the document
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +38,7 @@ class App extends Component {
       favStations: [],
       allStations: [],
       favStationsId,
-      currentFavorite : [],
+      currentFavorite: [],
       viewCenter: defaultCenter.center,
       userPosition: [],
     };
@@ -42,6 +49,11 @@ class App extends Component {
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.updateFavStationsList = this.updateFavStationsList.bind(this);
     this.handleFavList = this.handleFavList.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', resize);
+    resize();
   }
 
   handleFilterChange(key, increment) {
@@ -65,7 +77,7 @@ class App extends Component {
 
   addFavorite(stationNumber) {
     if (!localStorage.getItem('favorites')) {
-      localStorage.setItem('favorites', JSON.stringify([]));  
+      localStorage.setItem('favorites', JSON.stringify([]));
     }
     const previousFavList = JSON.parse(localStorage.getItem('favorites'));
     localStorage.setItem('favorites', JSON.stringify([...previousFavList, stationNumber]));
@@ -84,8 +96,8 @@ class App extends Component {
     });
     const favorites = stationsList.filter(station => station.isFavorite);
     this.setState({
-      favStations : favorites,
-      allStations : stationsList
+      favStations: favorites,
+      allStations: stationsList
     });
     console.log('Liste des stations à afficher :', this.state.favStations);
     console.log(`Liste des stations à dans localStorage : ${this.state.favStationsId}`);
@@ -100,41 +112,40 @@ class App extends Component {
     }
   }
 
-getClosestStationPosition(stationsToDisplay){
-
-  let userPosition = JSON.parse(localStorage.getItem('userposition'));
-  const [lat,lng] = userPosition;
-  let Closest = [];
-  let distance;
-  let min=-1;
-  let x,y;
-  this.state.allStations.filter(stationData => 
-    (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
-    (stationData.available_bike_stands !== 0 && stationsToDisplay === 'freeSpaces')).
-    map(stationData => {
-      if (this.state.allStations.length!==0){
-        x = stationData.position.lat-lat;
-        y = stationData.position.lng-lng;
-        distance = Math.sqrt(x*x+y*y);
-        if(distance<min || min===-1){
+  getClosestStationPosition(stationsToDisplay) {
+    const userPosition = JSON.parse(localStorage.getItem('userposition'));
+    const [lat, lng] = userPosition;
+    const Closest = [];
+    let distance;
+    let min = -1;
+    let x;
+    let y;
+    this.state.allStations.filter(stationData => (stationData.available_bikes !== 0 && stationsToDisplay === 'bikes') || (stationData.available_bike_stands !== 0 && stationsToDisplay === 'freeSpaces')
+    )
+      .map(stationData => {
+        if (this.state.allStations.length !== 0) {
+          x = stationData.position.lat - lat;
+          y = stationData.position.lng - lng;
+          distance = Math.sqrt(x * x + y * y);
+          if (distance < min || min === -1) {
           // console.log("avant ",Closest);
-          Closest.splice(0,2,stationData.position)
-          // console.log("apres ",Closest);
-          // console.log("no station ",stationData.number," adresse ",stationData.address);
-          min=distance;
+            Closest.splice(0, 2, stationData.position);
+            // console.log("apres ",Closest);
+            // console.log("no station ",stationData.number," adresse ",stationData.address);
+            min = distance;
+          }
         }
-      }
-    });
-  // console.log("coord + proche ",Closest);
-  if(Closest.length===0){
-    return [43.6000109, 1.4427647999999635];
+      });
+    // console.log("coord + proche ",Closest);
+    if (Closest.length === 0) {
+      return [43.6000109, 1.4427647999999635];
+    }
+    return Object.values(Closest[0]);
   }
-  return Object.values(Closest[0]);
-}
 
- setUserPosition(userPosition) {
-   localStorage.setItem('userposition',JSON.stringify(userPosition));
- }
+  setUserPosition(userPosition) {
+    localStorage.setItem('userposition', JSON.stringify(userPosition));
+  }
 
   handleRadioChange(event) {
     this.setState({
@@ -190,7 +201,7 @@ getClosestStationPosition(stationsToDisplay){
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
           this.setUserPosition(userPosition);
           // this.getClosestStationPosition('bikes');
-          
+
 
           return (
             <div className="App container-fluid">
