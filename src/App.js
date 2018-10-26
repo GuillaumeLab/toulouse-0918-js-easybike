@@ -39,6 +39,7 @@ class App extends Component {
     this.selectNavigation = this.selectNavigation.bind(this);
     this.displayFeature = this.displayFeature.bind(this);
     this.updateStationsList = this.updateStationsList.bind(this);
+    this.getClosestStationPosition = this.getClosestStationPosition.bind(this);
   }
 
   readStoredFav() {
@@ -55,42 +56,39 @@ class App extends Component {
     });
   }
 
-getClosestStationPosition(){
+getClosestStationPosition(stationsToDisplay){
+
   let userPosition = JSON.parse(localStorage.getItem('userposition'));
   const [lat,lng] = userPosition;
-  const stations = this.state.allStations;
-  let plusProche = [];
-  if (stations.length!==0){
-    let x = stations[35].position.lat-lat;
-    let y = stations[35].position.lng-lng;
-    console.log("mon premier ",stations[35].position);
-    let distance = Math.sqrt(x*x+y*y);
-    let min = distance;
-    plusProche.push(stations[35].position);
-
-    console.log("userPosition",userPosition);
-    console.log("Init",plusProche);
-    
-    let ind=0;
-
-    for(let i=0;i<stations.length;i++){
-      console.log("en cours",stations[i].position);
-      x = stations[i].position.lat-lat;
-      y = stations[i].position.lng-lng;
-      distance = Math.sqrt(x*x+y*y);
-      if(distance<min){
-        ind=i;
-        min=distance;
+  let Closest = [];
+  let distance;
+  let min=-1;
+  let x,y;
+  this.state.allStations.filter(stationData => 
+    (stationData.available_bikes !== 0 && stationsToDisplay === "bikes") ||
+    (stationData.available_bike_stands !== 0 && stationsToDisplay === 'freeSpaces')).
+    map(stationData => {
+      if (this.state.allStations.length!==0){
+        x = stationData.position.lat-lat;
+        y = stationData.position.lng-lng;
+        distance = Math.sqrt(x*x+y*y);
+        if(distance<min || min===-1){
+          console.log("avant ",Closest);
+          Closest.splice(0,2,stationData.position)
+          console.log("apres ",Closest);
+          console.log("no station ",stationData.number," adresse ",stationData.address);
+          min=distance;
+        }
       }
-      plusProche.splice(0,1,stations[ind].position)
-    }
-    console.log("final ",stations[ind].position);
-    console.log("final ",plusProche," indice ",ind);
+    });
+  console.log("coord + proche ",Closest);
+  if(Closest.length===0){
+    return [43, 1.443197];
   }
+  return Object.values(Closest[0]);
 }
 
  setUserPosition(userPosition) {
-   console.log("ecriture",userPosition);
    localStorage.setItem('userposition',JSON.stringify(userPosition));
  }
 
@@ -183,7 +181,7 @@ getClosestStationPosition(){
 
           const userPosition = isUserLocated ? [latitude, longitude] : viewCenter;
           this.setUserPosition(userPosition);
-          this.getClosestStationPosition(userPosition);
+          // this.getClosestStationPosition('bikes');
           
 
           return (
@@ -191,6 +189,8 @@ getClosestStationPosition(){
               <div className="row">
                 <Navbar
                   displayWhat={this.displayWhat}
+                  userPosition={userPosition}
+                  getClosestStationPosition={this.getClosestStationPosition}
                 />
               </div>
               <FunctionalitiesLayer

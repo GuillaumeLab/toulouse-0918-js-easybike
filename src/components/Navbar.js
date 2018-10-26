@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 
+const getItineraryUrl = (userPosition, closestStation) => 
+  {
+    console.log("userPosition", userPosition);
+    console.log("getItinary", closestStation);
+    return `https://www.google.com/maps/dir/?api=1&origin=${userPosition}&destination=${closestStation}`;
+  };
+
 class Navbar extends Component {
   render() {
+    const { getClosestStationPosition, userPosition } = this.props;
+    console.log("Navbar ",getClosestStationPosition("bikes"));
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="col-2">
@@ -20,8 +29,19 @@ class Navbar extends Component {
         </button>
         <div id="navbarNavAltMarkup" className="col-md-8 collapse navbar-collapse">
           <div className="navbar-nav text-right text-md-center mx-auto">
-            <a className="nav-item nav-link" href="#">Prendre un vélo</a>
-            <a className="nav-item nav-link" href="#">Déposer un vélo</a>
+            <a 
+              className="nav-item nav-link" 
+              href={getItineraryUrl(userPosition, getClosestStationPosition("bikes"))}
+              target="_blank"
+            >
+              Vite! Un vélo!
+            </a>
+            <a 
+              className="nav-item nav-link" 
+              href={getItineraryUrl(userPosition, getClosestStationPosition("freeSpaces"))}
+              target="_blank"
+            >
+            Vite! Poser mon vélo!</a>
           </div>
         </div>
       </nav>
