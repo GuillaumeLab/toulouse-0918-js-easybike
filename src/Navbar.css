@@ -24,6 +24,7 @@
   border-radius: 15px;
   width: 110px;
   font-weight: bold;
+  border: 2px solid white;
 }
 .vite-button:hover {
   background-color: #1F57EC;
