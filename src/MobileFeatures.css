@@ -1,0 +1,83 @@
+.search-panel, .filter-panel, .favs-panel {
+  position: absolute;
+  left: 0px;
+  z-index: 1500;
+  background-color: rgb(255, 255, 255, 0.9);
+  padding: 0rem;
+  font-size: 0.9rem;
+  border-bottom-right-radius: 10px;
+  border: 1px solid rgb(68, 68, 248);
+}
+.search-panel {
+  width:70vw;
+}
+
+.favs-panel {
+  width:60vw;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+.filter-panel {
+  width:60vw;
+}
+
+.navigation-input input{
+  height: 0.5rem;
+}
+
+.filter-panel h3, .favs-panel h3, .search-panel h3 {
+  font-size: 1rem;
+  color: rgb(68, 68, 248);
+  background-color: rgb(255, 255, 255);
+  padding: 0.4rem;
+  margin: 0;
+  border-bottom: 1px solid rgb(68, 68, 248);
+}
+
+.filters-container, .search-container, .favs-container {
+  padding: 0.5rem;
+}
+
+.filter-panel p {
+  margin: 0;
+}
+
+.filter-input button {
+  border-radius: 40px;
+  box-shadow: 0 0;
+  min-width: 30px;
+  padding: 0;
+  color:white;
+  background-color: rgb(68, 68, 248);
+  border: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.filter-input input {
+  color: rgb(41, 41, 41);
+  font-weight: bold;
+  font-size: 1rem;
+  width:2.5rem;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  text-align: center;
+}
+
+.favs-panel h4 {
+  font-size: 1rem;
+}
+
+.favs-go {
+  margin: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .search-panel, .filter-panel, .favs-panel {
+    display: none;
+  }
+};

@@ -1,0 +1,9 @@
+
+
+#mapContainer {
+  height: 90vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 90);
+
+  padding: 0;
+  overflow: hidden;
+}

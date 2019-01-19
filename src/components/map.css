@@ -1,0 +1,29 @@
+@media only screen and (min-width: 768px) {
+  .display-button {
+    display:none;
+  }  
+}
+
+.geoloc {
+  background-image:url("../images/gps1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.search {
+  background-image:url("../images/magnifying.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fav {
+  background-image:url("../images/star.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.filter {
+  background-image:url("../images/filter.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
